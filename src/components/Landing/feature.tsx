@@ -1,4 +1,3 @@
-import Logo from "@/assets/Logo/Logo";
 import {WandSparkles, Orbit, Rocket, SlidersHorizontal } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
@@ -8,6 +7,7 @@ interface Feature {
   title: string;
   description: string;
 }
+
 const features: Feature[] = [
   {
     count: 1,
@@ -42,10 +42,6 @@ const features: Feature[] = [
 const Feature = () => {
   return (
     <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-background px-6 py-12 sm:px-10 md:py-16 md:px-20">
-
-      <div className="absolute inset-0">
-        <Logo className="absolute inset-0 h-full w-full text-foreground/5" />
-      </div>
   
       <div className="relative z-10 mx-auto w-full">
    
@@ -71,7 +67,7 @@ const Feature = () => {
             Why Void UI?
         </p>
 
-        <div className="mt-3 grid overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/10 sm:grid-cols-2 lg:grid-cols-4 backdrop-blur-2xl">
+        <div className="mt-3 grid overflow-hidden rounded-2xl border border-foreground/10 sm:grid-cols-2 lg:grid-cols-4 backdrop-blur-2xl">
           {features.map((feature) => (
             <div
               key={feature.count}
