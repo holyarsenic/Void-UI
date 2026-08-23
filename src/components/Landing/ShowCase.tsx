@@ -9,7 +9,7 @@ const ShowCase = () => {
         <Logo className="absolute inset-0 h-full w-full rotate-180 text-foreground/5" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl">
+      <div className="relative z-10 w-full max-w-7xl">
 
         <div className="mb-10 max-w-2xl md:mb-14">
           <h2 className="font-theme text-2xl font-bold text-white md:text-5xl">
