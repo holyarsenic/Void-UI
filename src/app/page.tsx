@@ -2,6 +2,7 @@ import Navbar from "@/components/ui/Navbar";
 import Hero from "@/components/Landing/Hero";
 import ShowCase from "@/components/Landing/ShowCase";
 import Feature from "@/components/Landing/Feature";
+import Footer from "@/components/Landing/Footer"
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <ShowCase />
       <Feature />
+      <Footer />
     </div>
   );
 }
