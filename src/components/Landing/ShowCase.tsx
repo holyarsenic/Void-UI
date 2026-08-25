@@ -1,5 +1,6 @@
 import Logo from "@/assets/Logo/Logo";
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
+import WorkFlow from "@/components/ui/WorkFlow";
 
 const ShowCase = () => {
   return (
@@ -9,17 +10,22 @@ const ShowCase = () => {
         <Logo className="absolute inset-0 h-full w-full rotate-180 text-foreground/5" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl">
+      <div className="relative z-10 w-full">
 
-        <div className="mb-10 max-w-2xl md:mb-14">
-          <h2 className="font-theme text-2xl font-bold text-white md:text-5xl">
-            From prompt to interface in seconds.
-          </h2>
+        <div className="flex flex-col md:flex-row justify-between gap-10 mb-10 w-full md:mb-14">
+          <div className="w-full md:w-1/2">
+            <h2 className="font-theme text-2xl font-bold text-white md:text-5xl">
+              From prompt to interface in seconds.
+            </h2>
 
-          <p className="mt-4 max-w-xl text-sm text-white/40 md:text-base">
-            Describe what you imagine. Watch AI interpret your design system and
-            deliver production-ready, accessible components effortlessly.
-          </p>
+            <p className="mt-4 max-w-xl text-sm text-white/40 md:text-base">
+              Describe what you imagine. Watch AI interpret your design system and
+              deliver production-ready, accessible components effortlessly.
+            </p>
+          </div>
+          <div className="w-full md:w-1/2">
+            <WorkFlow />
+          </div>
         </div>
 
         <div className="grid items-center gap-10 md:grid-cols-2 lg:gap-20">

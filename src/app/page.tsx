@@ -1,7 +1,7 @@
 import Navbar from "@/components/ui/Navbar";
 import Hero from "@/components/Landing/Hero";
 import ShowCase from "@/components/Landing/ShowCase";
-import Feature from "@/components/Landing/Feature"
+import Feature from "@/components/Landing/Feature";
 
 export default function Home() {
   return (
