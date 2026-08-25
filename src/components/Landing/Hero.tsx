@@ -22,7 +22,7 @@ const Hero = () => {
       </div>
 
 
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-10 px-6 py-8 sm:px-10 lg:px-20 lg:py-10">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-10 px-6 py-8 lg:px-20 lg:py-10">
 
         <h2 className="font-theme text-base md:text-2xl text-foreground/60 text-center">Describe your vision. Let the void shape your component.</h2>
         <div className="w-full max-w-2xl">

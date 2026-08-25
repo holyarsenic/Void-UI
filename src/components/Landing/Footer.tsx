@@ -25,7 +25,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full border border-white/20 pt-14 pb-5 md:pt-20">
+    <footer className="relative w-full border border-white/20 pt-14 pb-5 lg:pt-20">
 
       <div className="relative w-full px-6 pb-7 sm:px-10 md:px-20">
 
