@@ -63,15 +63,15 @@ const Feature = () => {
         </div>
        
 
-        <p className="mt-10 text-lg font-heading text-foreground">
+        <p className="mt-10 text-lg font-theme text-foreground">
             Why Void UI?
         </p>
 
-        <div className="mt-3 grid overflow-hidden rounded-2xl border-4 border-foreground/50 sm:grid-cols-2 lg:grid-cols-4 backdrop-blur-2xl">
+        <div className="mt-3 grid overflow-hidden border-4 border-foreground/50 sm:grid-cols-2 lg:grid-cols-4 backdrop-blur-2xl">
           {features.map((feature) => (
             <div
               key={feature.count}
-              className="group border border-foreground/50 p-7 transition-colors duration-300 hover:bg-foreground/10"
+              className="group border-2 border-foreground/50 p-7 transition-colors duration-300 hover:bg-foreground/10"
             >
               <div className="flex items-center justify-between">
                 

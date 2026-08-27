@@ -7,7 +7,7 @@ const Enroll = () => {
       <div className="flex h-90 md:h-115 w-full items-center justify-between bg-gray-500/10 px-8 sm:px-12 md:px-20">
         
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-theme text-white sm:text-5xl md:text-6xl">
+          <h1 className="text-3xl font-theme text-white sm:text-5xl md:text-6xl">
             Ready to build something amazing?
           </h1>
 
