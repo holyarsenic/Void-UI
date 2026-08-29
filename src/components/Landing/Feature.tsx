@@ -1,5 +1,6 @@
 import {WandSparkles, Orbit, Rocket, SlidersHorizontal } from "lucide-react";
 import { LucideIcon } from "lucide-react";
+import BlackHole from "@/assets/Icons/blackhole";
 
 interface Feature {
   count: number;
@@ -45,8 +46,8 @@ const Feature = () => {
   
       <div className="relative z-10 mx-auto w-full">
    
-        <div className="flex w-full items-center justify-between">
-          <div className="max-w-2xl">
+        <div className="flex flex-col md:flex-row justify-between gap-10 mb-10 w-full lg:mb-14">
+          <div className="w-full lg:w-1/2">
             <h2 className="text-2xl font-theme font-bold text-foreground md:text-5xl">
               Stop building
               <br />
@@ -60,6 +61,9 @@ const Feature = () => {
               rebuilding its interface.
             </p>
           </div>
+          <div className="absolute right-0 -top-10 lg:-top-25 justify-center items-center lg:w-1/2 -z-50">
+            <BlackHole className="h-full w-full text-foreground/10 lg:text-foreground/80"/>
+          </div>
         </div>
        
 
@@ -67,7 +71,7 @@ const Feature = () => {
             Why Void UI?
         </p>
 
-        <div className="mt-3 grid overflow-hidden border-4 border-foreground/50 sm:grid-cols-2 lg:grid-cols-4 backdrop-blur-2xl">
+        <div className="mt-3 grid overflow-hidden border-4 border-foreground/50 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature) => (
             <div
               key={feature.count}
