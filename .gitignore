@@ -1,8 +1,7 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependencies
 
-# dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp/
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,33 +9,97 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# pnpm
 
-# next.js
-/.next/
-/out/
+.pnpm-debug.log*
+.pnpm-store/
 
-# production
-/build
-.txt
+# Testing
 
-# misc
-.DS_Store
-*.pem
+coverage/
 
-# debug
+# Next.js
+
+.next/
+out/
+
+# Production
+
+build/
+dist/
+
+# Environment variables / secrets
+
+.env
+.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Vercel
+
+.vercel/
+
+# Prisma
+
+# Keep Prisma schema/config tracked.
+
+# Ignore local/generated Prisma artifacts if you create them.
+
+prisma/generated/
+
+# Debug logs
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# TypeScript
 
-# vercel
-.vercel
-
-# typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS files
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Certificates / private keys
+
+*.pem
+*.key
+*.crt
+
+# Editor / IDE
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# AI coding agents
+
+# Only ignore these if you don't want their local instructions/config
+
+# committed to Git.
+
+.claude/
+.cursor/
+.devin/
+.agents/
+
+# Misc
+
+*.log
+*.tmp
+*.temp
+.cache/
+*.swp
+*.swo
+EOF
+
+.txt
