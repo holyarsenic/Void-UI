@@ -20,11 +20,11 @@ export function createAccessToken(userId: number) {
   const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
   if (!ACCESS_TOKEN_SECRET) {
-    throw new Error("ACCESS_TOKEN_SECRET is not defined");
+    throw new Error("Access Token is not defined");
   }
 
   if (!REFRESH_TOKEN_SECRET) {
-    throw new Error("REFRESH_TOKEN_SECRET is not defined");
+    throw new Error("Refresh Token is not defined");
   }
 
   return jwt.sign(
@@ -65,14 +65,14 @@ export function createRefreshToken(userId: number) {
   const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
   if (!REFRESH_TOKEN_SECRET) {
-    throw new Error("REFRESH_TOKEN_SECRET is not defined");
+    throw new Error("Refresh Token is not defined");
   }
 
   return jwt.sign(
     { userId },
     REFRESH_TOKEN_SECRET,
     {
-      expiresIn: "7d",
+      expiresIn: "30d",
     }
   );
 }
@@ -81,7 +81,7 @@ export function verifyRefreshToken(token: string) {
   const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
   if (!REFRESH_TOKEN_SECRET) {
-    throw new Error("REFRESH_TOKEN_SECRET is not defined");
+    throw new Error("Refresh Token is not defined");
   }
 
   const payload = jwt.verify(token, REFRESH_TOKEN_SECRET);
