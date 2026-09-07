@@ -18,11 +18,14 @@ enum AIProvider {
 }
 
 model User {
-  id              Int       @id @default(autoincrement())
-  email           String    @unique
-  name            String?
-  accounts        Account[]
-  projects        Project[]
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String
+
+  accounts Account[]
+  projects Project[]
+
   plan            Plan      @default(free)
   dailyRequests   Int       @default(0)
   lastRequestDate DateTime?
