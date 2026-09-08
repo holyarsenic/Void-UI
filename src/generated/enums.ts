@@ -18,8 +18,7 @@ export type Plan = (typeof Plan)[keyof typeof Plan]
 
 
 export const AIProvider = {
-  ollama: 'ollama',
-  openai: 'openai'
+  gemini: 'gemini'
 } as const
 
 export type AIProvider = (typeof AIProvider)[keyof typeof AIProvider]

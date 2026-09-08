@@ -13,8 +13,7 @@ enum Plan {
 }
 
 enum AIProvider {
-  ollama
-  openai
+  gemini
 }
 
 model User {
@@ -30,8 +29,14 @@ model User {
   dailyRequests   Int       @default(0)
   lastRequestDate DateTime?
   totalRequests   Int       @default(0)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+
+  razorpayCustomerId     String?
+  razorpaySubscriptionId String?
+  subscriptionStatus     String?
+  currentPeriodEnd       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Account {
@@ -48,13 +53,15 @@ model Account {
 }
 
 model Project {
-  id          Int          @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   userId      Int
   name        String
   description String?
+
   generations Generation[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -62,13 +69,16 @@ model Project {
 }
 
 model Generation {
-  id        Int        @id @default(autoincrement())
+  id        Int @id @default(autoincrement())
   userId    Int
   projectId Int
-  prompt    String
-  result    String
-  provider  AIProvider @default(ollama)
-  createdAt DateTime   @default(now())
+
+  prompt String
+  result String
+
+  provider AIProvider @default(gemini)
+
+  createdAt DateTime @default(now())
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 

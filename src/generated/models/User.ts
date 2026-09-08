@@ -47,6 +47,10 @@ export type UserMinAggregateOutputType = {
   dailyRequests: number | null
   lastRequestDate: Date | null
   totalRequests: number | null
+  razorpayCustomerId: string | null
+  razorpaySubscriptionId: string | null
+  subscriptionStatus: string | null
+  currentPeriodEnd: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +64,10 @@ export type UserMaxAggregateOutputType = {
   dailyRequests: number | null
   lastRequestDate: Date | null
   totalRequests: number | null
+  razorpayCustomerId: string | null
+  razorpaySubscriptionId: string | null
+  subscriptionStatus: string | null
+  currentPeriodEnd: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -73,6 +81,10 @@ export type UserCountAggregateOutputType = {
   dailyRequests: number
   lastRequestDate: number
   totalRequests: number
+  razorpayCustomerId: number
+  razorpaySubscriptionId: number
+  subscriptionStatus: number
+  currentPeriodEnd: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -100,6 +112,10 @@ export type UserMinAggregateInputType = {
   dailyRequests?: true
   lastRequestDate?: true
   totalRequests?: true
+  razorpayCustomerId?: true
+  razorpaySubscriptionId?: true
+  subscriptionStatus?: true
+  currentPeriodEnd?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -113,6 +129,10 @@ export type UserMaxAggregateInputType = {
   dailyRequests?: true
   lastRequestDate?: true
   totalRequests?: true
+  razorpayCustomerId?: true
+  razorpaySubscriptionId?: true
+  subscriptionStatus?: true
+  currentPeriodEnd?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -126,6 +146,10 @@ export type UserCountAggregateInputType = {
   dailyRequests?: true
   lastRequestDate?: true
   totalRequests?: true
+  razorpayCustomerId?: true
+  razorpaySubscriptionId?: true
+  subscriptionStatus?: true
+  currentPeriodEnd?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -226,6 +250,10 @@ export type UserGroupByOutputType = {
   dailyRequests: number
   lastRequestDate: Date | null
   totalRequests: number
+  razorpayCustomerId: string | null
+  razorpaySubscriptionId: string | null
+  subscriptionStatus: string | null
+  currentPeriodEnd: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -262,6 +290,10 @@ export type UserWhereInput = {
   dailyRequests?: Prisma.IntFilter<"User"> | number
   lastRequestDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   totalRequests?: Prisma.IntFilter<"User"> | number
+  razorpayCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
+  razorpaySubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
+  subscriptionStatus?: Prisma.StringNullableFilter<"User"> | string | null
+  currentPeriodEnd?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accounts?: Prisma.AccountListRelationFilter
@@ -277,6 +309,10 @@ export type UserOrderByWithRelationInput = {
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrderInput | Prisma.SortOrder
   totalRequests?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  razorpaySubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentPeriodEnd?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
@@ -295,6 +331,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   dailyRequests?: Prisma.IntFilter<"User"> | number
   lastRequestDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   totalRequests?: Prisma.IntFilter<"User"> | number
+  razorpayCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
+  razorpaySubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
+  subscriptionStatus?: Prisma.StringNullableFilter<"User"> | string | null
+  currentPeriodEnd?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accounts?: Prisma.AccountListRelationFilter
@@ -310,6 +350,10 @@ export type UserOrderByWithAggregationInput = {
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrderInput | Prisma.SortOrder
   totalRequests?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  razorpaySubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentPeriodEnd?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -331,6 +375,10 @@ export type UserScalarWhereWithAggregatesInput = {
   dailyRequests?: Prisma.IntWithAggregatesFilter<"User"> | number
   lastRequestDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   totalRequests?: Prisma.IntWithAggregatesFilter<"User"> | number
+  razorpayCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  razorpaySubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  subscriptionStatus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  currentPeriodEnd?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -343,6 +391,10 @@ export type UserCreateInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -358,6 +410,10 @@ export type UserUncheckedCreateInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -372,6 +428,10 @@ export type UserUpdateInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -387,6 +447,10 @@ export type UserUncheckedUpdateInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -402,6 +466,10 @@ export type UserCreateManyInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -414,6 +482,10 @@ export type UserUpdateManyMutationInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -427,6 +499,10 @@ export type UserUncheckedUpdateManyInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -440,6 +516,10 @@ export type UserCountOrderByAggregateInput = {
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrder
   totalRequests?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrder
+  razorpaySubscriptionId?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  currentPeriodEnd?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -459,6 +539,10 @@ export type UserMaxOrderByAggregateInput = {
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrder
   totalRequests?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrder
+  razorpaySubscriptionId?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  currentPeriodEnd?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -472,6 +556,10 @@ export type UserMinOrderByAggregateInput = {
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrder
   totalRequests?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrder
+  razorpaySubscriptionId?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  currentPeriodEnd?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -551,6 +639,10 @@ export type UserCreateWithoutAccountsInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
@@ -565,6 +657,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
@@ -594,6 +690,10 @@ export type UserUpdateWithoutAccountsInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
@@ -608,6 +708,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -621,6 +725,10 @@ export type UserCreateWithoutProjectsInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -635,6 +743,10 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   dailyRequests?: number
   lastRequestDate?: Date | string | null
   totalRequests?: number
+  razorpayCustomerId?: string | null
+  razorpaySubscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -664,6 +776,10 @@ export type UserUpdateWithoutProjectsInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -678,6 +794,10 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalRequests?: Prisma.IntFieldUpdateOperationsInput | number
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpaySubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -732,6 +852,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   dailyRequests?: boolean
   lastRequestDate?: boolean
   totalRequests?: boolean
+  razorpayCustomerId?: boolean
+  razorpaySubscriptionId?: boolean
+  subscriptionStatus?: boolean
+  currentPeriodEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
@@ -748,6 +872,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   dailyRequests?: boolean
   lastRequestDate?: boolean
   totalRequests?: boolean
+  razorpayCustomerId?: boolean
+  razorpaySubscriptionId?: boolean
+  subscriptionStatus?: boolean
+  currentPeriodEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -761,6 +889,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   dailyRequests?: boolean
   lastRequestDate?: boolean
   totalRequests?: boolean
+  razorpayCustomerId?: boolean
+  razorpaySubscriptionId?: boolean
+  subscriptionStatus?: boolean
+  currentPeriodEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -774,11 +906,15 @@ export type UserSelectScalar = {
   dailyRequests?: boolean
   lastRequestDate?: boolean
   totalRequests?: boolean
+  razorpayCustomerId?: boolean
+  razorpaySubscriptionId?: boolean
+  subscriptionStatus?: boolean
+  currentPeriodEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "plan" | "dailyRequests" | "lastRequestDate" | "totalRequests" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "plan" | "dailyRequests" | "lastRequestDate" | "totalRequests" | "razorpayCustomerId" | "razorpaySubscriptionId" | "subscriptionStatus" | "currentPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
@@ -802,6 +938,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     dailyRequests: number
     lastRequestDate: Date | null
     totalRequests: number
+    razorpayCustomerId: string | null
+    razorpaySubscriptionId: string | null
+    subscriptionStatus: string | null
+    currentPeriodEnd: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1237,6 +1377,10 @@ export interface UserFieldRefs {
   readonly dailyRequests: Prisma.FieldRef<"User", 'Int'>
   readonly lastRequestDate: Prisma.FieldRef<"User", 'DateTime'>
   readonly totalRequests: Prisma.FieldRef<"User", 'Int'>
+  readonly razorpayCustomerId: Prisma.FieldRef<"User", 'String'>
+  readonly razorpaySubscriptionId: Prisma.FieldRef<"User", 'String'>
+  readonly subscriptionStatus: Prisma.FieldRef<"User", 'String'>
+  readonly currentPeriodEnd: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

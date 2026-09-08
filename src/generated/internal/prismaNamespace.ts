@@ -764,6 +764,10 @@ export const UserScalarFieldEnum = {
   dailyRequests: 'dailyRequests',
   lastRequestDate: 'lastRequestDate',
   totalRequests: 'totalRequests',
+  razorpayCustomerId: 'razorpayCustomerId',
+  razorpaySubscriptionId: 'razorpaySubscriptionId',
+  subscriptionStatus: 'subscriptionStatus',
+  currentPeriodEnd: 'currentPeriodEnd',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

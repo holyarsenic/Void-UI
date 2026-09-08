@@ -12,7 +12,7 @@ const razorpay = new Razorpay({
 
 export async function POST(req: NextRequest) {
   try {
-    const body: unknown = await req.json();
+    const body = await req.json();
 
     // Runtime validation with Zod
     const result = CheckoutSchema.safeParse(body);
