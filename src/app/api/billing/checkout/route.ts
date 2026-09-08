@@ -1,14 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { CheckoutSchema } from "@/schemas/CheckOut.schema";
-import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+import Razorpay from "razorpay";
+
+import {Checkout, CheckoutSchema} from "@/schemas/CheckOut.schema";
+
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID!,
+  key_secret: process.env.RAZORPAY_KEY_SECRET!,
+});
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    const body: unknown = await req.json();
 
+    // Runtime validation with Zod
     const result = CheckoutSchema.safeParse(body);
 
     if (!result.success) {
@@ -21,91 +27,54 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { plan } = result.data;
+    // TypeScript type safety
+    const checkout: Checkout = result.data;
 
-    if (!plan) {
-      return NextResponse.json(
-        { error: "Plan is required" },
-        { status: 400 }
-      );
-    }
+    const { plan } = checkout;
 
-    // Free plan uses Ollama and does not require checkout.
+    // FREE PLAN
     if (plan === "free") {
       return NextResponse.json({
         success: true,
-        provider: "ollama",
-        message: "Free plan uses Ollama.",
+        plan: "free",
+        aiProvider: "ollama",
       });
     }
 
-    // Paid plan uses OpenAI.
-    if (plan !== "pro") {
-      return NextResponse.json(
-        { error: "Invalid plan" },
-        { status: 400 }
-      );
-    }
+    // PRO PLAN
+    if (plan === "pro") {
+      const subscription = await razorpay.subscriptions.create({
+        plan_id: process.env.RAZORPAY_PRO_PLAN_ID!,
+        total_count: 12,
+        quantity: 1,
+        customer_notify: 1,
+      });
 
-    const priceId = process.env.STRIPE_PRO_PRICE_ID;
-
-    if (!priceId) {
-      return NextResponse.json(
-        { error: "Stripe price is not configured" },
-        { status: 500 }
-      );
-    }
-
-    const origin =
-      req.headers.get("origin") ||
-      process.env.NEXT_PUBLIC_APP_URL;
-
-    if (!origin) {
-      return NextResponse.json(
-        { error: "App URL is not configured" },
-        { status: 500 }
-      );
-    }
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "subscription",
-
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-
-      success_url: `${origin}/billing/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/billing`,
-
-      metadata: {
+      return NextResponse.json({
+        success: true,
         plan: "pro",
         aiProvider: "openai",
-      },
-
-      subscription_data: {
-        metadata: {
-          plan: "pro",
-          aiProvider: "openai",
-        },
-      },
-    });
-
-    return NextResponse.json({
-      success: true,
-      provider: "openai",
-      url: session.url,
-      sessionId: session.id,
-    });
-  } catch (error) {
-    console.error("Billing checkout error:", error);
+        subscriptionId: subscription.id,
+        keyId: process.env.RAZORPAY_KEY_ID,
+        amount: subscription.amount,
+        currency: subscription.currency,
+      });
+    }
 
     return NextResponse.json(
       {
         success: false,
-        error: "Unable to create checkout session",
+        error: "Unsupported plan",
+      },
+      { status: 400 }
+    );
+  } catch (error) {
+    console.error("Razorpay checkout error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to create Razorpay subscription",
       },
       { status: 500 }
     );
