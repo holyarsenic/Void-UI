@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-
+import { db } from "@/lib/prisma"
 import {GenerateSchema, GenerateInput } from "@/schemas/Generate.schema";
+import { VOID_UI_SYSTEM_PROMPT } from "@/prompt/systemPrompt"
 
 const gemini = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
@@ -31,90 +32,84 @@ export async function POST(req: NextRequest) {
     }
 
     const input: GenerateInput = result.data;
-    const { prompt } = input;
+    const { prompt, userId } = input;
 
-    // 3. TODO: Get this from your authentication system
-    const userId = "USER_ID_FROM_AUTH";
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
 
-    // 4. TODO: Get this from PostgreSQL
-    const billing = {
-      plan: "free" as "free" | "pro",
-      subscriptionStatus: "none" as
-        | "none"
-        | "active"
-        | "canceled"
-        | "past_due",
-      dailyRequests: 0,
-      totalRequests: 0,
-      lastRequestDate: new Date().toISOString().split("T")[0],
-    };
-
-    // 5. Check whether user is actually Pro
-    const isPro =
-      billing.plan === "pro" &&
-      billing.subscriptionStatus === "active";
-
-    // 6. Select request limit
-    const limit = isPro ? PRO_LIMIT : FREE_LIMIT;
-
-    // 7. Check daily limit
-    if (billing.dailyRequests >= limit) {
+    if( !user ) {
       return NextResponse.json(
         {
           success: false,
-          error: "Daily request limit reached",
-          limit,
-          dailyRequests: billing.dailyRequests,
+          error: "User not found",
         },
-        { status: 429 }
+        { status: 404 }
       );
     }
 
-    // 8. Generate with Gemini
+    const now = new Date();
+    const TwentyFourHoursAgo = 24 * 60 * 60 * 1000;
+    const lastRequestDate = user.lastRequestDate;
+
+    const isNewDay = !lastRequestDate || (now.getTime() - lastRequestDate.getTime()) > TwentyFourHoursAgo;
+
+    if (isNewDay) {
+      await db.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          dailyRequests: 0,
+          lastRequestDate: now,
+        },
+      });
+
+      user.dailyRequests = 0;
+    }
+
+    if( user.plan === "free" && user.dailyRequests >= FREE_LIMIT ) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Free plan limit reached, Try again tomorrow. Please upgrade to Pro.",
+        },
+        { status: 403 }
+      );
+    }
+
+    if( user.plan === "pro" && user.dailyRequests >= PRO_LIMIT ) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Plan limit reached, Try again tomorrow. Please contact support for more information.",
+        },
+        { status: 403 }
+      );
+    }
+
+    // Generate with Gemini
     const response = await gemini.models.generateContent({
       model: "gemini-3.1-flash-lite",
       contents: prompt,
       config: {
+        systemInstruction: VOID_UI_SYSTEM_PROMPT,
         maxOutputTokens: 1000,
       },
     });
 
     const responseText = response.text;
 
-    // 9. Make sure Gemini returned something
-    if (!responseText) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Gemini returned an empty response",
-        },
-        { status: 500 }
-      );
-    }
-
-    // 10. TODO: Increment these values in PostgreSQL
-    const newDailyRequests = billing.dailyRequests + 1;
-    const newTotalRequests = billing.totalRequests + 1;
-
-    console.log("Request counted:", {
-      userId,
-      plan: isPro ? "pro" : "free",
-      provider: "gemini",
-      dailyRequests: newDailyRequests,
-      totalRequests: newTotalRequests,
-    });
-
-    // 11. Return response
-    return NextResponse.json({
-      success: true,
-      provider: "gemini",
-      response: responseText,
-      usage: {
-        dailyRequests: newDailyRequests,
-        dailyLimit: limit,
-        totalRequests: newTotalRequests,
+    return NextResponse.json(
+      {
+        success: true,
+        data: responseText,
       },
-    });
+      { status: 200 }
+    );
+   
   } catch (error) {
     console.error("Generate API error:", error);
 
