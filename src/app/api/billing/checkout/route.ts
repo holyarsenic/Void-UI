@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import Razorpay from "razorpay";
+import DodoPayments from "dodopayments";
 
-import {Checkout, CheckoutSchema} from "@/schemas/CheckOut.schema";
+import {
+  Checkout,
+  CheckoutSchema,
+} from "@/schemas/CheckOut.schema";
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
+const dodo = new DodoPayments({
+  apiKey: process.env.DODO_API_KEY!,
 });
 
 export async function POST(req: NextRequest) {
@@ -21,7 +23,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Invalid checkout request"
+          error: "Invalid checkout request",
         },
         { status: 400 }
       );
@@ -29,7 +31,6 @@ export async function POST(req: NextRequest) {
 
     // TypeScript type safety
     const checkout: Checkout = result.data;
-
     const { plan } = checkout;
 
     // FREE PLAN
@@ -43,21 +44,31 @@ export async function POST(req: NextRequest) {
 
     // PRO PLAN
     if (plan === "pro") {
-      const subscription = await razorpay.subscriptions.create({
-        plan_id: process.env.RAZORPAY_PRO_PLAN_ID!,
-        total_count: 12,
-        quantity: 1,
-        customer_notify: 1,
-      });
+      /*
+       * Create a Dodo checkout session here.
+       *
+       * You will use your Dodo Pro product ID:
+       * process.env.DODO_PRO_PRODUCT_ID
+       *
+       * The exact SDK method depends on the Dodo SDK version.
+       */
+
+      // const session = await dodo.checkoutSessions.create({
+      //   product_cart: [
+      //     {
+      //       product_id: process.env.DODO_PRO_PRODUCT_ID!,
+      //       quantity: 1,
+      //     },
+      //   ],
+      //   return_url: `${process.env.NEXT_PUBLIC_APP_URL}/billing/success`,
+      // });
 
       return NextResponse.json({
         success: true,
         plan: "pro",
         aiProvider: "openai",
-        subscriptionId: subscription.id,
-        keyId: process.env.RAZORPAY_KEY_ID,
-        amount: subscription.amount,
-        currency: subscription.currency,
+
+        // url: session.checkout_url,
       });
     }
 
@@ -69,12 +80,12 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   } catch (error) {
-    console.error("Razorpay checkout error:", error);
+    console.error("Dodo checkout error:", error);
 
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to create Razorpay subscription",
+        error: "Failed to create Dodo checkout",
       },
       { status: 500 }
     );
