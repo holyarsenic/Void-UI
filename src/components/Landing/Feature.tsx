@@ -75,7 +75,7 @@ const Feature = () => {
           {features.map((feature) => (
             <div
               key={feature.count}
-              className="group border-2 border-foreground/50 p-7 transition-colors duration-300 hover:bg-foreground/10"
+              className="group border-2 border-foreground/50 p-4 md:p-7 transition-colors duration-300 hover:bg-foreground/10"
             >
               <div className="flex items-center justify-between">
                 
