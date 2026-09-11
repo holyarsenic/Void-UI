@@ -43,13 +43,13 @@ const ShowCase = () => {
             </video>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left">
 
             <span className="text-sm font-heading text-foreground">
               Enroll Now
             </span>
 
-            <h3 className="mt-4 max-w-2xl font-theme text-2xl font-bold text-white lg:text-5xl">
+            <h3 className="mt-1 md:mt-4 max-w-2xl font-theme text-2xl font-bold text-white lg:text-5xl">
               Bring your ideas to life.
             </h3>
 
