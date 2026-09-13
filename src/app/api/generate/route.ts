@@ -4,6 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 import { db } from "@/lib/prisma"
 import {GenerateSchema, GenerateInput } from "@/schemas/Generate.schema";
 import { VOID_UI_SYSTEM_PROMPT } from "@/prompt/systemPrompt"
+import { getCurrentUserId } from "@/lib/auth";
 
 const gemini = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
@@ -14,6 +15,17 @@ const PRO_LIMIT = 300;
 
 export async function POST(req: NextRequest) {
   try {
+    const userId = await getCurrentUserId();
+
+    if (!userId) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Unauthorized",
+        },
+        { status: 401 }
+      );
+    }
     // 1. Parse request body
     const body: unknown = await req.json();
 
@@ -24,15 +36,32 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Invalid request",
-          details: result.error.flatten(),
+          error: "Invalid request"
         },
         { status: 400 }
       );
     }
 
     const input: GenerateInput = result.data;
-    const { prompt, userId } = input;
+
+    const project = await db.project.findFirst({
+      where: {
+        id: input.projectId,
+        userId: userId,
+      },
+    });
+
+    if (!project) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Project not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    const { prompt } = input;
 
     const user = await db.user.findUnique({
       where: {
@@ -59,7 +88,7 @@ export async function POST(req: NextRequest) {
     if (isNewDay) {
       await db.user.update({
         where: {
-          id: user.id,
+          id: userId,
         },
         data: {
           dailyRequests: 0,
@@ -101,6 +130,41 @@ export async function POST(req: NextRequest) {
     });
 
     const responseText = response.text;
+
+    if (!responseText) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Gemini did not return any content",
+        },
+        { status: 500 }
+      );
+    }
+
+    await db.generation.create({
+      data: {
+        userId,
+        projectId: input.projectId,
+        prompt: input.prompt,
+        result: responseText,
+        provider: "gemini",
+      },
+    });
+
+    await db.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        dailyRequests: {
+          increment: 1,
+        },
+        totalRequests: {
+          increment: 1,
+        },
+        lastRequestDate: new Date(),
+      },
+    });
 
     return NextResponse.json(
       {

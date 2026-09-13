@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 // Password
 export async function hashPassword(password: string) {
@@ -36,7 +37,7 @@ export function createAccessToken(userId: number) {
   );
 }
 
-export function verifyAccessToken(token: string) {
+export function verifyAccessToken(accessToken: string) {
 
   const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
@@ -44,7 +45,7 @@ export function verifyAccessToken(token: string) {
     throw new Error("ACCESS_TOKEN_SECRET is not defined");
   }
   
-  const payload = jwt.verify(token, ACCESS_TOKEN_SECRET);
+  const payload = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
 
   if (
     typeof payload !== "object" ||
@@ -77,14 +78,14 @@ export function createRefreshToken(userId: number) {
   );
 }
 
-export function verifyRefreshToken(token: string) {
+export function verifyRefreshToken(refreshToken: string) {
   const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
   if (!REFRESH_TOKEN_SECRET) {
     throw new Error("Refresh Token is not defined");
   }
 
-  const payload = jwt.verify(token, REFRESH_TOKEN_SECRET);
+  const payload = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
 
   if (
     typeof payload !== "object" ||
@@ -98,4 +99,22 @@ export function verifyRefreshToken(token: string) {
   return {
     userId: payload.userId,
   };
+}
+
+export async function getCurrentUserId(): Promise<number | null> {
+  try {
+    const cookieStore = await cookies();
+
+    const token = cookieStore.get("accessToken")?.value;
+
+    if (!token) {
+      return null;
+    }
+
+    const { userId } = verifyAccessToken(token);
+
+    return userId;
+  } catch {
+    return null;
+  }
 }

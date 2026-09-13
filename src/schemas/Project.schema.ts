@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 export const CreateProjectSchema = z.object({
+
+  userId: z.number().min(1).max(100),
   name: z.string().min(1, {
     message: "Project name is required",
   }).max(100, {
