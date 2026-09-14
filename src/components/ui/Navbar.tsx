@@ -1,7 +1,11 @@
-import Image from "next/image"
-import { Button } from "./button"
+"use client"
+
+import Image from "next/image";
+import { Button } from "./button";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter()
   return (
     <div className='fixed top-0 h-15 w-full flex items-center justify-between text-accent-foreground px-5 z-20'>
       <div className="flex gap-2 font-theme">
@@ -10,8 +14,8 @@ const Navbar = () => {
       </div>
 
       <div>
-        <Button variant={"ghost"}>Log in</Button>
-        <Button variant={"default"}>Sign Up</Button>
+        <Button variant={"ghost"} onClick={() => router.push("/auth/login")}>Log in</Button>
+        <Button variant={"default"} onClick={() => router.push("/auth/signup")}>Sign Up</Button>
       </div>
     </div>
   )
