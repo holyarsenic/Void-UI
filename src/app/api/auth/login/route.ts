@@ -46,6 +46,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!user.password) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "This account uses Google login. Please continue with Google.",
+        },
+        { status: 401 }
+      );
+    }
+
     // Compare password
     const isPasswordValid = await comparePassword(
       password,

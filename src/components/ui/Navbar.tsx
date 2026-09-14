@@ -15,7 +15,7 @@ const Navbar = () => {
 
       <div>
         <Button variant={"ghost"} onClick={() => router.push("/auth/login")}>Log in</Button>
-        <Button variant={"default"} onClick={() => router.push("/auth/signup")}>Sign Up</Button>
+        <Button variant={"default"} onClick={() => router.push("/auth/sign-up")}>Sign Up</Button>
       </div>
     </div>
   )

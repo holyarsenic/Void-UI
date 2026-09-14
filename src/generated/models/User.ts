@@ -43,6 +43,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   name: string | null
   password: string | null
+  image: string | null
   plan: $Enums.Plan | null
   dailyRequests: number | null
   lastRequestDate: Date | null
@@ -60,6 +61,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   name: string | null
   password: string | null
+  image: string | null
   plan: $Enums.Plan | null
   dailyRequests: number | null
   lastRequestDate: Date | null
@@ -77,6 +79,7 @@ export type UserCountAggregateOutputType = {
   email: number
   name: number
   password: number
+  image: number
   plan: number
   dailyRequests: number
   lastRequestDate: number
@@ -108,6 +111,7 @@ export type UserMinAggregateInputType = {
   email?: true
   name?: true
   password?: true
+  image?: true
   plan?: true
   dailyRequests?: true
   lastRequestDate?: true
@@ -125,6 +129,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   name?: true
   password?: true
+  image?: true
   plan?: true
   dailyRequests?: true
   lastRequestDate?: true
@@ -142,6 +147,7 @@ export type UserCountAggregateInputType = {
   email?: true
   name?: true
   password?: true
+  image?: true
   plan?: true
   dailyRequests?: true
   lastRequestDate?: true
@@ -245,7 +251,8 @@ export type UserGroupByOutputType = {
   id: number
   email: string
   name: string | null
-  password: string
+  password: string | null
+  image: string | null
   plan: $Enums.Plan
   dailyRequests: number
   lastRequestDate: Date | null
@@ -285,7 +292,8 @@ export type UserWhereInput = {
   id?: Prisma.IntFilter<"User"> | number
   email?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
-  password?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  image?: Prisma.StringNullableFilter<"User"> | string | null
   plan?: Prisma.EnumPlanFilter<"User"> | $Enums.Plan
   dailyRequests?: Prisma.IntFilter<"User"> | number
   lastRequestDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -304,7 +312,8 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  password?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   plan?: Prisma.SortOrder
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -326,7 +335,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringNullableFilter<"User"> | string | null
-  password?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  image?: Prisma.StringNullableFilter<"User"> | string | null
   plan?: Prisma.EnumPlanFilter<"User"> | $Enums.Plan
   dailyRequests?: Prisma.IntFilter<"User"> | number
   lastRequestDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -345,7 +355,8 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  password?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   plan?: Prisma.SortOrder
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -370,7 +381,8 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   plan?: Prisma.EnumPlanWithAggregatesFilter<"User"> | $Enums.Plan
   dailyRequests?: Prisma.IntWithAggregatesFilter<"User"> | number
   lastRequestDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -386,7 +398,8 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -405,7 +418,8 @@ export type UserUncheckedCreateInput = {
   id?: number
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -423,7 +437,8 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -442,7 +457,8 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -461,7 +477,8 @@ export type UserCreateManyInput = {
   id?: number
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -477,7 +494,8 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -494,7 +512,8 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -512,6 +531,7 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   plan?: Prisma.SortOrder
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrder
@@ -535,6 +555,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   plan?: Prisma.SortOrder
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrder
@@ -552,6 +573,7 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   plan?: Prisma.SortOrder
   dailyRequests?: Prisma.SortOrder
   lastRequestDate?: Prisma.SortOrder
@@ -634,7 +656,8 @@ export type UserUpdateOneRequiredWithoutProjectsNestedInput = {
 export type UserCreateWithoutAccountsInput = {
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -652,7 +675,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   id?: number
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -685,7 +709,8 @@ export type UserUpdateToOneWithWhereWithoutAccountsInput = {
 export type UserUpdateWithoutAccountsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -703,7 +728,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -720,7 +746,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCreateWithoutProjectsInput = {
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -738,7 +765,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   id?: number
   email: string
   name?: string | null
-  password: string
+  password?: string | null
+  image?: string | null
   plan?: $Enums.Plan
   dailyRequests?: number
   lastRequestDate?: Date | string | null
@@ -771,7 +799,8 @@ export type UserUpdateToOneWithWhereWithoutProjectsInput = {
 export type UserUpdateWithoutProjectsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -789,7 +818,8 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
   dailyRequests?: Prisma.IntFieldUpdateOperationsInput | number
   lastRequestDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -848,6 +878,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   name?: boolean
   password?: boolean
+  image?: boolean
   plan?: boolean
   dailyRequests?: boolean
   lastRequestDate?: boolean
@@ -868,6 +899,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   name?: boolean
   password?: boolean
+  image?: boolean
   plan?: boolean
   dailyRequests?: boolean
   lastRequestDate?: boolean
@@ -885,6 +917,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   name?: boolean
   password?: boolean
+  image?: boolean
   plan?: boolean
   dailyRequests?: boolean
   lastRequestDate?: boolean
@@ -902,6 +935,7 @@ export type UserSelectScalar = {
   email?: boolean
   name?: boolean
   password?: boolean
+  image?: boolean
   plan?: boolean
   dailyRequests?: boolean
   lastRequestDate?: boolean
@@ -914,7 +948,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "plan" | "dailyRequests" | "lastRequestDate" | "totalRequests" | "CustomerId" | "SubscriptionId" | "subscriptionStatus" | "currentPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "image" | "plan" | "dailyRequests" | "lastRequestDate" | "totalRequests" | "CustomerId" | "SubscriptionId" | "subscriptionStatus" | "currentPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
@@ -933,7 +967,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     email: string
     name: string | null
-    password: string
+    password: string | null
+    image: string | null
     plan: $Enums.Plan
     dailyRequests: number
     lastRequestDate: Date | null
@@ -1373,6 +1408,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly image: Prisma.FieldRef<"User", 'String'>
   readonly plan: Prisma.FieldRef<"User", 'Plan'>
   readonly dailyRequests: Prisma.FieldRef<"User", 'Int'>
   readonly lastRequestDate: Prisma.FieldRef<"User", 'DateTime'>
