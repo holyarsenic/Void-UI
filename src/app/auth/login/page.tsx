@@ -32,7 +32,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-5 lg:gap-10 bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-20 z-20">
+      <div className="flex flex-col justify-between items-center gap-5 bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-15 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />

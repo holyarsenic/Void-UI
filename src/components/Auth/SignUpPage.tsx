@@ -52,7 +52,7 @@ const SignUpPage = () => {
         Build Your Account
       </h1>
 
-      <p className="mb-6 text-center text-gray-500 font-theme">
+      <p className="mb-6 text-center text-white/50 font-theme">
         Sign up to create your account
       </p>
 

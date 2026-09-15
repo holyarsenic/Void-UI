@@ -52,7 +52,7 @@ const LoginPage = () => {
           Welcome Back
         </h1>
 
-        <p className="mb-6 text-center text-gray-500 font-theme">
+        <p className="mb-6 text-center text-white/50 font-theme">
           Login to your account
         </p>
 
