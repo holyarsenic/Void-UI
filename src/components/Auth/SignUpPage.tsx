@@ -47,9 +47,9 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="w-full  rounded-xl p-5 md:p-8 shadow-md">
+    <div className="w-full max-w-md rounded-xl p-5 md:p-8 shadow-md">
       <h1 className="mb-2 text-center text-3xl font-bold font-theme">
-        Start Building Your Account
+        Build Your Account
       </h1>
 
       <p className="mb-6 text-center text-gray-500 font-theme">

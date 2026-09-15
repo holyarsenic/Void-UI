@@ -32,13 +32,13 @@ const SignUP = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-5 md:gap-10 bg-black/85 w-full md:w-1/2 h-full p-5 md:p-20 z-20">
+      <div className="flex flex-col justify-center items-center gap-5 lg:gap-10 bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-20 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />
             <h1 className="text-lg text-white font-theme">Void <span className="font-bold">UI</span></h1>
           </div>
-          <div className="flex items-center gap-2 group cursor-pointer hover:scale-102" onClick={() => router.back()}>
+          <div className="flex items-center gap-2 group cursor-pointer hover:scale-102" onClick={() => router.push("/")}>
             <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-all ease-in" />
             <h1 className="text-lg text-white font-theme">Back</h1>
           </div>
