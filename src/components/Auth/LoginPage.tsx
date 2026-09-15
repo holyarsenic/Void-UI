@@ -46,7 +46,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full max-w-md rounded-xl p-8 shadow-md">
+    <div className="w-full max-w-md rounded-xl p-5 md:p-8 shadow-md">
       
         <h1 className="mb-2 text-center text-3xl font-bold font-theme">
           Welcome Back
@@ -112,6 +112,12 @@ const LoginPage = () => {
          <GoogleIcon className="h-7 w-7"/>
           Continue with Google
         </Button>
+
+        <p className="text-sm text-white/50 text-center font-theme mt-2"> Dont have an account?{" "} 
+          <span className="text-white cursor-pointer hover:underline" onClick={() => router.push("/auth/sign-up")} >
+            Log in 
+          </span> 
+        </p>
       </div>
   );
 };
