@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-import { db } from "@/lib/prisma"
-import {GenerateSchema, GenerateInput } from "@/schemas/Generate.schema";
-import { VOID_UI_SYSTEM_PROMPT } from "@/prompt/systemPrompt"
-import { getCurrentUserId } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+
+import { db } from "@/lib/prisma";
+import { authOptions } from "@/lib/auth";
+import {
+  GenerateSchema,
+  GenerateInput,
+} from "@/schemas/Generate.schema";
+import { VOID_UI_SYSTEM_PROMPT } from "@/prompt/systemPrompt";
 
 const gemini = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
@@ -15,9 +20,9 @@ const PRO_LIMIT = 300;
 
 export async function POST(req: NextRequest) {
   try {
-    const userId = await getCurrentUserId();
+    const session = await getServerSession(authOptions);
 
-    if (!userId) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         {
           success: false,
@@ -26,17 +31,34 @@ export async function POST(req: NextRequest) {
         { status: 401 }
       );
     }
-    // 1. Parse request body
+
+    const user = await db.user.findUnique({
+      where: {
+        email: session.user.email,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "User not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    const userId = user.id;
+
     const body: unknown = await req.json();
 
-    // 2. Validate request
     const result = GenerateSchema.safeParse(body);
 
     if (!result.success) {
       return NextResponse.json(
         {
           success: false,
-          error: "Invalid request"
+          error: "Invalid request",
         },
         { status: 400 }
       );
@@ -63,27 +85,14 @@ export async function POST(req: NextRequest) {
 
     const { prompt } = input;
 
-    const user = await db.user.findUnique({
-      where: {
-        id: userId,
-      },
-    });
-
-    if( !user ) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "User not found",
-        },
-        { status: 404 }
-      );
-    }
-
     const now = new Date();
     const TwentyFourHoursAgo = 24 * 60 * 60 * 1000;
+
     const lastRequestDate = user.lastRequestDate;
 
-    const isNewDay = !lastRequestDate || (now.getTime() - lastRequestDate.getTime()) > TwentyFourHoursAgo;
+    const isNewDay =
+      !lastRequestDate ||
+      now.getTime() - lastRequestDate.getTime() > TwentyFourHoursAgo;
 
     if (isNewDay) {
       await db.user.update({
@@ -99,27 +108,28 @@ export async function POST(req: NextRequest) {
       user.dailyRequests = 0;
     }
 
-    if( user.plan === "free" && user.dailyRequests >= FREE_LIMIT ) {
+    if (user.plan === "free" && user.dailyRequests >= FREE_LIMIT) {
       return NextResponse.json(
         {
           success: false,
-          error: "Free plan limit reached, Try again tomorrow. Please upgrade to Pro.",
+          error:
+            "Free plan limit reached, Try again tomorrow. Please upgrade to Pro.",
         },
         { status: 403 }
       );
     }
 
-    if( user.plan === "pro" && user.dailyRequests >= PRO_LIMIT ) {
+    if (user.plan === "pro" && user.dailyRequests >= PRO_LIMIT) {
       return NextResponse.json(
         {
           success: false,
-          error: "Plan limit reached, Try again tomorrow. Please contact support for more information.",
+          error:
+            "Plan limit reached, Try again tomorrow. Please contact support for more information.",
         },
         { status: 403 }
       );
     }
-
-    // Generate with Gemini
+    
     const response = await gemini.models.generateContent({
       model: "gemini-3.1-flash-lite",
       contents: prompt,
@@ -173,7 +183,6 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-   
   } catch (error) {
     console.error("Generate API error:", error);
 

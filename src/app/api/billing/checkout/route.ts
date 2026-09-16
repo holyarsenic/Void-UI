@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
 import DodoPayments from "dodopayments";
+import { getServerSession } from "next-auth";
 
 import {
   Checkout,
   CheckoutSchema,
 } from "@/schemas/CheckOut.schema";
+
+import { authOptions } from "@/lib/auth";
+import { db } from "@/lib/prisma";
 
 const dodo = new DodoPayments({
   apiKey: process.env.DODO_API_KEY!,
@@ -14,6 +17,36 @@ const dodo = new DodoPayments({
 
 export async function POST(req: NextRequest) {
   try {
+    // Check NextAuth session
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Unauthorized",
+        },
+        { status: 401 }
+      );
+    }
+
+    // Find logged-in user
+    const user = await db.user.findUnique({
+      where: {
+        email: session.user.email,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "User not found",
+        },
+        { status: 404 }
+      );
+    }
+
     const body = await req.json();
 
     // Runtime validation with Zod
@@ -47,13 +80,13 @@ export async function POST(req: NextRequest) {
       /*
        * Create a Dodo checkout session here.
        *
-       * You will use your Dodo Pro product ID:
+       * You can use:
        * process.env.DODO_PRO_PRODUCT_ID
        *
-       * The exact SDK method depends on the Dodo SDK version.
+       * The exact SDK method depends on your Dodo SDK version.
        */
 
-      // const session = await dodo.checkoutSessions.create({
+      // const checkoutSession = await dodo.checkoutSessions.create({
       //   product_cart: [
       //     {
       //       product_id: process.env.DODO_PRO_PRODUCT_ID!,
@@ -68,7 +101,7 @@ export async function POST(req: NextRequest) {
         plan: "pro",
         aiProvider: "openai",
 
-        // url: session.checkout_url,
+        // checkoutUrl: checkoutSession.checkout_url,
       });
     }
 

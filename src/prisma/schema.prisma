@@ -17,13 +17,14 @@ enum AIProvider {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  password String?
-  image    String?
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
 
   accounts Account[]
+  sessions Session[]
   projects Project[]
 
   plan            Plan      @default(free)
@@ -47,18 +48,36 @@ model Account {
   provider          String
   providerAccountId String
 
+  refresh_token String? @db.Text
+  access_token  String? @db.Text
+  expires_at    Int?
+  token_type    String?
+  scope         String?
+  id_token      String? @db.Text
+  session_state String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
 
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
 model Project {
-  id          Int     @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   userId      Int
   name        String
   description String?
-
   generations Generation[]
 
   createdAt DateTime @default(now())
@@ -70,16 +89,13 @@ model Project {
 }
 
 model Generation {
-  id        Int @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   userId    Int
   projectId Int
-
-  prompt String
-  result String
-
-  provider AIProvider @default(gemini)
-
-  createdAt DateTime @default(now())
+  prompt    String
+  result    String
+  provider  AIProvider @default(gemini)
+  createdAt DateTime   @default(now())
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
