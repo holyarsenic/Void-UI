@@ -5,6 +5,7 @@ import LightLines from "../ui/light-lines";
 import Logo from "@/assets/Logo/Logo";
 import { ArrowUp } from "lucide-react";
 import { Button } from "../ui/button";
+import Navbar from "../ui/Navbar";
 
 const Hero = () => {
   const [value, setValue] = useState("");
@@ -16,6 +17,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden bg-[#050505] text-white">
+      <Navbar />
       <div className="absolute inset-0">
         <LightLines />
         <Logo className="absolute inset-0 h-full w-full text-foreground/10" />
