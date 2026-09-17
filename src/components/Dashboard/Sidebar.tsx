@@ -38,9 +38,9 @@ const Sidebar = () => {
         duration: 0.35,
         ease: "easeInOut",
       }}
-      className="relative flex h-screen flex-col overflow-hidden border-r border-white/15 bg-background"
+      className="relative flex h-screen flex-col overflow-hidden border-r border-white/10 bg-background"
     >
-      <div className="relative flex h-20 items-center justify-between border-b border-white/15 px-5">
+      <div className="relative flex h-20 items-center justify-between border-b border-white/10 px-5">
         <Link href="/dashboard" className="flex items-center gap-3">
           <motion.div
             whileHover={{ rotate: 8, scale: 1.08 }}
@@ -65,6 +65,7 @@ const Sidebar = () => {
         </Link>
 
         <motion.button
+          onHoverStart={() => setCollapsed(false)}
           whileHover={{
             scale: 1.08
           }}
@@ -86,18 +87,13 @@ const Sidebar = () => {
       </div>
 
       <nav className="flex flex-1 flex-col gap-2 p-4">
-        <AnimatePresence>
-          {!collapsed && (
-            <motion.span
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
+        <div>
+            <span
               className="mb-2 px-2 text-sm font-theme text-white/30"
             >
-              Workspace
-            </motion.span>
-          )}
-        </AnimatePresence>
+              {collapsed ? "W" : "Workspace" }
+            </span>
+        </div>
 
         {menuItems.map((item, index) => {
           const Icon = item.icon;
@@ -107,6 +103,7 @@ const Sidebar = () => {
               key={item.name}
               initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity:0, x: -15 }}
               transition={{
                 delay: index * 0.05,
                 duration: 0.35,
@@ -114,9 +111,7 @@ const Sidebar = () => {
             >
               <Link
                 href={item.href}
-                className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/50 transition-colors hover:bg-white/5 hover:text-white ${
-                  collapsed ? "justify-center" : ""
-                }`}
+                className="group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/50 transition-colors hover:bg-white/5 hover:text-white"
               >
                 <motion.span
                   className="absolute left-0 h-5 w-0.5 rounded-full bg-white"
@@ -148,7 +143,7 @@ const Sidebar = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.2 }}
-                      className="whitespace-nowrap font-theme"
+                      className="font-theme"
                     >
                       {item.name}
                     </motion.span>
@@ -159,25 +154,17 @@ const Sidebar = () => {
           );
         })}
 
-        <AnimatePresence>
-          {!collapsed && (
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mb-2 mt-8 px-2 text-sm font-theme text-white/30"
+        <div>
+          <span
+              className="mb-2 px-2 text-sm font-theme text-white/30"
             >
-              System
-            </motion.span>
-          )}
-        </AnimatePresence>
+              {collapsed ? "S" : "System" }
+            </span>
+        </div>
 
         <Link
           href="/dashboard/settings"
-          className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/50 transition-colors hover:bg-white/5 hover:text-white ${
-            collapsed ? "justify-center" : ""
-          }`}
-        >
+          className='group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/50 transition-colors hover:bg-white/5 hover:text-white'>
           <motion.div
             whileHover={{ rotate: 45, scale: 1.1 }}
             transition={{
@@ -194,7 +181,8 @@ const Sidebar = () => {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -8 }}
-                className="whitespace-nowrap font-theme"
+                transition={{ duration: 0.2 }}
+                className="font-theme"
               >
                 Settings
               </motion.span>
@@ -209,16 +197,12 @@ const Sidebar = () => {
             x: collapsed ? 0 : 3
           }}
           whileTap={{ scale: 0.97 }}
-          onClick={() => signOut({ callbackUrl: "/login" })}
-          className={`group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400 ${
-            collapsed ? "justify-center" : ""
-          }`}
-        >
+          onClick={() => signOut({ callbackUrl: "/auth/login" })}
+          className='group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400'>
           <motion.div
             whileHover={{ x: 3 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <LogOut className="h-5 w-5 shrink-0" />
+            transition={{ type: "spring", stiffness: 300 }}>
+            <LogOut className="h-5 w-5" />
           </motion.div>
 
           <AnimatePresence>
@@ -227,7 +211,8 @@ const Sidebar = () => {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -8 }}
-                className="font-theme"
+                transition={{ duration: 0.2 }}
+                className="whitespace-nowrap font-theme"
               >
                 Sign out
               </motion.span>
