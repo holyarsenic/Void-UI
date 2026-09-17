@@ -10,13 +10,21 @@ const Login = () => {
   const router = useRouter()
   return (
     <div className='flex min-h-screen w-full py-2'>
-      <div className='hidden lg:flex flex-col gap-10 w-1/2 h-screen bg-linear-to-t from-white/80 to-black rounded-lg p-10'>
-        <BlackHole className='w-full h-full text-white/30 absolute inset-0' />
-        <div className="h-full w-full flex flex-col mt-20">
-          <h2 className="text-5xl font-bold text-white font-theme leading-tight">
-            From prompt
-            <br />
-            to <span className="text-white/70">pixel - perfect</span> UI.
+      <BlackHole className='w-full h-full text-white/30 absolute inset-0' />
+      <div className='hidden lg:flex flex-col justify-between gap-10 w-1/2 h-screen bg-linear-to-t from-white/80 to-black rounded-lg p-10'>
+        <div className="flex items-center gap-3 mb-7">
+          <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-mono">
+            Built for creators
+          </span>
+        </div>
+
+        <div className="h-full w-full flex flex-col mt-5">
+        
+          <h2 className="text-5xl font-bold text-white font-theme"> From prompt 
+            <br /> to{" "} 
+            <span className="font-light text-transparent bg-clip-text bg-linear-to-r from-white via-white/80 to-white/30"> 
+            pixel - perfect 
+            </span>{" "} UI. 
           </h2>
 
           <p className="mt-5 max-w-lg text-lg text-white/60 font-theme leading-relaxed">
@@ -32,7 +40,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-50 items-center bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-15 z-20">
+      <div className="flex flex-col gap-50 items-center bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-20 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />
