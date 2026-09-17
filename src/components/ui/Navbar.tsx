@@ -9,12 +9,12 @@ const Navbar = () => {
   return (
     <div className='fixed top-0 h-15 w-full flex items-center justify-between text-accent-foreground px-5 z-20'>
       <div className="flex gap-2 font-theme">
-        <Image src="/Logo.svg" alt="Void UI Logo" width={22} height={22} className="text-white"/>
+        <Image src="/Logo.svg" alt="Void UI Logo" width={22} height={22} className="text-white w-5 h-auto" />
         <h4>Void UI</h4>
       </div>
 
       <div>
-        <Button variant={"ghost"} onClick={() => router.push("/auth/login")}>Log in</Button>
+        <Button variant={"default"} onClick={() => router.push("/auth/login")}>Log in</Button>
       </div>
     </div>
   )

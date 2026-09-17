@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("http://localhost:3000"),
   title: "Void UI",
   description:
     "Generate beautiful, production-ready UI components from simple prompts. Build, customize, preview, and save components with AI.",
@@ -42,6 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
+      data-scroll-behavior="smooth"
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${montenegrin.variable} h-full antialiased dark`}
     >

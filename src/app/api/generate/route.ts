@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-import { getServerSession } from "next-auth";
 
 import { db } from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import {
   GenerateSchema,
   GenerateInput,
@@ -20,7 +19,7 @@ const PRO_LIMIT = 300;
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth;
 
     if (!session?.user?.email) {
       return NextResponse.json(
