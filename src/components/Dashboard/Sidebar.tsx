@@ -5,12 +5,19 @@ import Logo from "@/assets/Logo/Logo";
 import { LayoutDashboard, Circle, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen } from "lucide-react"; 
 
 import { useState } from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const pathname = usePathname();
+  const isSettingsActive = pathname === "/dashboard/settings";
+
+  const { data } = useSession();
+  const user = data?.user;
 
   const menuItems = [
     {
@@ -97,6 +104,7 @@ const Sidebar = () => {
 
         {menuItems.map((item, index) => {
           const Icon = item.icon;
+          const isActive = pathname === item.href;
 
           return (
             <motion.div
@@ -111,8 +119,7 @@ const Sidebar = () => {
             >
               <Link
                 href={item.href}
-                className="group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/50 transition-colors hover:bg-white/5 hover:text-white"
-              >
+                className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "bg-white/7 text-white" : "text-white/50 hover:text-white"}`}>
                 <motion.span
                   className="absolute left-0 h-5 w-0.5 rounded-full bg-white"
                   initial={{ opacity: 0, scaleY: 0 }}
@@ -164,7 +171,11 @@ const Sidebar = () => {
 
         <Link
           href="/dashboard/settings"
-          className='group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/50 transition-colors hover:bg-white/5 hover:text-white'>
+          className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
+            isSettingsActive
+              ? "bg-white/7 text-white"
+              : "text-white/50 hover:text-white"
+          }`}>
           <motion.div
             whileHover={{ rotate: 45, scale: 1.1 }}
             transition={{
@@ -214,7 +225,7 @@ const Sidebar = () => {
                 transition={{ duration: 0.2 }}
                 className="whitespace-nowrap font-theme"
               >
-                Sign out
+                { user?.email}
               </motion.span>
             )}
           </AnimatePresence>

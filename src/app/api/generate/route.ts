@@ -19,7 +19,7 @@ const PRO_LIMIT = 300;
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth;
+    const session = await auth();
 
     if (!session?.user?.email) {
       return NextResponse.json(

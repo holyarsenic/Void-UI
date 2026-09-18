@@ -1,17 +1,7 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import Sidebar from "@/components/Dashboard/Sidebar";
-
-export default async function DashboardPage() {
-  const session = await auth();
-
-  if (!session) {
-    redirect("/auth/login");
-  }
-
+export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Sidebar />
+    <div className="p-8">
+      <h1 className="font-theme text-3xl">Dashboard</h1>
     </div>
   );
 }
