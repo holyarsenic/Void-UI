@@ -4,10 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 
 import { db } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import {
-  GenerateSchema,
-  GenerateInput,
-} from "@/schemas/Generate.schema";
+import { GenerateSchema, GenerateInput } from "@/schemas/Generate.schema";
 import { VOID_UI_SYSTEM_PROMPT } from "@/prompt/systemPrompt";
 
 const gemini = new GoogleGenAI({

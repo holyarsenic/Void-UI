@@ -9,6 +9,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -42,7 +43,7 @@ const Sidebar = () => {
       initial={{ width: 256 }}
       animate={{ width: collapsed ? 80 : 256 }}
       transition={{
-        duration: 0.35,
+        duration: 0.34,
         ease: "easeInOut",
       }}
       className="relative flex h-screen flex-col overflow-hidden border-r border-white/10 bg-background"
@@ -109,6 +110,7 @@ const Sidebar = () => {
           return (
             <motion.div
               key={item.name}
+              whileTap={{scale:0.95}}
               initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity:0, x: -15 }}
@@ -120,15 +122,6 @@ const Sidebar = () => {
               <Link
                 href={item.href}
                 className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "bg-white/7 text-white" : "text-white/50 hover:text-white"}`}>
-                <motion.span
-                  className="absolute left-0 h-5 w-0.5 rounded-full bg-white"
-                  initial={{ opacity: 0, scaleY: 0 }}
-                  whileHover={{
-                    opacity: 1,
-                    scaleY: 1,
-                  }}
-                />
-
                 <motion.div
                   whileHover={{
                     scale: 1.12,
@@ -209,11 +202,12 @@ const Sidebar = () => {
           }}
           whileTap={{ scale: 0.97 }}
           onClick={() => signOut({ callbackUrl: "/auth/login" })}
-          className='group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400'>
+          className='group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400 cursor-pointer'>
           <motion.div
             whileHover={{ x: 3 }}
-            transition={{ type: "spring", stiffness: 300 }}>
-            <LogOut className="h-5 w-5" />
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <LogOut className="h-7 w-5" />
           </motion.div>
 
           <AnimatePresence>
@@ -223,9 +217,10 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -8 }}
                 transition={{ duration: 0.2 }}
-                className="whitespace-nowrap font-theme"
+                className="whitespace-nowrap flex gap-2 items-center font-theme"
               >
-                { user?.email}
+                <Image src={user?.image || "/default-avatar.png"} alt={user?.name || "User"} width={28} height={28} className="rounded-full h-7 w-7" />
+                { user?.name }
               </motion.span>
             )}
           </AnimatePresence>
