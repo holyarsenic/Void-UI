@@ -3,12 +3,24 @@
 import { signIn } from "next-auth/react";
 import { Button } from "../ui/button";
 import GoogleIcon from "@/assets/Icons/Google";
+import { useState } from "react";
+import AuthLoading from "../Loading/AuthLoading";
 
 const LoginPage = () => {
+  const [loading, setLoading] = useState(false);
+
   const handleGoogleLogin = async () => {
-    await signIn("google", {
-      callbackUrl: "/dashboard",
-    });
+    setLoading(true)
+    try {
+        await signIn("google", {
+        callbackUrl: "/dashboard",
+      });
+    } catch (err) {
+      console.error("Google login failed:", err);
+      setLoading(false)
+    }
+    
+
   };
 
   return (
@@ -24,10 +36,17 @@ const LoginPage = () => {
       <Button
         type="button"
         onClick={handleGoogleLogin}
-        className="flex w-full gap-2 py-5 text-lg font-theme"
+        className={`flex w-full gap-2 py-5 text-lg font-theme ${ loading ? "bg-primary/80" : ""}`}
       >
-        <GoogleIcon className="h-7 w-7" />
-        Continue with Google
+        {loading ? ( 
+          <> 
+            <AuthLoading />
+          </> 
+          ) : ( 
+          <> 
+            <GoogleIcon className="h-7 w-7" /> Continue with Google 
+          </> 
+        )}
       </Button>
     </div>
   );

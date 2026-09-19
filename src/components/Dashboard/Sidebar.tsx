@@ -219,7 +219,7 @@ const Sidebar = () => {
                 transition={{ duration: 0.2 }}
                 className="whitespace-nowrap flex gap-2 items-center font-theme"
               >
-                <Image src={user?.image || "/default-avatar.png"} alt={user?.name || "User"} width={28} height={28} className="rounded-full h-7 w-7" />
+                <Image src={user?.image || "/default-profile.jpg"} alt={user?.name || "User"} width={28} height={28} className="rounded-full h-7 w-7" />
                 { user?.name }
               </motion.span>
             )}
