@@ -1,14 +1,15 @@
-import { Circle } from "lucide-react";
 import { motion } from "motion/react"
 
 const AuthLoading = () => {
   return (
-    <div className='ml-1 inline-flex items-center gap-0.5"'>
+    <div className='flex items-center gap-3'>
       {[0, 1, 2].map((i) => (
         <motion.span
          key={i}
          animate={{
-          y: [0, -5, 0]
+          y: [1, -5, 1],
+          scale: [1, 1.35, 1],
+          opacity: [0.5, 1, 0.5]
          }}
          transition={{
           duration: 0.6, 
@@ -16,8 +17,8 @@ const AuthLoading = () => {
           ease: "easeInOut", 
           delay: i * 0.12,
          }}
+        className="h-2 w-2 rounded-full bg-current"
         >
-          <Dot className='h-2 w-2 text-10xl'/>
         </motion.span>
       ))}
     </div>
