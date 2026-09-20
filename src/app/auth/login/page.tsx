@@ -29,7 +29,7 @@ const Login = () => {
           </h2>
 
           <p className="mt-5 max-w-lg text-lg text-white/60 font-theme leading-relaxed">
-            Enter your prompt. Step out with an interface that moves.
+            Type your idea. Create something that feels like you.
           </p>
         </div>
         <div className="flex w-full justify-between gap-5">
@@ -41,7 +41,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-50 items-center bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-20 z-20">
+      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-20 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />

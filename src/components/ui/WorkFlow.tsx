@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  Sparkles,
-  WandSparkles,
-  SlidersHorizontal,
-  Rocket,
-} from "lucide-react";
+import { Circle, WandSparkles, SlidersHorizontal, Hammer } from "lucide-react";
 
 const workFlowSteps = [
   {
     number: "1.",
-    icon: Sparkles,
+    icon: Circle,
     title: "Prompt",
     description: "Describe your idea.",
   },
@@ -28,7 +23,7 @@ const workFlowSteps = [
   },
   {
     number: "4.",
-    icon: Rocket,
+    icon: Hammer,
     title: "Build",
     description: "Ship it to your project.",
   },

@@ -1,10 +1,4 @@
-import {
-  WandSparkles,
-  Orbit,
-  Rocket,
-  SlidersHorizontal,
-  LucideIcon,
-} from "lucide-react";
+import { WandSparkles, Orbit, Hammer, SlidersHorizontal, LucideIcon} from "lucide-react";
 
 import BlackHole from "@/assets/Icons/blackhole";
 
@@ -32,7 +26,7 @@ const features: Feature[] = [
   },
   {
     count: 3,
-    icon: Rocket,
+    icon: Hammer,
     title: "Ready to Ship",
     description:
       "Generate clean, responsive components built for real products, not just prototypes.",
@@ -48,7 +42,7 @@ const features: Feature[] = [
 
 const Feature = () => {
   return (
-    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-background px-6 py-8 lg:py-16 lg:px-20">
+    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-background px-6 py-8 lg:py-16 lg:px-20" id="features">
       <div className="relative z-10 mx-auto w-full">
 
         <div className="relative mb-12 flex w-full flex-col gap-6 lg:mb-16 lg:flex-row lg:justify-between">

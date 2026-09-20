@@ -24,8 +24,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full max-w-md rounded-xl p-5 shadow-md md:p-8">
-      <h1 className="mb-2 text-center text-3xl font-bold font-theme">
+    <div className="w-full flex flex-col items-center justify-center max-w-md rounded-xl p-5 shadow-md md:p-8">
+      <h1 className="text-center text-3xl font-bold font-theme">
         Welcome to Void UI
       </h1>
 
@@ -48,6 +48,14 @@ const LoginPage = () => {
           </> 
         )}
       </Button>
+
+      <div className="mt-7 flex w-full items-center gap-3">
+          <div className="h-px flex-1 bg-white/30" />
+          <span className="text-[10px] uppercase tracking-widest text-white/30">
+            Secure login
+          </span>
+          <div className="h-px flex-1 bg-white/30" />
+        </div>
     </div>
   );
 };
