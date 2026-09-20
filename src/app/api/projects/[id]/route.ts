@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/prisma";
-import { getCurrentUserId } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 
 import { UpdateProjectSchema } from "@/schemas/Project.schema";
 interface Params {
@@ -10,7 +10,9 @@ interface Params {
 
 export async function GET(req: NextRequest, { params }: { params: Params }) {
   try {
-    const userId = await getCurrentUserId();
+    const session = await auth();
+
+    const userId = Number(session?.user?.id)
 
     if (!userId) {
       return NextResponse.json(
@@ -72,7 +74,9 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
 
   export async function PATCH(req: NextRequest, { params }: { params: Params }) {
     try {
-      const userId = await getCurrentUserId();
+      const session = await auth();
+
+      const userId = Number(session?.user?.id)
 
       if (!userId) {
         return NextResponse.json(
@@ -155,7 +159,9 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
 
     export async function DELETE(req: NextRequest, { params }: { params: Params }) {
       try {
-        const userId = await getCurrentUserId();
+        const session = await auth();
+
+        const userId = Number(session?.user?.id)
 
         if (!userId) {
           return NextResponse.json(

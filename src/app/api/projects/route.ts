@@ -3,12 +3,14 @@ import type { NextRequest } from "next/server";
 import { db } from "@/lib/prisma";
 
 import { CreateProjectSchema } from "@/schemas/Project.schema";
-import { getCurrentUserId } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 
 export async function GET() {
   try {
 
-    const userId = await getCurrentUserId();
+    const session = await auth();
+
+    const userId = Number(session?.user?.id)
 
     if (!userId) {
       return NextResponse.json(
@@ -53,7 +55,9 @@ export async function GET() {
 export async function POST(req: NextRequest) {
 
   try {
-    const userId = await getCurrentUserId();
+    const session = await auth();
+
+    const userId = Number(session?.user?.id)
 
      if (!userId) {
       return NextResponse.json(

@@ -130,12 +130,12 @@ export default async function Dashboard() {
             </h2>
 
             {user.plan === "free" && (
-              <span className="text-xs px-2 py-1 rounded-full bg-foreground text-background font-theme">
+              <span className="text-xs px-2 py-1 rounded-full bg-yellow-600 text-foreground/80 font-theme">
                 10 req/Per Day
               </span>
             )}
             {user.plan === "pro" && (
-              <span className="text-xs px-2 py-1 rounded-full bg-foreground text-background font-theme">
+              <span className="text-xs px-2 py-1 rounded-full bg-yellow-600 text-foreground/80 font-theme">
                 310/Per Day
               </span>
             )}
