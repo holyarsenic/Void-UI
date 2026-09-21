@@ -2,7 +2,7 @@
 
 import Logo from "@/assets/Logo/Logo";
 
-import { LayoutDashboard, Circle, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen } from "lucide-react"; 
+import { LayoutDashboard, Circle, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen, ArrowUpRight } from "lucide-react"; 
 
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
@@ -121,7 +121,7 @@ const Sidebar = () => {
             >
               <Link
                 href={item.href}
-                className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "bg-white/7 text-white" : "text-white/50 hover:text-white"}`}>
+                className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "text-white" : "text-white/50 hover:text-white"}`}>
                 <motion.div
                   whileHover={{
                     scale: 1.12,
@@ -143,9 +143,17 @@ const Sidebar = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.2 }}
-                      className="font-theme"
+                      className="font-theme flex justify-between w-full"
                     >
                       {item.name}
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, x: -5, y: 5 }}
+                          animate={{ opacity: 1, x: 0, y: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }} >
+                          <ArrowUpRight className="h-4 w-4" />
+                        </motion.div>
+                      )}
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -166,7 +174,7 @@ const Sidebar = () => {
           href="/dashboard/settings"
           className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
             isSettingsActive
-              ? "bg-white/7 text-white"
+              ? "text-white"
               : "text-white/50 hover:text-white"
           }`}>
           <motion.div
@@ -186,9 +194,17 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -8 }}
                 transition={{ duration: 0.2 }}
-                className="font-theme"
+                className="font-theme flex justify-between w-full"
               >
                 Settings
+                {isSettingsActive && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -5, y: 5 }}
+                    animate={{ opacity: 1, x: 0, y: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }} >
+                      <ArrowUpRight className="h-4 w-4" />
+                  </motion.div>
+                )}
               </motion.span>
             )}
           </AnimatePresence>

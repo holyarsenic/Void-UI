@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import BlackHole from "@/assets/Icons/blackhole";
+import { Button } from "@/components/ui/button"
 
 type ProjectType = { 
   id: number; 
@@ -46,18 +47,26 @@ export default function Project(){
               </p>
             </div>
 
+            <Button
+              variant={"default"}
+              size={"lg"}
+              className='flex items-center justify-center font-theme'
+              >
+              + Create Project
+            </Button>
+
           </div>
 
 
           {projects?.length === 0 ? (
 
-            <div className="rounded-2xl border border-dashed border-white/10 p-5 flex flex-col items-center justify-center">
+            <div className="rounded-2xl border border-dashed border-white/20 p-5 flex flex-col items-center justify-center">
 
               <p className="text-white/40 font-theme">
                 You haven&apos;t generated anything yet.
               </p>
 
-              <BlackHole className="h-80 w-80 text-foreground/50 -rotate-25 mt-15" />
+              <BlackHole className="h-80 w-80 text-foreground/50 -rotate-25 -mt-15" />
 
             </div>
 
@@ -70,7 +79,7 @@ export default function Project(){
                 <Link
                   href={`/generate/${Project.id}`}
                   key={inx}
-                  className="block rounded-2xl border border-white/10 p-5 transition"
+                  className="block rounded-2xl border border-white/20 p-5 transition"
                 >
 
                   <div className="flex items-center justify-between gap-5">

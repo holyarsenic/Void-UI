@@ -173,7 +173,7 @@ export default async function Dashboard() {
 
         {recentGenerations.length === 0 ? (
 
-          <div className="rounded-2xl border border-dashed border-white/10 p-5 flex flex-col items-center justify-center">
+          <div className="rounded-2xl border border-dashed border-white/20 p-5 flex flex-col items-center justify-center">
 
             <p className="text-white/40 font-theme">
               You haven&apos;t generated anything yet.
@@ -192,7 +192,7 @@ export default async function Dashboard() {
               <Link
                 href={`/generate/${generation.id}`}
                 key={generation.id}
-                className="block rounded-2xl border border-white/10 p-5 transition"
+                className="block rounded-2xl border border-white/20 p-5 transition"
               >
 
                 <div className="flex items-center justify-between gap-5">

@@ -20,10 +20,10 @@ const Login = () => {
 
         <div className="h-full w-full flex flex-col mt-5">
         
-          <h2 className="text-6xl font-bold text-white font-theme">
+          <h2 className="text-6xl text-white font-theme">
             From a prompt
             <br /> to{" "}
-            <span className="font-light text-transparent bg-clip-text bg-linear-to-r from-white via-white/80 to-white/30">
+            <span className=" text-transparent bg-clip-text bg-linear-to-r from-white via-white/80 to-white/30">
               pure motion.
             </span>
           </h2>
