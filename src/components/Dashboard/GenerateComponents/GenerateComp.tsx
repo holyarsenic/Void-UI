@@ -1,13 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "@/assets/Logo/Logo";
 import { ArrowUp } from "lucide-react";
 import { Button } from "../../ui/button";
+import { useSession } from "next-auth/react";
 import TextareaAutosize from "react-textarea-autosize";
+import { useRouter } from "next/navigation";
 
 const GenerateComp = () => {
   const [value, setValue] = useState("");
+
+  const router = useRouter();
+
+  const { data, status } = useSession();
+  const user = data?.user;
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
 
   const handleSubmit = () => {
     if (!value.trim()) return;
@@ -17,7 +30,9 @@ const GenerateComp = () => {
   return (
     <section className="relative h-full w-full flex flex-col gap-5 items-center mt-20 overflow-hidden bg-background text-white">
 
-        <h2 className="font-theme text-base md:text-2xl text-foreground/60 text-center">Describe your vision. Let the void shape your component.</h2>
+        <h2 className="font-theme text-base md:text-2xl text-foreground/60 text-center">
+          {user?.name?.split(" ")[0] || "Creator"}&apos;s — What&apos;s the next move?
+        </h2>
         <div className="w-full max-w-2xl">
           <div className="group relative overflow-hidden rounded-xl md:rounded-3xl border-2 border-foreground/40 bg-background/30 focus-within:border-foreground/70 transition-colors duration-50 ease-in-out pb-14">
 

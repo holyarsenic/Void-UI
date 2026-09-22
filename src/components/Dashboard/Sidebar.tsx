@@ -2,7 +2,7 @@
 
 import Logo from "@/assets/Logo/Logo";
 
-import { LayoutDashboard, Circle, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen, ArrowUpRight } from "lucide-react"; 
+import { LayoutDashboard, Orbit, Circle, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen, ArrowUpRight } from "lucide-react"; 
 
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
@@ -40,8 +40,8 @@ const Sidebar = () => {
 
   return (
     <motion.aside
-      initial={{ width: 256 }}
-      animate={{ width: collapsed ? 80 : 256 }}
+      initial={{ width: 280 }}
+      animate={{ width: collapsed ? 80 : 280 }}
       transition={{
         duration: 0.34,
         ease: "easeInOut",
@@ -227,9 +227,9 @@ const Sidebar = () => {
                 initial={{ opacity: 0, scale:0.7 }}
                 animate={{ opacity: 1, scale:1 }}
                 exit={{ opacity: 0, scale:0.7 }}
-                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
                 className="font-theme">
-                 <Circle className="h-4 w-4" />
+                 <Orbit className="h-5 w-5"/>
               </motion.span> :
               <motion.span
                 initial={{ opacity: 0, y: -3 }}

@@ -2,7 +2,7 @@
 
 import Editor from "@monaco-editor/react";
 
-const CodeEditor = () => {
+const UiEditor = () => {
 
   return (
     <div className="h-screen w-full">
@@ -30,4 +30,4 @@ const CodeEditor = () => {
   );
 };
 
-export default CodeEditor;
+export default UiEditor;

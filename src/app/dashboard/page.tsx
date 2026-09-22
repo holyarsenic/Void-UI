@@ -61,7 +61,7 @@ export default async function Dashboard() {
           <h1 className="text-2xl md:text-3xl font-theme">
             {user.name?.split(' ')[0] || "Creator"}&apos;s Workspace
           </h1>
-          <p className="text-sm text-white/40 font-theme mt-1">Pull your ideas beyond the event horizon.</p>
+          <p className="text-sm text-white/40 font-theme mt-1">Every great build starts in the dark.</p>
         </div>
 
         <Link href="/dashboard/generate">

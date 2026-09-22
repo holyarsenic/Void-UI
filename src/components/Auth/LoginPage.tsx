@@ -13,7 +13,7 @@ const LoginPage = () => {
     setLoading(true)
     try {
         await signIn("google", {
-        callbackUrl: "/dashboard",
+        callbackUrl: "/dashboard/generate",
       });
     } catch (err) {
       console.error("Google login failed:", err);
