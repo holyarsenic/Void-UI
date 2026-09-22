@@ -2,6 +2,7 @@ allowBuilds:
   '@google/genai': true
   '@prisma/engines': true
   bcrypt: true
+  es5-ext: true
   esbuild: false
   msgpackr-extract: false
   prisma: true

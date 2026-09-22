@@ -115,6 +115,9 @@ const Sidebar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity:0, x: -15 }}
               transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 30,
                 delay: index * 0.05,
                 duration: 0.35,
               }}
@@ -209,14 +212,43 @@ const Sidebar = () => {
             )}
           </AnimatePresence>
         </Link>
+
+        <motion.div 
+        whileTap={{scale:0.98}}
+        transition={{
+          type: "spring",
+          stiffness: 400,
+          damping: 10
+        }}
+        className="group relative flex items-center justify-center bg-foreground/80 text-background gap-3 rounded-lg px-3 py-2 text-sm transition-colors cursor-pointer">
+          <AnimatePresence>
+            {collapsed ?
+              <motion.span
+                initial={{ opacity: 0, scale:0.7 }}
+                animate={{ opacity: 1, scale:1 }}
+                exit={{ opacity: 0, scale:0.7 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="font-theme">
+                 <Circle className="h-4 w-4" />
+              </motion.span> :
+              <motion.span
+                initial={{ opacity: 0, y: -3 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -3 }}
+                transition={{ duration: 0.2, ease:"easeInOut" }}
+                className="font-theme">
+                  Upgarde
+              </motion.span>
+            }
+          </AnimatePresence>
+        </motion.div>
       </nav>
 
       <div className="border-t border-white/10 p-4">
         <motion.button
-          whileHover={{
-            x: collapsed ? 0 : 3
-          }}
+          whileHover={{x: collapsed ? 0 : 3}}
           whileTap={{ scale: 0.97 }}
+          transition={{type: "spring", stiffness: 400, damping: 25}}
           onClick={() => signOut({ callbackUrl: "/auth/login" })}
           className='group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400 cursor-pointer'>
           <motion.div
