@@ -23,7 +23,9 @@ export default function Project(){
           method: "Get"
         })
 
-        if (!res.ok) { throw new Error("Failed to fetch projects"); }
+        if (!res.ok) { 
+          throw new Error("Failed to fetch projects"); 
+        }
         const data = await res.json(); 
         setProjects(data.data);
       } catch(error){

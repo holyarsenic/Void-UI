@@ -11,6 +11,7 @@ import GenerateCompLoader from "@/components/Loading/GenerateCompLoader"
 
 const GenerateComp = () => {
   const [value, setValue] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
 
@@ -27,9 +28,58 @@ const GenerateComp = () => {
     return <GenerateCompLoader />
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!value.trim()) return;
-    setValue("");
+
+    setIsSubmitting(true);
+
+    try {
+
+      //createing project
+      const projectRes = await fetch("/api/project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: value.trim().slice(0, 50)
+        }),
+      });
+
+      const projectData = await projectRes.json();
+
+      if (!projectRes.ok) {
+        throw new Error(
+          projectData.error || "Failed to create project"
+        );
+      }
+
+      const projectId = projectData.data.id;
+
+      //generate comp
+      const generateRes = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectId,
+          prompt: value.trim(),
+        }),
+      });
+
+      const generateData = await generateRes.json();
+
+      if (!generateRes.ok) {
+        throw new Error(
+          generateData.error || "Generation failed"
+        );
+      }
+
+      setValue("");
+      router.push(`/dashboard/projects/generate/${projectId}`);
+
+    } catch (error) {
+      console.error("Generation error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,9 +114,14 @@ const GenerateComp = () => {
               <Button
                 variant={"default"}
                 onClick={handleSubmit}
-                disabled={!value.trim()}
+                disabled={!value.trim() || isSubmitting}
                 className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-black transition-all hover:scale-105 disabled:opacity-30">
-                <ArrowUp size={18} strokeWidth={2.5} />
+
+                {isSubmitting ? (
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
+                ) : (
+                  <ArrowUp size={18} strokeWidth={2.5} />
+                )}
               </Button>
             </div>
           </div>

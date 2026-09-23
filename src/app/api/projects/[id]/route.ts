@@ -5,10 +5,10 @@ import { auth } from "@/lib/auth";
 
 import { UpdateProjectSchema } from "@/schemas/Project.schema";
 interface Params {
-  id: string;
+  params: Promise<{id: string}>
 }
 
-export async function GET(req: NextRequest, { params }: { params: Params }) {
+export async function GET({ params }: Params ) {
   try {
     const session = await auth();
 
@@ -72,7 +72,7 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
     );
   }}
 
-  export async function PATCH(req: NextRequest, { params }: { params: Params }) {
+  export async function PATCH(req: NextRequest, { params }: Params ) {
     try {
       const session = await auth();
 
@@ -157,7 +157,7 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
       );
     }}
 
-    export async function DELETE(req: NextRequest, { params }: { params: Params }) {
+    export async function DELETE(req: NextRequest, { params }: Params ) {
       try {
         const session = await auth();
 
