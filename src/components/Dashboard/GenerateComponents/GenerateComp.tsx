@@ -36,7 +36,7 @@ const GenerateComp = () => {
     try {
 
       //createing project
-      const projectRes = await fetch("/api/project", {
+      const projectRes = await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,13 +46,16 @@ const GenerateComp = () => {
 
       const projectData = await projectRes.json();
 
+      console.log("Project response:", projectData);
+      console.log("Project status:", projectRes.status);
+
       if (!projectRes.ok) {
         throw new Error(
           projectData.error || "Failed to create project"
         );
       }
 
-      const projectId = projectData.data.id;
+      const projectId = Number(projectData.data.id);
 
       //generate comp
       const generateRes = await fetch("/api/generate", {
@@ -71,7 +74,7 @@ const GenerateComp = () => {
           generateData.error || "Generation failed"
         );
       }
-
+      console.log(generateData)
       setValue("");
       router.push(`/dashboard/projects/generate/${projectId}`);
 

@@ -33,8 +33,7 @@ export default function GeneratedProject({ params }: PageProps){
 
       try {
         const res = await fetch(`/api/projects/${id}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" }
+          method: "GET"
         })
         const data = await res.json();
 
