@@ -59,7 +59,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <p className="hidden lg:block mt-3 text-center text-xs text-white/40">
+          <p className="hidden lg:block mt-3 text-center text-sm text-white/40">
             Press Enter to send · Shift + Enter for a new line
           </p>
         </div>

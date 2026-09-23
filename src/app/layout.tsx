@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Montenegrin_Gothic_One } from "next/font/google";
+import { Saira, Geist_Mono, Montenegrin_Gothic_One } from "next/font/google";
 import "./globals.css";
 
 const montenegrin = Montenegrin_Gothic_One({
@@ -8,8 +8,8 @@ const montenegrin = Montenegrin_Gothic_One({
   subsets: ["latin"],
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const Sans = Saira({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -45,9 +45,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       data-scroll-behavior="smooth"
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${montenegrin.variable} h-full antialiased dark`}
+      className={`${Sans.variable} ${geistMono.variable} ${montenegrin.variable} h-full antialiased dark`}
     >
-      <body className="font-mono min-h-full flex flex-col">{children}</body>
+      <body className="font-sans min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

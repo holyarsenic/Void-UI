@@ -7,6 +7,7 @@ import { Button } from "../../ui/button";
 import { useSession } from "next-auth/react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useRouter } from "next/navigation";
+import GenerateCompLoader from "@/components/Loading/GenerateCompLoader"
 
 const GenerateComp = () => {
   const [value, setValue] = useState("");
@@ -21,6 +22,10 @@ const GenerateComp = () => {
       router.push("/auth/login");
     }
   }, [status, router]);
+
+  if(status === "loading") {
+    return <GenerateCompLoader />
+  }
 
   const handleSubmit = () => {
     if (!value.trim()) return;

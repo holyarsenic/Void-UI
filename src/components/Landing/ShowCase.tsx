@@ -12,7 +12,7 @@ const ShowCase = () => {
 
       <div className="relative z-10 w-full">
 
-        <div className="flex flex-col md:flex-row justify-between gap-10 mb-10 w-full lg:mb-14">
+        <div className="flex flex-col md:flex-row justify-between gap-10 mb-10 w-full lg:mb-20">
           <div className="w-full lg:w-1/2">
             <h2 className="font-theme text-2xl font-bold text-white lg:text-5xl">
               From prompt to interface in seconds.
