@@ -8,7 +8,7 @@ interface Params {
   params: Promise<{id: string}>
 }
 
-export async function GET({ params }: Params ) {
+export async function GET( _req: NextRequest,{ params }: Params ) {
   try {
     const session = await auth();
 
@@ -41,7 +41,10 @@ export async function GET({ params }: Params ) {
       where: {
         id: projectId,
         userId,
-      }
+      },
+      include: {
+        generations: true,
+      },
     });
 
     if (!project) {
@@ -157,7 +160,7 @@ export async function GET({ params }: Params ) {
       );
     }}
 
-    export async function DELETE(req: NextRequest, { params }: Params ) {
+    export async function DELETE( _req: NextRequest, { params }: Params ) {
       try {
         const session = await auth();
 
