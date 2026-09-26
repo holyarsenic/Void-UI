@@ -11,7 +11,7 @@ const gemini = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
 });
 
-const FREE_LIMIT = 20;
+const FREE_LIMIT = 10;
 const PRO_LIMIT = 300;
 
 export async function POST(req: NextRequest) {
@@ -131,7 +131,7 @@ export async function POST(req: NextRequest) {
       contents: prompt,
       config: {
         systemInstruction: VOID_UI_SYSTEM_PROMPT,
-        maxOutputTokens: 1000,
+        maxOutputTokens: 8192,
       },
     });
 
@@ -144,6 +144,16 @@ export async function POST(req: NextRequest) {
           error: "Gemini did not return any content",
         },
         { status: 500 }
+      );
+    }
+
+    if (!responseText.includes("export default App")) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "AI generated incomplete code. Please try again.",
+        },
+        { status: 502 }
       );
     }
 

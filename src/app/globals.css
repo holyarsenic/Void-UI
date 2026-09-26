@@ -18,6 +18,30 @@ html::-webkit-scrollbar,
   display: none;
 }
 
+/* Custom Void scrollbar */
+.void-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #ca8a04 transparent;
+}
+
+.void-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.void-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.void-scrollbar::-webkit-scrollbar-thumb {
+  background: #ca8a04;
+  border-radius: 3px;
+}
+
+.void-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

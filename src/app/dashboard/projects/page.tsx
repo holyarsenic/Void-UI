@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import BlackHole from "@/assets/Icons/blackhole";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { formatDistanceToNowStrict } from "date-fns";
 
 type ProjectType = { 
   id: number; 
@@ -79,9 +80,9 @@ export default function Project(){
               {projects?.map((Project, inx) => (
 
                 <Link
-                  href={`/generate/${Project.id}`}
+                  href={`/dashboard/projects/generate/${Project.id}`}
                   key={inx}
-                  className="block rounded-2xl border border-white/20 p-5 transition"
+                  className="block rounded-xl border border-white/20 px-5 py-3 transition"
                 >
 
                   <div className="flex items-center justify-between gap-5">
@@ -103,7 +104,7 @@ export default function Project(){
                     </div>
 
                     <span className="text-xs text-white/30 whitespace-nowrap">
-                      {new Date(Project.createdAt).toLocaleDateString()}
+                      {formatDistanceToNowStrict(Project.createdAt, { addSuffix: true })}
                     </span>
 
                   </div>

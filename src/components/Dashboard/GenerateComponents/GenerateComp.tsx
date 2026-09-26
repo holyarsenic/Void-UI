@@ -70,10 +70,9 @@ const GenerateComp = () => {
       const generateData = await generateRes.json();
 
       if (!generateRes.ok) {
-        throw new Error(
-          generateData.error || "Generation failed"
-        );
+        console.log(generateData.error || "Generation failed")
       }
+      
       console.log(generateData)
       setValue("");
       router.push(`/dashboard/projects/generate/${projectId}`);

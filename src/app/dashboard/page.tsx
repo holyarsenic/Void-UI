@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { Button } from "@/components/ui/button"
 import BlackHole from "@/assets/Icons/blackhole";
 import { redirect } from "next/navigation";
+import { formatDistanceToNowStrict } from "date-fns";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -77,7 +78,7 @@ export default async function Dashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
 
-        <div className="rounded-sm border-2 border-white/50 p-6">
+        <div className="rounded-sm border-2 border-white/20 p-6">
 
           <p className="text-sm text-white/40 font-theme">
             Today&apos;s Requests
@@ -97,7 +98,7 @@ export default async function Dashboard() {
 
         </div>
 
-        <div className="rounded-sm border-2 border-white/50 p-6">
+        <div className="rounded-sm border-2 border-white/20 p-6">
 
           <p className="text-sm text-white/40 font-theme">
             Total Generations
@@ -117,7 +118,7 @@ export default async function Dashboard() {
 
         </div>
 
-        <div className="rounded-2xl border-2 border-white/50 p-6">
+        <div className="rounded-2xl border-2 border-white/20 p-6">
 
           <p className="text-sm text-white/40 font-theme">
             Current Plan
@@ -130,12 +131,12 @@ export default async function Dashboard() {
             </h2>
 
             {user.plan === "free" && (
-              <span className="text-xs px-2 py-1 rounded-full bg-yellow-600 text-foreground/80 font-theme">
+              <span className="text-xs px-2 py-1 rounded-sm bg-yellow-700 text-foreground font-theme">
                 10 req/Per Day
               </span>
             )}
             {user.plan === "pro" && (
-              <span className="text-xs px-2 py-1 rounded-full bg-yellow-600 text-foreground/80 font-theme">
+              <span className="text-xs px-2 py-1 rounded-full bg-yellow-700 text-foreground/80 font-theme">
                 310/Per Day
               </span>
             )}
@@ -187,12 +188,12 @@ export default async function Dashboard() {
 
           <div className="space-y-3">
 
-            {recentGenerations.map((generation) => (
+            {recentGenerations.slice(0,5).map((generation) => (
 
               <Link
-                href={`/generate/${generation.id}`}
+                href={`/dashboard/projects/generate/${generation.id}`}
                 key={generation.id}
-                className="block rounded-2xl border border-white/20 p-5 transition"
+                className="block rounded-xl border border-white/20 px-5 py-3 transition"
               >
 
                 <div className="flex items-center justify-between gap-5">
@@ -205,8 +206,8 @@ export default async function Dashboard() {
                         {generation.project.name}
                       </h3>
 
-                      <span className="text-[10px] uppercase tracking-wider text-white/30 border border-white/10 px-2 py-1 rounded-full">
-                        {generation.provider}
+                      <span className="text-[10px] uppercase tracking-wider text-[#00F0FF] py-1 rounded-full">
+                        | {generation.provider}
                       </span>
 
                     </div>
@@ -218,7 +219,7 @@ export default async function Dashboard() {
                   </div>
 
                   <span className="text-xs text-white/30 whitespace-nowrap">
-                    {generation.createdAt.toLocaleDateString()}
+                    {formatDistanceToNowStrict(generation.createdAt, { addSuffix: true })}
                   </span>
 
                 </div>
