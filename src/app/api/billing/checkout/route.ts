@@ -1,24 +1,21 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import DodoPayments from "dodopayments";
-import { getServerSession } from "next-auth";
 
 import {
   Checkout,
   CheckoutSchema,
 } from "@/schemas/CheckOut.schema";
 
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 
-const dodo = new DodoPayments({
-  apiKey: process.env.DODO_API_KEY!,
-});
+const dodo = new DodoPayments({bearerToken: process.env.DODO_API_KEY, environment: "test_mode"})
 
 export async function POST(req: NextRequest) {
   try {
     // Check NextAuth session
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session?.user?.email) {
       return NextResponse.json(
@@ -71,37 +68,38 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         success: true,
         plan: "free",
-        aiProvider: "ollama",
       });
     }
 
-    // PRO PLAN
     if (plan === "pro") {
-      /*
-       * Create a Dodo checkout session here.
-       *
-       * You can use:
-       * process.env.DODO_PRO_PRODUCT_ID
-       *
-       * The exact SDK method depends on your Dodo SDK version.
-       */
+      const productId = process.env.DODO_PRO_PRODUCT_ID;
 
-      // const checkoutSession = await dodo.checkoutSessions.create({
-      //   product_cart: [
-      //     {
-      //       product_id: process.env.DODO_PRO_PRODUCT_ID!,
-      //       quantity: 1,
-      //     },
-      //   ],
-      //   return_url: `${process.env.NEXT_PUBLIC_APP_URL}/billing/success`,
-      // });
+      if(!productId) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Pro product is not configured"
+          },
+          { status: 500}
+        )
+      }
+
+      const checkoutSession = await dodo.checkoutSessions.create({
+        product_cart: [
+          {
+            product_id: productId,
+            quantity: 1,
+          },
+        ],
+        customer: {email: user.email},
+        return_url: `${process.env.NEXTAUTH_URL}/dashboard`
+      });
 
       return NextResponse.json({
         success: true,
         plan: "pro",
-        aiProvider: "openai",
-
-        // checkoutUrl: checkoutSession.checkout_url,
+        checkoutUrl: checkoutSession.checkout_url,
+        sessionId: checkoutSession.session_id,
       });
     }
 

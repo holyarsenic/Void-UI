@@ -213,35 +213,37 @@ const Sidebar = () => {
           </AnimatePresence>
         </Link>
 
-        <motion.div 
-        whileTap={{scale:0.98}}
-        transition={{
-          type: "spring",
-          stiffness: 400,
-          damping: 10
-        }}
-        className="group relative flex items-center justify-center bg-foreground/80 text-background gap-3 rounded-lg px-3 py-2 text-sm transition-colors cursor-pointer">
-          <AnimatePresence>
-            {collapsed ?
-              <motion.span
-                initial={{ opacity: 0, scale:0.7 }}
-                animate={{ opacity: 1, scale:1 }}
-                exit={{ opacity: 0, scale:0.7 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-                className="font-theme">
-                 <Orbit className="h-5 w-5"/>
-              </motion.span> :
-              <motion.span
-                initial={{ opacity: 0, y: -3 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -3 }}
-                transition={{ duration: 0.2, ease:"easeInOut" }}
-                className="font-theme">
-                  Upgarde
-              </motion.span>
-            }
-          </AnimatePresence>
-        </motion.div>
+        <Link href="/dashboard/upgrade">
+          <motion.div 
+          whileTap={{scale:0.98}}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 10
+          }}
+          className="group relative flex items-center justify-center bg-foreground/80 text-background gap-3 rounded-lg px-3 py-2 text-sm transition-colors cursor-pointer">
+            <AnimatePresence>
+              {collapsed ?
+                <motion.span
+                  initial={{ opacity: 0, scale:0.7 }}
+                  animate={{ opacity: 1, scale:1 }}
+                  exit={{ opacity: 0, scale:0.7 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  className="font-theme">
+                  <Orbit className="h-5 w-5"/>
+                </motion.span> :
+                <motion.span
+                  initial={{ opacity: 0, y: -3 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -3 }}
+                  transition={{ duration: 0.2, ease:"easeInOut" }}
+                  className="font-theme">
+                    Upgrade
+                </motion.span>
+              }
+            </AnimatePresence>
+          </motion.div>
+        </Link>
       </nav>
 
       <div className="border-t border-white/10 p-4">
