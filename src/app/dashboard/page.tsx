@@ -191,8 +191,8 @@ export default async function Dashboard() {
             {recentGenerations.slice(0,5).map((generation) => (
 
               <Link
-                href={`/dashboard/projects/generate/${generation.id}`}
-                key={generation.id}
+                href={`/dashboard/projects/generate/${generation.projectId}`}
+                key={generation.projectId}
                 className="block rounded-xl border border-white/20 px-5 py-3 transition"
               >
 

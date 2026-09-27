@@ -69,6 +69,42 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    
+    if (!user) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "User not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    if(user.plan === "free" && user.dailyRequests >= 10){
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Free plan limit reached. Please try again tomorrow or upgrade to Pro.",
+        },
+        { status: 429 }
+      );
+    }
+
+    if(user.plan === "pro" && user.dailyRequests >= 300){
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Plan limit reached. Please try again tomorrow.",
+        },
+        { status: 429 }
+      );
+    }
+
     const body: unknown = await req.json();
 
     const result = CreateProjectSchema.safeParse(body);
@@ -84,21 +120,6 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, description } = result.data;
-
-    const user = await db.user.findUnique({
-      where: {
-        id: userId,
-      },
-    });
-    if (!user) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "User not found",
-        },
-        { status: 404 }
-      );
-    }
 
     const project = await db.project.create({
       data: {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BarLoader } from "react-spinners";
 import * as esbuild from "esbuild-wasm";
 
 interface LivePreviewProps {
@@ -26,10 +27,7 @@ function initEsbuild(): Promise<void> {
     })
     .catch((error) => {
 
-      if (
-        error instanceof Error &&
-        error.message.includes("initialize")
-      ) {
+      if (error instanceof Error && error.message.includes("initialize")) {
         return;
       }
 
@@ -46,12 +44,14 @@ export default function LivePreview({
 }: LivePreviewProps) {
   const [srcDoc, setSrcDoc] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
 
     async function compilePreview() {
       try {
+        setloading(true);
         setError(null);
         setSrcDoc("");
 
@@ -172,12 +172,10 @@ export default function LivePreview({
                     `;
 
         setSrcDoc(html);
+        setloading(false)
       } catch (err) {
-        console.error(
-          "Preview compilation error:",
-          err
-        );
-
+        console.error("Preview compilation error:",err);
+        setloading(false)
         if (!cancelled) {
           setError(
             err instanceof Error
@@ -195,6 +193,15 @@ export default function LivePreview({
     };
   }, [code]);
 
+
+  if(loading) {
+    return (
+    <div className="flex h-full w-full items-center justify-center rounded-lg border border-white/10 bg-background">
+      <BarLoader color="var(--foreground)" />
+    </div>
+  );
+  }
+
   if (error) {
     return (
       <div className="h-full w-full rounded-lg border border-red-500/20 bg-red-500/5 p-5">
@@ -205,18 +212,6 @@ export default function LivePreview({
         <pre className="whitespace-pre-wrap text-xs leading-relaxed text-red-300">
           {error}
         </pre>
-      </div>
-    );
-  }
-
-  //Loading
-  
-  if (!srcDoc) {
-    return (
-      <div className="flex h-full w-full items-center justify-center rounded-lg border border-white/10 bg-background">
-        <p className="text-sm text-white/50">
-          Compiling preview...
-        </p>
       </div>
     );
   }

@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Copy, Maximize, ChevronLeft, Check } from "lucide-react";
+import Link from "next/link";
+import Logo from "@/assets/Logo/Logo";
+import { motion, AnimatePresence } from "motion/react" 
 import LivePreview from "@/components/Dashboard/GenerateComponents/LivePreview";
+import { toast } from "sonner";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -29,6 +34,8 @@ interface ProjectResponse {
 
 export default function GeneratedProject({ params }: PageProps) {
   const [value, setValue] = useState<ProjectResponse | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [bigScreen, setBigScreen] = useState(false);
 
   useEffect(() => {
     const handleProject = async () => {
@@ -42,12 +49,14 @@ export default function GeneratedProject({ params }: PageProps) {
         const data = await res.json();
 
         if (!res.ok) {
-          throw new Error(data.error || "Failed to fetch project");
+          toast.error(data.error || "Failed to Load project");
+          return;
         }
 
         setValue(data);
       } catch (error) {
         console.error("Project error:", error);
+        toast.error("Something went wrong.");
       } 
     };
 
@@ -62,6 +71,22 @@ export default function GeneratedProject({ params }: PageProps) {
     );
   }
 
+  const copy = async (code: string) => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+
+      toast.success("Copied to clipboard");
+    } catch (error) {
+      console.error("Copy failed:", error);
+      toast.error("Failed to copy");
+    }
+  };
+
   const project = value.data;
 
   const latestGeneration =
@@ -71,12 +96,22 @@ export default function GeneratedProject({ params }: PageProps) {
 
   return (
     <div className="h-screen bg-background text-foreground px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl">
 
         <div className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-theme">
-            {project.name}
-          </h1>
+          <div className="flex gap-1 items-center">
+            <Link href="/dashboard/generate">
+              <motion.div
+              whileHover={{x: -2}}
+              whileTap={{scale: 1.1}}
+              className="cursor-pointer">
+                <ChevronLeft className="h-8 w-8"/>
+              </motion.div>
+            </Link>
+            <h1 className="text-2xl md:text-3xl font-theme">
+              {project.name}
+            </h1>     
+          </div>
 
           {project.description && (
             <p className="mt-2 text-white/50">
@@ -102,11 +137,65 @@ export default function GeneratedProject({ params }: PageProps) {
 
             <div className="border border-white/20 rounded-xl overflow-hidden">
 
-              <div className="px-5 py-4 border-b border-white/20">
+              <div className="px-5 py-4 border-b border-white/20 flex items-center justify-between">
                 <h2 className="font-semibold">
                   Live Preview
                 </h2>
+                <span className="text-white/60 hover:text-white hover:scale-105 cursor-pointer"
+                onClick={() => setBigScreen(true)}>
+                  <Maximize className="h-5 w-5"/>
+                </span>
               </div>
+              <AnimatePresence>
+                {bigScreen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="fixed inset-0 z-50 bg-background p-6">
+
+                    <div className="flex h-full flex-col">
+                      <div className="px-2 mb-4 flex items-center justify-between">
+
+                        <div className="flex gap-1 items-center cursor-pointer" onClick={() => setBigScreen(false)}>
+                          <motion.div
+                            whileHover={{x: -2}}
+                            whileTap={{scale: 1.1}}
+                            className="cursor-pointer">
+                            <ChevronLeft className="h-8 w-8"/>
+                          </motion.div>
+                          <h1 className="text-lg md:text-2xl font-theme">Back</h1>
+                        </div>
+
+                        <Link href="/dashboard" className="flex items-center gap-2">
+                          <motion.div
+                            whileHover={{ rotate: 8, scale: 1.08 }}
+                            transition={{ type: "spring", stiffness: 400 }}>
+                            <Logo className="h-6 w-6" />
+                          </motion.div>
+
+                          <AnimatePresence mode="wait">
+                              <motion.span
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                transition={{ duration: 0.2 }}
+                                className="whitespace-nowrap font-theme text-lg text-white"
+                              >
+                                Void <span className="font-bold">UI</span>
+                              </motion.span>
+                          </AnimatePresence>
+                        </Link>
+                      </div>
+
+                      <div className="h-full flex-1 overflow-hidden rounded-xl border border-white/20">
+                        <LivePreview code={latestGeneration.result} />
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div className="p-5">
                 <div className="h-130 w-full overflow-y-scroll">
@@ -123,9 +212,16 @@ export default function GeneratedProject({ params }: PageProps) {
                   Generated Result
                 </h2>
 
-                <span className="text-xs px-2 py-1 rounded-md bg-white/20 text-white/60">
-                  {latestGeneration.provider}
-                </span>
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => copy(latestGeneration.result)}
+                  className="text-white/60 hover:text-white">
+                  {copied ? 
+                  (<Check className="h-5 w-5" />) : 
+                  (<Copy className="h-5 w-5" />)}
+                </motion.button>
               </div>
 
               <div className="p-5">

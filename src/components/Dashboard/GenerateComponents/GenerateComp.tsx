@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useRouter } from "next/navigation";
 import GenerateCompLoader from "@/components/Loading/GenerateCompLoader"
+import { toast } from "sonner";
 
 const GenerateComp = () => {
   const [value, setValue] = useState("");
@@ -35,7 +36,7 @@ const GenerateComp = () => {
 
     try {
 
-      //createing project
+      //creating project
       const projectRes = await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -46,13 +47,9 @@ const GenerateComp = () => {
 
       const projectData = await projectRes.json();
 
-      console.log("Project response:", projectData);
-      console.log("Project status:", projectRes.status);
-
       if (!projectRes.ok) {
-        throw new Error(
-          projectData.error || "Failed to create project"
-        );
+        toast.error(projectData.error || "Failed to create project");
+        return;
       }
 
       const projectId = Number(projectData.data.id);
@@ -70,15 +67,16 @@ const GenerateComp = () => {
       const generateData = await generateRes.json();
 
       if (!generateRes.ok) {
-        console.log(generateData.error || "Generation failed")
+        toast.error(generateData.error || "Generation failed");
+        return;
       }
       
-      console.log(generateData)
       setValue("");
       router.push(`/dashboard/projects/generate/${projectId}`);
 
     } catch (error) {
       console.error("Generation error:", error);
+      toast.error("Generation failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

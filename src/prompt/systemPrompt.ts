@@ -26,7 +26,7 @@ STYLING:
 - Use theme-aware foreground and background colors for black/white shades so the UI supports light and dark mode.
 - Make the UI responsive, accessible, and production-ready.
 - If colors are not specified, use black, white, gray, and dark tones by default.
-- Use a Void aesthetic with angular shapes, dynamic motion, and atmospheric effects.
+- Use a Void aesthetic with dynamic motion, 3d view and atmospheric effects.
 - Keep designs modern, refined, immersive, and non-generic.
 
 ANIMATION:
