@@ -1,100 +1,88 @@
-import { NextResponse } from "next/server";
-import DodoPayments from "dodopayments";
+import { NextRequest, NextResponse } from "next/server";
+import { Webhook } from "standardwebhooks";
 
-import { db } from "@/lib/prisma";
+const webhookSecret = process.env.DODO_WEBHOOK_KEY!;
 
-const dodo = new DodoPayments({
-  bearerToken: process.env.DODO_API_KEY,
-  environment: "live_mode",
-});
-
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    // Get raw request body
-    const body = await req.text();
+    // Get webhook headers
+    const webhookId = req.headers.get("webhook-id");
+    const webhookSignature = req.headers.get("webhook-signature");
+    const webhookTimestamp = req.headers.get("webhook-timestamp");
 
-    // Dodo webhook headers
-    const headers = {
-      "webhook-id": req.headers.get("webhook-id") ?? "",
-      "webhook-signature":
-        req.headers.get("webhook-signature") ?? "",
-      "webhook-timestamp":
-        req.headers.get("webhook-timestamp") ?? "",
-    };
-
-    // Verify and parse webhook
-    const event = dodo.webhooks.unwrap(body, {
-      headers,
-      key: process.env.DODO_WEBHOOK_KEY!,
-    });
-
-    console.log("Dodo webhook received:", event.type);
-
-    // Payment successful
-    if (event.type === "payment.succeeded") {
-      const payment = event.data;
-
-      const email = payment.customer?.email;
-
-      if (!email) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "Customer email missing",
-          },
-          { status: 400 }
-        );
-      }
-
-      // Find your user
-      const user = await db.user.findUnique({
-        where: {
-          email,
-        },
-      });
-
-      if (!user) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "User not found",
-          },
-          { status: 404 }
-        );
-      }
-
-      // Upgrade user
-      await db.user.update({
-        where: {
-          id: user.id,
-        },
-        data: {
-          plan: "pro",
-          CustomerId:
-            payment.customer?.customer_id ?? null,
-          SubscriptionId:
-            payment.subscription_id ?? null,
-          subscriptionStatus: "active",
-        },
-      });
-
-      console.log(
-        `User ${user.id} upgraded to Pro`
+    if (!webhookId || !webhookSignature || !webhookTimestamp) {
+      return NextResponse.json(
+        { error: "Missing webhook headers" },
+        { status: 400 }
       );
     }
 
-    return NextResponse.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error("Dodo webhook error:", error);
+    // Get raw body
+    const body = await req.text();
 
+    // Verify webhook signature
+    const webhook = new Webhook(webhookSecret);
+
+    try {
+      await webhook.verify(body, {
+        "webhook-id": webhookId,
+        "webhook-signature": webhookSignature,
+        "webhook-timestamp": webhookTimestamp,
+      });
+    } catch (err) {
+      console.error("Webhook verification failed:", err);
+      return NextResponse.json(
+        { error: "Invalid webhook signature" },
+        { status: 400 }
+      );
+    }
+
+    // Parse the verified payload
+    const payload = JSON.parse(body);
+    console.log("WEBHOOK", payload.data);
+
+    // Handle different webhook events
+    switch (payload.type) {
+      case "payment.succeeded":
+        console.log("Payment succeeded:", payload.data);
+        // Handle successful payment
+        // Update your database, send confirmation email, etc.
+        break;
+
+      case "payment.failed":
+        console.log("Payment failed:", payload.data);
+        // Handle failed payment
+        break;
+
+      case "subscription.created":
+        console.log("Subscription created:", payload.data);
+        // Handle new subscription
+        break;
+
+      case "subscription.cancelled":
+        console.log("Subscription cancelled:", payload.data);
+        // Handle subscription cancellation
+        break;
+
+      case "subscription.updated":
+        console.log("Subscription updated:", payload.data);
+        // Handle subscription update
+        break;
+
+      default:
+        console.log("Unhandled webhook event:", payload.type);
+    }
+
+    // Return success response
     return NextResponse.json(
-      {
-        success: false,
-        error: "Webhook verification failed",
-      },
-      { status: 400 }
+      { received: true, type: payload.type },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Webhook processing error:", error);
+    return NextResponse.json(
+      { error: "Webhook processing failed" },
+      { status: 500 }
     );
   }
 }
