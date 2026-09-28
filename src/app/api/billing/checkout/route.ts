@@ -10,7 +10,7 @@ import {
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 
-const dodo = new DodoPayments({bearerToken: process.env.DODO_API_KEY, environment: "test_mode"})
+const dodo = new DodoPayments({bearerToken: process.env.DODO_API_KEY, environment: "live_mode"})
 
 export async function POST(req: NextRequest) {
   try {
