@@ -56,7 +56,7 @@ export default function Upgrade() {
       
       <div className="max-w-7xl">
         <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-white/10 bg-white/20 p-8">
+          <div className="rounded-3xl border border-white/15 bg-white/5 p-8">
             <div>
               <h2 className="text-2xl font-semibold">Free</h2>
 
@@ -70,7 +70,7 @@ export default function Upgrade() {
               <span className="ml-2 text-sm text-white/40">/ month</span>
             </div>
 
-            <div className="my-8 h-px bg-white/10" />
+            <div className="my-8 h-px bg-white/15" />
 
             <div className="space-y-4">
               {freeFeatures.map((feature) => (

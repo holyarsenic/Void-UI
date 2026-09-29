@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Webhook } from "standardwebhooks";
+import { db } from "@/lib/prisma";
 
 const webhookSecret = process.env.DODO_WEBHOOK_KEY!;
 
 export async function POST(req: NextRequest) {
   try {
-    // Get webhook headers
     const webhookId = req.headers.get("webhook-id");
     const webhookSignature = req.headers.get("webhook-signature");
     const webhookTimestamp = req.headers.get("webhook-timestamp");
@@ -17,69 +17,110 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Get raw body
     const body = await req.text();
 
-    // Verify webhook signature
     const webhook = new Webhook(webhookSecret);
 
-    try {
-      await webhook.verify(body, {
-        "webhook-id": webhookId,
-        "webhook-signature": webhookSignature,
-        "webhook-timestamp": webhookTimestamp,
-      });
-    } catch (err) {
-      console.error("Webhook verification failed:", err);
-      return NextResponse.json(
-        { error: "Invalid webhook signature" },
-        { status: 400 }
-      );
-    }
+    await webhook.verify(body, {
+      "webhook-id": webhookId,
+      "webhook-signature": webhookSignature,
+      "webhook-timestamp": webhookTimestamp,
+    });
 
-    // Parse the verified payload
     const payload = JSON.parse(body);
-    console.log("WEBHOOK", payload.data);
+    const data = payload.data;
 
-    // Handle different webhook events
-    switch (payload.type) {
-      case "payment.succeeded":
-        console.log("Payment succeeded:", payload.data);
-        // Handle successful payment
-        // Update your database, send confirmation email, etc.
-        break;
+    console.log("DODO WEBHOOK:", payload.type, data);
 
-      case "payment.failed":
-        console.log("Payment failed:", payload.data);
-        // Handle failed payment
-        break;
+    // Subscription created
+    if (payload.type === "subscription.created") {
+      const customerId = data.customer_id;
+      const subscriptionId = data.subscription_id;
+      const email = data.customer?.email || data.email;
 
-      case "subscription.created":
-        console.log("Subscription created:", payload.data);
-        // Handle new subscription
-        break;
+      if (!email) {
+        return NextResponse.json(
+          { error: "Customer email not found" },
+          { status: 400 }
+        );
+      }
 
-      case "subscription.cancelled":
-        console.log("Subscription cancelled:", payload.data);
-        // Handle subscription cancellation
-        break;
+      const user = await db.user.findUnique({
+        where: { email },
+      });
 
-      case "subscription.updated":
-        console.log("Subscription updated:", payload.data);
-        // Handle subscription update
-        break;
+      if (!user) {
+        return NextResponse.json(
+          { error: "User not found" },
+          { status: 404 }
+        );
+      }
 
-      default:
-        console.log("Unhandled webhook event:", payload.type);
+      await db.user.update({
+        where: { id: user.id },
+        data: {
+          plan: "pro",
+          CustomerId: customerId ? String(customerId) : null,
+          SubscriptionId: subscriptionId ? String(subscriptionId) : null,
+          subscriptionStatus: "active",
+          currentPeriodEnd: data.current_period_end ? new Date(data.current_period_end) : null,
+        },
+      });
+
+      console.log(`User ${user.id} upgraded to PRO`);
     }
 
-    // Return success response
+    // Subscription updated
+    if (payload.type === "subscription.updated") {
+      const subscriptionId = data.subscription_id;
+
+      const user = await db.user.findFirst({
+        where: {
+          SubscriptionId: String(subscriptionId),
+        },
+      });
+
+      if (user) {
+        await db.user.update({
+          where: { id: user.id },
+          data: {
+            subscriptionStatus: data.status ? String(data.status) : user.subscriptionStatus,
+            currentPeriodEnd: data.current_period_end ? new Date(data.current_period_end) : user.currentPeriodEnd,
+          },
+        });
+      }
+    }
+
+    // Subscription cancelled
+    if (payload.type === "subscription.cancelled") {
+      const subscriptionId = data.subscription_id;
+
+      const user = await db.user.findFirst({
+        where: {
+          SubscriptionId: String(subscriptionId),
+        },
+      });
+
+      if (user) {
+        await db.user.update({
+          where: { id: user.id },
+          data: {
+            plan: "free",
+            subscriptionStatus: "cancelled",
+          },
+        });
+
+        console.log(`User ${user.id} downgraded to FREE`);
+      }
+    }
+
     return NextResponse.json(
-      { received: true, type: payload.type },
+      { received: true },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Webhook processing error:", error);
+    console.error("Webhook error:", error);
+
     return NextResponse.json(
       { error: "Webhook processing failed" },
       { status: 500 }

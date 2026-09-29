@@ -248,32 +248,33 @@ const Sidebar = () => {
 
       <div className="border-t border-white/10 p-4">
         <motion.button
-          whileHover={{x: collapsed ? 0 : 3}}
-          whileTap={{ scale: 0.97 }}
-          transition={{type: "spring", stiffness: 400, damping: 25}}
           onClick={() => signOut({ callbackUrl: "/auth/login" })}
-          className='group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400 cursor-pointer'>
-          <motion.div
-            whileHover={{ x: 3 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <LogOut className="h-7 w-5" />
-          </motion.div>
-
+          whileHover={{ x: 4 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className="group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-white/40 transition-colors hover:text-red-400 cursor-pointer">
           <AnimatePresence>
             {!collapsed && (
               <motion.span
-                initial={{ opacity: 0, x: -8 }}
+                initial={{ opacity: 0, x: 8 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -8 }}
-                transition={{ duration: 0.2 }}
-                className="whitespace-nowrap flex gap-2 items-center font-theme"
+                exit={{ opacity: 0, x: 8 }}
+                className="flex items-center gap-2 font-theme whitespace-nowrap"
               >
-                <Image src={user?.image || "/default-profile.jpg"} alt={user?.name || "User"} width={28} height={28} className="rounded-full h-7 w-7" />
-                { user?.name }
+                <Image
+                  src={user?.image || "/default-profile.jpg"}
+                  alt={user?.name || "User"}
+                  width={28}
+                  height={28}
+                  className="h-7 w-7 rounded-full"
+                />
+
+                {user?.name}
               </motion.span>
             )}
           </AnimatePresence>
+
+          <LogOut className="ml-auto h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1" />
         </motion.button>
       </div>
     </motion.aside>

@@ -99,7 +99,7 @@ export default function GeneratedProject({ params }: PageProps) {
       <div className="max-w-7xl">
 
         <div className="mb-8">
-          <div className="flex gap-1 items-center">
+          <div className="-ml-5 flex gap-2 items-center">
             <Link href="/dashboard/generate">
               <motion.div
               whileHover={{x: -2}}

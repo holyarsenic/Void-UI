@@ -23,6 +23,7 @@ REACT:
 
 STYLING:
 - Use Tailwind CSS only.
+- Don’t add custom text until asked by User.
 - Use theme-aware foreground and background colors for black/white shades so the UI supports light and dark mode.
 - Make the UI responsive, accessible, and production-ready.
 - If colors are not specified, use black, white, gray, and dark tones by default.

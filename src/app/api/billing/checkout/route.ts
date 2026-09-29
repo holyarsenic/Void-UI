@@ -2,15 +2,12 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import DodoPayments from "dodopayments";
 
-import {
-  Checkout,
-  CheckoutSchema,
-} from "@/schemas/CheckOut.schema";
+import { Checkout, CheckoutSchema } from "@/schemas/CheckOut.schema";
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 
-const dodo = new DodoPayments({bearerToken: process.env.DODO_API_KEY, environment: "live_mode"})
+const dodo = new DodoPayments({bearerToken: process.env.DODO_API_KEY, environment: process.env.DODO_ENVIRONMENT as "live_mode" | "test_mode"})
 
 export async function POST(req: NextRequest) {
   try {

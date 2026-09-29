@@ -2,9 +2,9 @@ import Link from "next/link";
 import { db } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { Button } from "@/components/ui/button"
-import BlackHole from "@/assets/Icons/blackhole";
 import { redirect } from "next/navigation";
-import { formatDistanceToNowStrict } from "date-fns";
+import Image from "next/image";
+import RecentGenerations from "@/components/Dashboard/GenerateComponents/RecentGenerations";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -76,163 +76,42 @@ export default async function Dashboard() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+      <div className="w-full flex mb-12 border border-foreground/20"> 
+        <div className="w-1/2 bg-background h-40">
+          <div className="mt-10 ml-4 flex gap-4">
+            <div className="px-4">
+              <p className="font-theme text-xs text-foreground/40">
+                Today Requests
+              </p>
+              <p className="mt-2 font-theme text-2xl text-foreground">
+                {user.dailyRequests}
+              </p>
+            </div>
 
-        <div className="rounded-sm border-2 border-white/20 p-6">
+            <div className="px-4">
+              <p className="font-theme text-xs text-foreground/40">
+                Total Requests
+              </p>
+              <p className="mt-2 font-theme text-2xl text-foreground">
+                {user.totalRequests}
+              </p>
+            </div>
 
-          <p className="text-sm text-white/40 font-theme">
-            Today&apos;s Requests
-          </p>
-
-          <div className="flex items-end gap-2 mt-3">
-
-            <h2 className="text-3xl font-theme">
-              {user.dailyRequests}
-            </h2>
-
-            <span className="text-sm text-white/30 mb-1 font-theme">
-              requests
-            </span>
-
+            <div className="px-4">
+              <p className="font-theme text-xs text-foreground/40">
+                Plan
+              </p>
+              <p className="mt-2 font-theme text-2xl capitalize text-foreground">
+                {user.plan}
+              </p>
+            </div>
           </div>
-
         </div>
-
-        <div className="rounded-sm border-2 border-white/20 p-6">
-
-          <p className="text-sm text-white/40 font-theme">
-            Total Generations
-          </p>
-
-          <div className="flex items-end gap-2 mt-3">
-
-            <h2 className="text-3xl font-theme">
-              {user.totalRequests}
-            </h2>
-
-            <span className="text-sm text-white/30 mb-1 font-theme">
-              generations
-            </span>
-
-          </div>
-
+        <div className="relative w-1/2 h-40 overflow-hidden">
+          <Image src="/Void.jpg" alt="void" fill className="object-cover" priority/>
         </div>
-
-        <div className="rounded-2xl border-2 border-white/20 p-6">
-
-          <p className="text-sm text-white/40 font-theme">
-            Current Plan
-          </p>
-
-          <div className="flex items-center gap-3 mt-3">
-
-            <h2 className="text-3xl font-theme">
-              {user.plan}
-            </h2>
-
-            {user.plan === "free" && (
-              <span className="text-xs px-2 py-1 rounded-sm bg-yellow-700 text-foreground font-theme">
-                10 req/Per Day
-              </span>
-            )}
-            {user.plan === "pro" && (
-              <span className="text-xs px-2 py-1 rounded-full bg-yellow-700 text-foreground/80 font-theme">
-                310/Per Day
-              </span>
-            )}
-
-          </div>
-
-        </div>
-
       </div>
-
-
-      <section>
-
-        <div className="flex items-center justify-between mb-5">
-
-          <div>
-            <h2 className="text-xl font-theme">
-              Recent Generations
-            </h2>
-
-            <p className="text-sm font-theme text-white/40 mt-1">
-              Your latest generated components
-            </p>
-          </div>
-
-          <Link
-            href="/dashboard/projects"
-            className="text-sm font-theme mr-5 text-white/50 hover:text-white transition"
-          >
-            View all
-          </Link>
-
-        </div>
-
-
-        {recentGenerations.length === 0 ? (
-
-          <div className="rounded-2xl border border-dashed border-white/20 p-5 flex flex-col items-center justify-center">
-
-            <p className="text-white/40 font-theme">
-              You haven&apos;t generated anything yet.
-            </p>
-
-            <BlackHole className="h-80 w-80 text-foreground/50 -rotate-25 -mt-15" />
-
-          </div>
-
-        ) : (
-
-          <div className="space-y-3">
-
-            {recentGenerations.slice(0,5).map((generation) => (
-
-              <Link
-                href={`/dashboard/projects/generate/${generation.projectId}`}
-                key={generation.projectId}
-                className="block rounded-xl border border-white/20 px-5 py-3 transition"
-              >
-
-                <div className="flex items-center justify-between gap-5">
-
-                  <div className="min-w-0">
-
-                    <div className="flex items-center gap-3">
-
-                      <h3 className="font-medium">
-                        {generation.project.name}
-                      </h3>
-
-                      <span className="text-[10px] uppercase tracking-wider text-[#00F0FF] py-1 rounded-full">
-                        | {generation.provider}
-                      </span>
-
-                    </div>
-
-                    <p className="text-sm text-white/40 mt-2 truncate max-w-2xl">
-                      {generation.prompt}
-                    </p>
-
-                  </div>
-
-                  <span className="text-xs text-white/30 whitespace-nowrap">
-                    {formatDistanceToNowStrict(generation.createdAt, { addSuffix: true })}
-                  </span>
-
-                </div>
-
-              </Link>
-
-            ))}
-
-          </div>
-
-        )}
-
-      </section>
+      <RecentGenerations recentGenerations={recentGenerations}/>
     </main>
   );
 }
