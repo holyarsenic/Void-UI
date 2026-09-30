@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import BlackHole from "@/assets/Icons/blackhole";
-import { Button } from "@/components/ui/button";
 import { formatDistanceToNowStrict } from "date-fns";
+import { BookPlus, Bookmark } from 'lucide-react';
+import { motion } from "motion/react";
 
 type ProjectType = { 
   id: number; 
@@ -21,7 +22,7 @@ export default function Project(){
     const FetchProjects = async () => {
       try {
         const res = await fetch("/api/projects", {
-          method: "Get"
+          method: "GET"
         })
 
         if (!res.ok) { 
@@ -50,71 +51,76 @@ export default function Project(){
               </p>
             </div>
 
-            <Button
-              variant={"default"}
-              size={"lg"}
-              className='flex items-center justify-center font-theme'
-              >
-              + Create Project
-            </Button>
-
           </div>
 
 
           {projects?.length === 0 ? (
+            <motion.div
+              initial={{opacity: 0, scale: 0.98}}
+              animate={{opacity: 1,scale: 1}}
+              transition={{duration: 0.5, ease: "easeOut"}}
+              className="relative flex min-h-90 flex-col items-center justify-center overflow-hidden rounded-2xl border border-dashed border-foreground/20 bg-transparent">
+              <motion.div
+                animate={{ y: [0, -8, 0], rotate: [-2, 0, -2]}}
+                transition={{duration: 7,repeat: Infinity,ease: "easeInOut"}}>
+                <BlackHole className="h-72 w-72 text-foreground/40 sm:h-80 sm:w-80"/>
+              </motion.div>
 
-            <div className="rounded-2xl border border-dashed border-white/20 p-5 flex flex-col items-center justify-center">
-
-              <p className="text-white/40 font-theme">
-                You haven&apos;t generated anything yet.
+              <p className="absolute bottom-8 text-sm font-theme text-foreground/80">
+                You haven&apos;t made any projects yet.
               </p>
-
-              <BlackHole className="h-80 w-80 text-foreground/50 -rotate-25 -mt-15" />
-
-            </div>
-
+            </motion.div>
           ) : (
+            <div className="grid  grid-cols-1 md:grid-cols-2 gap-4">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 18, scale: 0.985 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{duration: 0.45, delay: index * 0.07, ease: [0.22, 1, 0.36, 1]}}>
+                  <Link
+                    href={`/dashboard/projects/generate/${project.id}`}
+                    className="group block overflow-hidden rounded-xl border border-foreground/20 bg-background px-4 py-4 outline-none sm:px-5 h-30">
 
-            <div className="space-y-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-3">
+                          <motion.span
+                            whileHover={{ rotate: -8, scale: 1.08 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                            className="shrink-0"
+                          >
+                            <BookPlus className="h-5 w-5 text-foreground/80" />
+                          </motion.span>
 
-              {projects?.map((Project, inx) => (
+                          <h3 className="truncate font-theme text-sm font-medium text-foreground">
+                            {project.name}
+                          </h3>
+                        </div>
 
-                <Link
-                  href={`/dashboard/projects/generate/${Project.id}`}
-                  key={inx}
-                  className="block rounded-xl border border-white/20 px-5 py-3 transition"
-                >
+                        <p className="mt-2 truncate text-sm font-theme text-foreground/40">
+                          {project.description?.trim() || "Add Description"}
+                        </p>
 
-                  <div className="flex items-center justify-between gap-5">
-
-                    <div className="min-w-0">
-
-                      <div className="flex items-center gap-3">
-
-                        <h3 className="font-medium">
-                          {Project.name}
-                        </h3>
-
-                        <span className="text-[10px] uppercase tracking-wider text-white/30 border border-white/10 px-2 py-1 rounded-full">
-                          {Project.description}
-                        </span>
-
+                        <p className="mt-3 text-xs font-theme text-foreground/30">
+                          {formatDistanceToNowStrict(project.createdAt, {
+                            addSuffix: true,
+                          })}
+                        </p>
                       </div>
 
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="shrink-0 cursor-pointer"
+                      >
+                        <Bookmark className="h-5 w-5 text-foreground/40 transition-colors hover:text-foreground" />
+                      </motion.div>
                     </div>
-
-                    <span className="text-xs text-white/30 whitespace-nowrap">
-                      {formatDistanceToNowStrict(Project.createdAt, { addSuffix: true })}
-                    </span>
-
-                  </div>
-
-                </Link>
-
+                  </Link>
+                </motion.div>
               ))}
-
             </div>
-
           )}
       </div>
     );

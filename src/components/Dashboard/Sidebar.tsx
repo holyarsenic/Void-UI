@@ -2,7 +2,7 @@
 
 import Logo from "@/assets/Logo/Logo";
 
-import { LayoutDashboard, Orbit, Circle, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen, ArrowUpRight } from "lucide-react"; 
+import { LayoutDashboard, Orbit, Circle, RotateCcwClock, FolderKanban, Settings, LogOut, PanelLeftClose, PanelLeftOpen, ArrowUpRight } from "lucide-react"; 
 
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
@@ -32,22 +32,26 @@ const Sidebar = () => {
       href: "/dashboard/generate",
     },
     {
+      name: "History",
+      icon: RotateCcwClock,
+      href: "/dashboard/history"
+    },
+    {
       name: "Projects",
       icon: FolderKanban,
       href: "/dashboard/projects",
-    },
+    }
   ];
 
   return (
     <motion.aside
       initial={{ width: 280 }}
-      animate={{ width: collapsed ? 80 : 280 }}
+      animate={{ width: collapsed ? 80 : 280  }}
       transition={{
         duration: 0.34,
         ease: "easeInOut",
       }}
-      className="relative flex h-screen flex-col overflow-hidden border-r border-white/10 bg-background"
-    >
+      className="fixed md:relative flex h-screen flex-col overflow-hidden border-r border-white/10 bg-background z-20">
       <div className="relative flex h-20 items-center justify-between border-b border-white/10 px-5">
         <Link href="/dashboard" className="flex items-center gap-3">
           <motion.div
@@ -79,7 +83,7 @@ const Sidebar = () => {
           }}
           whileTap={{ scale: 0.92 }}
           onClick={() => setCollapsed(!collapsed)}
-          className=" p-2 text-yellow-600 transition-colors hover:text-white"
+          className=" p-2 text-yellow-600 transition-colors hover:text-white "
         >
           <motion.div
             animate={{ rotate: collapsed ? 180 : 0 }}
@@ -175,7 +179,7 @@ const Sidebar = () => {
 
         <Link
           href="/dashboard/settings"
-          className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
+          className={`group mb-2 relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
             isSettingsActive
               ? "text-white"
               : "text-white/50 hover:text-white"

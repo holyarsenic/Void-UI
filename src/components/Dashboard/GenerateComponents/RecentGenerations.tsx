@@ -15,32 +15,15 @@ interface Generation {
 
 interface RecentGenerationsProps {
   recentGenerations: Generation[];
+  length: number;
 }
 
 export default function RecentGenerations({
-  recentGenerations,
+  recentGenerations, length
 }: RecentGenerationsProps) {
 
   return (
     <section>
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-theme text-foreground">
-            Recent Generations
-          </h2>
-
-          <p className="mt-1 text-sm font-theme text-foreground/40">
-            Your latest generated components
-          </p>
-        </div>
-
-        <Link
-          href="/dashboard/projects"
-          className="mr-5 text-sm font-theme text-foreground/80 transition-colors hover:text-foreground">
-          View all
-        </Link>
-      </div>
-
       {recentGenerations.length === 0 ? (
         <motion.div
           initial={{opacity: 0, scale: 0.98}}
@@ -58,16 +41,13 @@ export default function RecentGenerations({
           </p>
         </motion.div>
       ) : (
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{hidden: {},visible: {transition: { staggerChildren: 0.07}}}}
-          className="grid  grid-cols-1 md:grid-cols-2 gap-4">
-          {recentGenerations.slice(0, 10).map((generation, index) => (
+        <div className="grid  grid-cols-1 md:grid-cols-2 gap-4">
+          {recentGenerations.slice(0, length).map((generation, index) => (
             <motion.div
               key={generation.projectId}
-              variants={{hidden: {opacity: 0, y: 18, scale: 0.985}, visible: { opacity: 1, y: 0, scale: 1}}}
-              transition={{duration: 0.45, ease: [0.22, 1, 0.36, 1]}}>
+              initial={{ opacity: 0, y: 18, scale: 0.985 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{duration: 0.45, delay: index * 0.07, ease: [0.22, 1, 0.36, 1]}}>
               <Link
                 href={`/dashboard/projects/generate/${generation.projectId}`}
                 className="group block overflow-hidden rounded-xl border border-foreground/20 bg-background px-4 py-4 outline-none sm:px-5">
@@ -104,7 +84,7 @@ export default function RecentGenerations({
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       )}
     </section>
   );

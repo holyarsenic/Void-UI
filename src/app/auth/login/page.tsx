@@ -9,9 +9,9 @@ import LoginPage from "@/components/Auth/LoginPage";
 const Login = () => {
   const router = useRouter()
   return (
-    <div className='flex min-h-screen w-full py-2'>
-      <BlackHole className='w-full h-full text-white/30 absolute inset-0' />
-      <div className='hidden lg:flex flex-col justify-between gap-10 w-1/2 h-screen bg-linear-to-t from-white/80 to-black rounded-lg p-10'>
+    <div className='relative flex min-h-screen w-full py-2 overflow-hidden'>
+      <BlackHole className=' absolute w-full h-full -rotate-25 ml-5 -mt-20 text-white/30' />
+      <div className='hidden lg:flex flex-col justify-between gap-10 w-[60%] h-screen bg-linear-to-t from-white/80 to-black rounded-lg p-10'>
         <div className="flex items-center gap-3 mb-7">
           <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-mono">
             Built for creators
@@ -23,13 +23,13 @@ const Login = () => {
           <h2 className="text-6xl text-white font-theme">
             From a prompt
             <br /> to{" "}
-            <span className=" text-transparent bg-clip-text bg-linear-to-r from-white via-white/80 to-white/30">
-              pure motion.
+            <span className="text-white">
+              pure Motion
             </span>
           </h2>
 
           <p className="mt-5 max-w-lg text-lg text-white/60 font-theme leading-relaxed">
-            Type your idea. Create something that feels like you.
+            Type your idea. create something that feels like you.
           </p>
         </div>
         <div className="flex w-full justify-between gap-5">
@@ -41,7 +41,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-1/2 h-screen p-5 lg:p-20 z-20">
+      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-[40%] h-screen p-5 lg:p-15 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />

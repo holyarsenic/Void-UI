@@ -54,6 +54,17 @@ export default async function Dashboard() {
     take: 5,
   });
 
+  const dailyLimit = user.plan === "pro" ? 300 : 10;
+  const remainingRequests = Math.max(
+    dailyLimit - user.dailyRequests,
+    0
+  );
+
+  const usagePercentage = Math.min(
+    (user.dailyRequests / dailyLimit) * 100,
+    100
+  );
+
   return (
     <main className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
@@ -76,42 +87,65 @@ export default async function Dashboard() {
         </Link>
       </div>
 
-      <div className="w-full flex mb-12 border border-foreground/20"> 
-        <div className="w-1/2 bg-background h-40">
-          <div className="mt-10 ml-4 flex gap-4">
-            <div className="px-4">
-              <p className="font-theme text-xs text-foreground/40">
-                Today Requests
+      <div className="w-full flex mb-12 border border-foreground/20 p-1"> 
+        <div className="w-[50%] h-40 border border-white/10 bg-white/2 p-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="font-theme text-xs text-white/40">
+                Today&apos;s usage
               </p>
-              <p className="mt-2 font-theme text-2xl text-foreground">
+
+              <p className="mt-3 font-theme text-4xl text-white">
                 {user.dailyRequests}
+                <span className="text-lg text-white/30">
+                  {" / "}{dailyLimit}
+                </span>
               </p>
             </div>
 
-            <div className="px-4">
-              <p className="font-theme text-xs text-foreground/40">
-                Total Requests
-              </p>
-              <p className="mt-2 font-theme text-2xl text-foreground">
-                {user.totalRequests}
-              </p>
-            </div>
+            <span className="border border-white/10 px-3 py-1 font-mono text-xs uppercase text-white/50">
+              {user.plan === "free" ? "Base" : "Pro"}
+            </span>
+          </div>
 
-            <div className="px-4">
-              <p className="font-theme text-xs text-foreground/40">
-                Plan
-              </p>
-              <p className="mt-2 font-theme text-2xl capitalize text-foreground">
-                {user.plan}
-              </p>
-            </div>
+          <div className="mt-6 h-1 w-full bg-white/10">
+            <div
+              className="h-full bg-white transition-all"
+              style={{ width: `${usagePercentage}%` }}
+            />
+          </div>
+
+          <p className="mt-3 font-theme text-xs text-white/30">
+            {remainingRequests} generations remaining today
+          </p>
+
+        </div>
+        <div className="relative w-[50%] h-40 overflow-hidden">
+          <Image src="/Void.jpg" alt="void" fill className="object-cover scale-100 hover:opacity-85 transition-opacity duration-700 opacity-70" priority/>
+          <div className="absolute top-4 left-4"> 
+            <h3 className="font-theme text-2xl tracking-tight text-white"> Create in the dark.</h3> 
+            <p className="mt-1 text-xs text-white/40"> Every great build starts somewhere.</p>
           </div>
         </div>
-        <div className="relative w-1/2 h-40 overflow-hidden">
-          <Image src="/Void.jpg" alt="void" fill className="object-cover" priority/>
-        </div>
       </div>
-      <RecentGenerations recentGenerations={recentGenerations}/>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-theme text-foreground">
+            Recent Generations
+          </h2>
+
+          <p className="mt-1 text-sm font-theme text-foreground/40">
+            Your latest generated components
+          </p>
+        </div>
+
+        <Link
+          href="/dashboard/projects"
+          className="mr-5 text-sm font-theme text-foreground/80 transition-colors hover:text-foreground">
+          View all
+        </Link>
+      </div>
+      <RecentGenerations recentGenerations={recentGenerations} length={10}/>
     </main>
   );
 }

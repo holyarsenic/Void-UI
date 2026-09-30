@@ -36,7 +36,7 @@ const Navbar = () => {
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0}}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
         className={`hidden items-center gap-8 md:flex px-10 py-2 border-2 rounded-sm transition-all duration-500 ease-in-out ${ scrolled ? "border-white/40 bg-black/80 " : "border-transparent"}`}
       >
         {navItems.map((item) => (

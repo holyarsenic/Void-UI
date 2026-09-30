@@ -55,7 +55,7 @@ export default function Upgrade() {
       </div>
       
       <div className="max-w-7xl">
-        <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-2">
           <div className="rounded-3xl border border-white/15 bg-white/5 p-8">
             <div>
               <h2 className="text-2xl font-semibold">Free</h2>

@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { Button } from "../ui/button";
 import GoogleIcon from "@/assets/Icons/Google";
 import { useState } from "react";
+import { Lock } from "lucide-react"
 import AuthLoading from "../Loading/AuthLoading";
 
 const LoginPage = () => {
@@ -24,7 +25,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center max-w-md rounded-xl p-5 shadow-md md:p-8">
+    <div className="w-full flex flex-col items-center justify-center max-w-md rounded-xl p-5 md:p-8">
       <h1 className="text-center text-3xl font-bold font-theme">
         Welcome to Void UI
       </h1>
@@ -36,7 +37,7 @@ const LoginPage = () => {
       <Button
         type="button"
         onClick={handleGoogleLogin}
-        className={`flex w-full gap-2 py-5 text-lg font-theme ${ loading ? "bg-primary/80" : ""}`}
+        className={`flex w-xs rounded-2xl gap-2 py-5 text-lg font-theme ${ loading ? "bg-primary/80" : ""}`}
       >
         {loading ? ( 
           <> 
@@ -49,12 +50,11 @@ const LoginPage = () => {
         )}
       </Button>
 
-      <div className="mt-7 flex w-full items-center gap-3">
-          <div className="h-px flex-1 bg-white/30" />
-          <span className="text-[10px] uppercase tracking-widest text-white/30">
-            Secure login
+      <div className="mt-3 flex w-full items-center justify-center gap-3">
+          <Lock className="h-4 w-4 text-foreground/40"/>
+          <span className="text-[11px] tracking-widest text-foreground/40">
+            Secure passwordless authentication.
           </span>
-          <div className="h-px flex-1 bg-white/30" />
         </div>
     </div>
   );
