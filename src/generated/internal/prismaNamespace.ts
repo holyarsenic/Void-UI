@@ -884,6 +884,7 @@ export const ProjectScalarFieldEnum = {
   userId: 'userId',
   name: 'name',
   description: 'description',
+  isPinned: 'isPinned',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -987,6 +988,13 @@ export type EnumPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'Plan[]'
  */
 export type ListEnumPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Plan[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

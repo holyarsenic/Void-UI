@@ -50,8 +50,7 @@ export default async function Dashboard() {
     },
     orderBy: {
       createdAt: "desc",
-    },
-    take: 5,
+    }
   });
 
   const dailyLimit = user.plan === "pro" ? 300 : 10;
@@ -67,7 +66,7 @@ export default async function Dashboard() {
 
   return (
     <main className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10 mt-5 md:mt-0">
 
         <div>
           <h1 className="text-2xl md:text-3xl font-theme">
@@ -88,7 +87,7 @@ export default async function Dashboard() {
       </div>
 
       <div className="w-full flex mb-12 border border-foreground/20 p-1"> 
-        <div className="w-[50%] h-40 border border-white/10 bg-white/2 p-6">
+        <div className="w-full md:w-[50%] h-40 border border-white/10 bg-white/2 p-6">
           <div className="flex items-start justify-between">
             <div>
               <p className="font-theme text-xs text-white/40">
@@ -120,7 +119,7 @@ export default async function Dashboard() {
           </p>
 
         </div>
-        <div className="relative w-[50%] h-40 overflow-hidden">
+        <div className="hidden md:block relative w-[50%] h-40 overflow-hidden">
           <Image src="/Void.jpg" alt="void" fill className="object-cover scale-100 hover:opacity-85 transition-opacity duration-700 opacity-70" priority/>
           <div className="absolute top-4 left-4"> 
             <h3 className="font-theme text-2xl tracking-tight text-white"> Create in the dark.</h3> 

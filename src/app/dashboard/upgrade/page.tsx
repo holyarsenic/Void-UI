@@ -44,7 +44,7 @@ export default function Upgrade() {
   return (
     <div className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
       
-      <div>
+      <div className="mt-5 md:mt-0">
         <h1 className="font-theme text-3xl">
           Choose your plan
         </h1>

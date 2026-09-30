@@ -78,6 +78,7 @@ model Project {
   userId      Int
   name        String
   description String?
+  isPinned    Boolean      @default(false)
   generations Generation[]
 
   createdAt DateTime @default(now())

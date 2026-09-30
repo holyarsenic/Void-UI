@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Copy, Maximize, ChevronLeft, Check } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Logo from "@/assets/Logo/Logo";
 import { motion, AnimatePresence } from "motion/react" 
 import LivePreview from "@/components/Dashboard/GenerateComponents/LivePreview";
@@ -37,6 +38,7 @@ export default function GeneratedProject({ params }: PageProps) {
   const [copied, setCopied] = useState(false);
   const [bigScreen, setBigScreen] = useState(false);
 
+  const router = useRouter();
   useEffect(() => {
     const handleProject = async () => {
       try {
@@ -95,19 +97,20 @@ export default function GeneratedProject({ params }: PageProps) {
       : null;
 
   return (
-    <div className="h-screen bg-background text-foreground px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
+    <div className="h-screen bg-background text-foreground px-3 py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="max-w-7xl">
 
-        <div className="mb-8">
-          <div className="-ml-5 flex gap-2 items-center">
-            <Link href="/dashboard/generate">
-              <motion.div
-              whileHover={{x: -2}}
-              whileTap={{scale: 1.1}}
-              className="cursor-pointer">
-                <ChevronLeft className="h-8 w-8"/>
-              </motion.div>
-            </Link>
+        <div className="mb-8 mt-5 md:mt-0">
+          <div className="-ml-2 md:-ml-5 flex gap-2 items-center">
+          
+            <motion.div
+            whileHover={{x: -2}}
+            whileTap={{scale: 1.1}}
+            className="cursor-pointer"
+            onClick={() => router.back()}>
+              <ChevronLeft className="h-8 w-8"/>
+            </motion.div>
+       
             <h1 className="text-2xl md:text-3xl font-theme">
               {project.name}
             </h1>     
@@ -153,17 +156,17 @@ export default function GeneratedProject({ params }: PageProps) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="fixed inset-0 z-50 bg-background p-6">
+                    className="fixed inset-0 z-50 bg-background p-2 pt-4 lg:p-6">
 
                     <div className="flex h-full flex-col">
                       <div className="px-2 mb-4 flex items-center justify-between">
 
-                        <div className="flex gap-1 items-center cursor-pointer" onClick={() => setBigScreen(false)}>
+                        <div className="flex gap-1 items-center cursor-pointer -ml-2" onClick={() => setBigScreen(false)}>
                           <motion.div
                             whileHover={{x: -2}}
                             whileTap={{scale: 1.1}}
                             className="cursor-pointer">
-                            <ChevronLeft className="h-8 w-8"/>
+                            <ChevronLeft className="h-5 w-5 md:h-7 md:w-7"/>
                           </motion.div>
                           <h1 className="text-lg md:text-2xl font-theme">Back</h1>
                         </div>

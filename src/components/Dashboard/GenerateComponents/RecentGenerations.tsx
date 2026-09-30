@@ -41,7 +41,7 @@ export default function RecentGenerations({
           </p>
         </motion.div>
       ) : (
-        <div className="grid  grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid  grid-cols-1 md:grid-cols-1 xl:grid-cols-2 gap-4">
           {recentGenerations.slice(0, length).map((generation, index) => (
             <motion.div
               key={generation.projectId}
@@ -61,16 +61,20 @@ export default function RecentGenerations({
                         {String(index + 1).padStart(2, "0")}
                       </motion.span>
 
-                      <h3 className="truncate font-theme text-foreground">
+                      <h3 className="truncate max-w-full lg:max-w-50 font-theme text-foreground">
                         {generation.project.name}
                       </h3>
 
-                      <span className="font-theme text-foreground/60">
+                      <span className="hidden lg:flex font-theme text-foreground/60">
                         | {generation.provider}
                       </span>
                     </div>
 
-                    <p className="mt-2 truncate max-w-2xl text-sm font-theme text-foreground/40">
+                    <span className="flex lg:hidden mt-1 font-theme text-foreground/60">
+                      | {generation.provider}
+                    </span>
+
+                    <p className="mt-2 line-clamp-3 max-w-2xl text-sm font-theme text-foreground/40">
                       {generation.prompt}
                     </p>
                   </div>

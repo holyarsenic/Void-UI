@@ -14,8 +14,8 @@ export const CreateProjectSchema = z.object({
 
 export const UpdateProjectSchema = z.object({
   name: z.string().min(1).max(100).optional(),
-
   description: z.string().max(500).optional(),
+  isPinned: z.boolean().default(false).optional()
 });
 
 export type CreateProjectInput = z.infer<typeof CreateProjectSchema>;

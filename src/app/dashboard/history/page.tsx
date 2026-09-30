@@ -47,14 +47,13 @@ export default async function Dashboard() {
     },
     orderBy: {
       createdAt: "desc",
-    },
-    take: 5,
+    }
   });
 
   return (
     <main className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
 
-      <div className="w-full flex items-center justify-between mb-5">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-2 justify-between mb-5 mt-5 md:mt-0">
 
         <div>
           <h1 className="font-theme text-3xl">A Record of Creation</h1>
@@ -63,7 +62,9 @@ export default async function Dashboard() {
             Everything created, preserved within the Void.
           </p>
         </div>
-
+        <div className="w-70 mt-4 border-2 border-foreground/20 px-5 py-2 flex justify-between items-center">
+          <h1>Total Generation</h1>{' '} <span className="px-3 py-1 bg-foreground/40">{user.totalRequests}</span>
+        </div>
       </div>
       <RecentGenerations recentGenerations={recentGenerations} length={recentGenerations.length}/>
     </main>
