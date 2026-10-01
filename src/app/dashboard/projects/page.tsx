@@ -12,7 +12,6 @@ type ProjectType = {
   id: number; 
   name: string; 
   description: string | null; 
-  createdAt: string; 
   updatedAt: string;
   isPinned: boolean;
 };
@@ -45,7 +44,8 @@ export default function Project(){
 
   const pinnedProjects = projects.filter((project) => project.isPinned).sort((a,b) => 
     new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
-  const recentProjects = projects.filter((project) => !project.isPinned).sort((a,b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+  const recentProjects = projects.filter((project) => !project.isPinned).sort((a,b) =>
+    new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
 
   return (
       <div className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
@@ -105,7 +105,7 @@ export default function Project(){
                         </p>
 
                         <p className="mt-3 text-xs font-theme text-foreground/30">
-                          {formatDistanceToNowStrict(pinned.createdAt, {
+                          {formatDistanceToNowStrict(pinned.updatedAt, {
                             addSuffix: true,
                           })}
                         </p>
@@ -201,7 +201,7 @@ export default function Project(){
                         </p>
 
                         <p className="mt-3 text-xs font-theme text-foreground/30">
-                          {formatDistanceToNowStrict(project.createdAt, {
+                          {formatDistanceToNowStrict(project.updatedAt, {
                             addSuffix: true,
                           })}
                         </p>

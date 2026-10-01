@@ -63,7 +63,7 @@ export default async function Dashboard() {
           </p>
         </div>
         <div className="w-70 mt-4 border-2 border-foreground/20 px-5 py-2 flex justify-between items-center">
-          <h1>Total Generation</h1>{' '} <span className="px-3 py-1 bg-foreground/40">{user.totalRequests}</span>
+          <h1>Total Generation</h1>{' '} <span className="px-3 py-1 bg-foreground/40">{recentGenerations.length}</span>
         </div>
       </div>
       <RecentGenerations recentGenerations={recentGenerations} length={recentGenerations.length}/>

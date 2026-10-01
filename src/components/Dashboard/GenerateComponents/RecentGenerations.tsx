@@ -61,7 +61,7 @@ export default function RecentGenerations({
                         {String(index + 1).padStart(2, "0")}
                       </motion.span>
 
-                      <h3 className="truncate max-w-full lg:max-w-50 font-theme text-foreground">
+                      <h3 className="truncate max-w-40 sm:max-w-70 font-theme text-foreground">
                         {generation.project.name}
                       </h3>
 
@@ -74,7 +74,7 @@ export default function RecentGenerations({
                       | {generation.provider}
                     </span>
 
-                    <p className="mt-2 line-clamp-3 max-w-2xl text-sm font-theme text-foreground/40">
+                    <p className="mt-2 line-clamp-2 max-w-50 sm:max-w-90 text-sm h-10 font-theme text-foreground/40">
                       {generation.prompt}
                     </p>
                   </div>

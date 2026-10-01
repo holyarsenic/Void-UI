@@ -9,6 +9,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { useRouter } from "next/navigation";
 import GenerateCompLoader from "@/components/Loading/GenerateCompLoader"
 import { toast } from "sonner";
+import { HashLoader } from "react-spinners";
 
 const GenerateComp = () => {
   const [value, setValue] = useState("");
@@ -118,7 +119,7 @@ const GenerateComp = () => {
                 className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-black transition-all hover:scale-105 disabled:opacity-30">
 
                 {isSubmitting ? (
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
+                  <HashLoader size={15} color="#000000" />
                 ) : (
                   <ArrowUp size={18} strokeWidth={2.5} />
                 )}

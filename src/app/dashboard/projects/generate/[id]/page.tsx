@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Copy, Maximize, ChevronLeft, Check } from "lucide-react";
+import { Copy, Maximize, ChevronLeft, Check, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Logo from "@/assets/Logo/Logo";
 import { motion, AnimatePresence } from "motion/react" 
 import LivePreview from "@/components/Dashboard/GenerateComponents/LivePreview";
 import { toast } from "sonner";
+import { RingLoader, HashLoader } from "react-spinners";
+import EditProjectPage from "@/components/Dashboard/EditProject/EditProjectPage";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -36,12 +38,16 @@ interface ProjectResponse {
 export default function GeneratedProject({ params }: PageProps) {
   const [value, setValue] = useState<ProjectResponse | null>(null);
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [bigScreen, setBigScreen] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
     const handleProject = async () => {
       try {
+        setLoading(true);
         const { id } = await params;
 
         const res = await fetch(`/api/projects/${id}`, {
@@ -59,11 +65,22 @@ export default function GeneratedProject({ params }: PageProps) {
       } catch (error) {
         console.error("Project error:", error);
         toast.error("Something went wrong.");
-      } 
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
     };
 
     handleProject();
   }, [params]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-white flex items-center justify-center">
+        <RingLoader size={30} color="#ffffff" />
+      </div>
+    );
+  }
 
   if (!value?.data) {
     return (
@@ -72,6 +89,34 @@ export default function GeneratedProject({ params }: PageProps) {
       </div>
     );
   }
+
+
+  const handleDelete = async () => {
+    try {
+      setDeleting(true);
+      const { id } = await params;
+
+      const res = await fetch(`/api/projects/${id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || "Failed to delete project");
+        return;
+      }
+
+      toast.success("Project deleted successfully");
+      router.push("/dashboard/projects");
+    } catch (error) {
+      console.error("Delete project error:", error);
+      toast.error("Something went wrong.");
+      setDeleting(false);
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const copy = async (code: string) => {
     try {
@@ -100,27 +145,50 @@ export default function GeneratedProject({ params }: PageProps) {
     <div className="h-screen bg-background text-foreground px-3 py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="max-w-7xl">
 
-        <div className="mb-8 mt-5 md:mt-0">
-          <div className="-ml-2 md:-ml-5 flex gap-2 items-center">
-          
-            <motion.div
-            whileHover={{x: -2}}
-            whileTap={{scale: 1.1}}
-            className="cursor-pointer"
-            onClick={() => router.back()}>
-              <ChevronLeft className="h-8 w-8"/>
-            </motion.div>
-       
-            <h1 className="text-2xl md:text-3xl font-theme">
+        <div className="relative mb-8 -ml-10 pt-2">
+          <div className="flex items-center gap-3">
+            <motion.button
+              whileHover={{ x: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-foreground/70 hover:bg-white/20 hover:text-foreground transition-colors"
+              onClick={() => router.back()}>
+              <ChevronLeft className="h-6 w-6" />
+            </motion.button>
+
+            <h1 className="text-2xl md:text-3xl font-theme font-medium tracking-tight truncate max-w-[65vw] lg:max-w-[40vw]">
               {project.name}
-            </h1>     
+            </h1>
+
+            <button
+              onClick={() => setEditing(true)}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-foreground/40 hover:bg-yellow-500/10 hover:text-yellow-500 transition-colors">
+              <Pencil className="h-4 w-4" />
+            </button>
           </div>
 
           {project.description && (
-            <p className="mt-2 text-white/50">
-              {project?.description}
+            <p className="mt-2 ml-12 max-w-[80vw] md:max-w-[55vw] text-sm leading-relaxed text-foreground/45 line-clamp-2">
+              {project.description}
             </p>
           )}
+
+          <motion.button
+            whileTap={{ scale: deleting ? 1 : 0.95 }}
+            whileHover={{ scale: deleting ? 1 : 1.02 }}
+            type="button"
+            className="absolute -top-3 right-1 md:top-2 md:right-4 inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 border border-red-500/20 bg-red-950/20 text-red-400 hover:bg-red-500/20 hover:text-red-300 hover:border-red-500/40 backdrop-blur-sm"
+            onClick={handleDelete}
+            disabled={deleting}
+          >
+            {deleting ? (
+              <HashLoader size={14} color="#f87171" />
+            ) : (
+              <>
+                <Trash2 className="h-3.5 w-3.5 text-red-400" />
+                <span>Delete</span>
+              </>
+            )}
+          </motion.button>
         </div>
 
         {!latestGeneration && (
@@ -238,6 +306,38 @@ export default function GeneratedProject({ params }: PageProps) {
           </div>
         )}
       </div>
+      <AnimatePresence>
+        {editing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background/60 backdrop-blur-sm">
+            <div className="w-full max-w-md overflow-hidden bg-background border border-foreground/20 rounded-xl px-3 py-3">
+              <EditProjectPage
+                id={project.id}
+                cancelButton={() => setEditing(false)} 
+                projectName={project.name}
+                projectDescription={project.description || ""}
+                onUpdate={(updatedProject) => {
+                  setValue((prev) => {
+                    if (!prev) return prev;
+
+                    return {
+                      ...prev,
+                      data: {
+                        ...prev.data,
+                        name: updatedProject.name,
+                        description: updatedProject.description || null,
+                      },
+                    };
+                  });
+                }}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

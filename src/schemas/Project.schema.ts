@@ -7,14 +7,14 @@ export const CreateProjectSchema = z.object({
     message: "Project name must be at most 100 characters",
   }),
 
-  description: z.string().max(500, {
-    message: "Description must be at most 500 characters",
+  description: z.string().max(200, {
+    message: "Description must be at most 200 characters",
   }).optional(),
 });
 
 export const UpdateProjectSchema = z.object({
   name: z.string().min(1).max(100).optional(),
-  description: z.string().max(500).optional(),
+  description: z.string().max(200).optional(),
   isPinned: z.boolean().default(false).optional()
 });
 
