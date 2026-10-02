@@ -11,7 +11,7 @@ const Login = () => {
   return (
     <div className='relative flex min-h-screen w-full py-2 overflow-hidden'>
       <BlackHole className=' absolute w-full h-full -rotate-25 ml-5 -mt-20 text-white/30' />
-      <div className='hidden lg:flex flex-col justify-between gap-10 w-[60%] h-screen bg-linear-to-t from-white/80 to-black rounded-lg p-10'>
+      <div className='hidden lg:flex flex-col justify-between gap-10 lg:w-[50%] xl:w-[60%] h-screen bg-linear-to-t from-white/80 to-black rounded-lg p-10'>
         <div className="flex items-center gap-3 mb-7">
           <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-mono">
             Built for creators
@@ -20,7 +20,7 @@ const Login = () => {
 
         <div className="h-full w-full flex flex-col mt-5">
         
-          <h2 className="text-6xl text-white font-theme">
+          <h2 className="lg:text-4xl xl:text-6xl text-white font-theme">
             From a prompt
             <br /> to{" "}
             <span className="text-white">
@@ -41,7 +41,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-[40%] h-screen p-5 lg:p-15 z-20">
+      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-[50%] xl:w-[40%] h-screen p-5 lg:p-15 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Saira, Geist_Mono, Montenegrin_Gothic_One } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { SessionProvider } from "next-auth/react";
 
 const montenegrin = Montenegrin_Gothic_One({
   variable: "--font-montenegrin",
@@ -48,10 +49,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       lang="en"
       className={`${Sans.variable} ${geistMono.variable} ${montenegrin.variable} h-full antialiased dark`}
     >
-      <body className="font-sans min-h-full flex flex-col">
-        {children} 
-        <Toaster position="bottom-right"/>
-      </body>
+      <SessionProvider >
+        <body className="font-sans min-h-full flex flex-col">
+          {children} 
+          <Toaster position="bottom-right"/>
+        </body>
+      </SessionProvider>
     </html>
   );
 }
