@@ -51,12 +51,12 @@ export default async function Dashboard() {
   });
 
   return (
-    <main className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
+    <main className="h-screen bg-background text-white px-6 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
 
-      <div className="flex flex-col lg:flex-row lg:items-center gap-2 justify-between mb-5 mt-5 md:mt-0">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-2 justify-between mb-5">
 
         <div>
-          <h1 className="font-theme text-3xl">A Record of Creation</h1>
+          <h1 className="font-theme text-2xl md:text-3xl ml-8 md:ml-0">A Record of Creation</h1>
 
           <p className="mt-1 font-theme text-sm text-white/40">
             Everything created, preserved within the Void.

@@ -51,17 +51,17 @@ interface RecentGenerationsProps {
               <Link
                 href={`/dashboard/projects/generate/${generation.projectId}`}
                 className="group block overflow-hidden rounded-xl border border-foreground/20 bg-background px-4 py-4 outline-none sm:px-5">
-
-                <div className="flex justify-between gap-4">
-                  <div className=" flex-1">
-                    <div className="flex items-center gap-3">
+                <div>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex min-w-0 items-center gap-3">
                       <motion.span
-                        whileHover={{rotate: -8, scale: 1.08}}
-                        className="flex h-7 w-7 items-center justify-center rounded-md bg-foreground/80 font-theme text-xs text-background">
+                        whileHover={{ rotate: -8, scale: 1.08 }}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-foreground/80 font-theme text-xs text-background"
+                      >
                         {String(index + 1).padStart(2, "0")}
                       </motion.span>
 
-                      <h3 className="truncate max-w-40 sm:max-w-70 font-theme text-foreground">
+                      <h3 className="max-w-full truncate font-theme text-foreground sm:max-w-70">
                         {generation.project.name}
                       </h3>
 
@@ -70,20 +70,20 @@ interface RecentGenerationsProps {
                       </span>
                     </div>
 
-                    <span className="flex lg:hidden mt-1 font-theme text-foreground/60">
-                      | {generation.provider}
+                    <span className="shrink-0 whitespace-nowrap text-xs text-foreground/80">
+                      {formatDistanceToNowStrict(generation.createdAt, {
+                        addSuffix: true,
+                      })}
                     </span>
-
-                    <p className="mt-2 line-clamp-2 max-w-full md:max-w-90 text-sm h-10 font-theme text-foreground/40">
-                      {generation.prompt}
-                    </p>
                   </div>
 
-                  <span className="shrink-0 mt-2 whitespace-nowrap text-xs transition-colors text-foreground/80 group-hover:text-foreground">
-                    {formatDistanceToNowStrict(generation.createdAt, {
-                      addSuffix: true,
-                    })}
+                  <span className="mt-1 flex font-theme text-foreground/60 lg:hidden">
+                    | {generation.provider}
                   </span>
+
+                  <p className="mt-2 w-full line-clamp-2 text-sm font-theme text-foreground/40">
+                    {generation.prompt}
+                  </p>
                 </div>
               </Link>
             </motion.div>

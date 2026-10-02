@@ -65,11 +65,11 @@ export default async function Dashboard() {
   );
 
   return (
-    <main className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10 mt-5 md:mt-0">
+    <main className="h-screen bg-background text-white px-6 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-theme">
+          <h1 className="text-2xl md:text-3xl font-theme ml-8 md:ml-0">
             {user.name?.split(' ')[0] || "Creator"}&apos;s Workspace
           </h1>
           <p className="text-sm text-white/40 font-theme mt-1">Every great build starts in the dark.</p>

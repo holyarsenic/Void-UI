@@ -21,9 +21,9 @@ export default async function Upgrade () {
   });
 
   return (
-    <main className="h-screen bg-background text-foreground px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
-      <div className="mt-5 md:mt-0">
-        <h1 className="font-theme text-3xl">
+    <main className="h-screen bg-background text-foreground px-6 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
+      <div>
+        <h1 className="font-theme text-2xl md:text-3xl ml-8 md:ml-0">
           Choose your plan
         </h1>
 

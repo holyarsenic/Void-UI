@@ -2,9 +2,9 @@ import GenerateComp from "@/components/Dashboard/GenerateComponents/GenerateComp
 
 export default function Generate() {
   return (
-    <main className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16 overflow-y-scroll">
-      <div className="mb-10 mt-5 md:mt-0">
-        <h1 className="text-2xl md:text-3xl font-theme">
+    <main className="h-screen bg-background text-white px-6 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
+      <div className="mb-10">
+        <h1 className="text-2xl md:text-3xl font-theme ml-8 md:ml-0">
           Generate Component
         </h1>
 

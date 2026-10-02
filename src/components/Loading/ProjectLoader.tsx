@@ -2,9 +2,9 @@ import React from 'react'
 
 const ProjectLoader = () => {
   return (
-    <div className="h-screen bg-background text-white px-6 py-10 md:px-10 lg:px-16">
-      <div className="mb-5 mt-5 md:mt-0">
-        <div className="h-9 w-48 rounded-md bg-foreground/10 animate-pulse" />
+    <div className="h-screen bg-background text-white px-6 py-5 md:py-10 md:px-10 lg:px-16">
+      <div className="mb-5">
+        <div className="h-9 w-48 rounded-md bg-foreground/10 animate-pulse ml-8 md:ml-0" />
         <div className="mt-2 h-4 w-72 rounded-md bg-foreground/10 animate-pulse" />
       </div>
 
