@@ -3,14 +3,11 @@
 import { Check } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-
 interface UpgradeCompProps {
   Plan: "free" | "pro";
-  isLandingPage?: boolean;
 }
 
-const UpgradeComp = ({ Plan, isLandingPage }: UpgradeCompProps) => {
+const UpgradeComp = ({ Plan }: UpgradeCompProps) => {
 
   const handleUpgrade = async () => {
     try {
@@ -79,20 +76,12 @@ const UpgradeComp = ({ Plan, isLandingPage }: UpgradeCompProps) => {
               ))}
             </div>
 
-            {isLandingPage ? (
-              <Link href="/auth/login" className="mt-100 w-full">
-                <Button variant={"default"} className="w-full py-5">
-                  Get Started
-                </Button>
-              </Link>
-            ) : (
-              <Button
-                disabled
-                variant={"outline"}
-                className="mt-10 w-full py-5">
-                { Plan === "free" ? "Current Plan" : "Manage Plan"}
+            <Button
+              disabled
+              variant={"outline"}
+              className="mt-10 w-full py-5">
+              { Plan === "free" ? "Current Plan" : "Manage Plan"}
             </Button>
-            )}
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-yellow-500/40 bg-yellow-600 p-8 text-black shadow-2xl shadow-yellow-600/10">

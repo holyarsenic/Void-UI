@@ -15,7 +15,7 @@ const ShowCase = () => {
         <div className="flex flex-col md:flex-row justify-between gap-10 mb-10 w-full lg:mb-20">
           <div className="w-full lg:w-1/2">
             <h2 className="font-theme text-2xl font-bold text-white lg:text-5xl">
-              From prompt to interface in seconds.
+              From prompt to interface in seconds
             </h2>
 
             <p className="mt-4 max-w-xl text-sm text-white/40 md:text-base">
@@ -50,7 +50,7 @@ const ShowCase = () => {
             </span>
 
             <h3 className="mt-1 md:mt-4 max-w-2xl font-theme text-2xl font-bold text-white lg:text-5xl">
-              Bring your ideas to life.
+              Bring your ideas to life
             </h3>
 
             <p className="mt-4 max-w-xl text-sm text-white/40 lg:text-base">

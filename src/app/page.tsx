@@ -3,6 +3,7 @@ import ShowCase from "@/components/Landing/ShowCase";
 import Feature from "@/components/Landing/Feature";
 import Footer from "@/components/Landing/Footer";
 import Enroll from "@/components/Landing/Enroll";
+import Pricing from "@/components/Landing/Pricing";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <ShowCase />
       <Feature />
+      <Pricing />
       <Enroll />
       <Footer />
     </div>

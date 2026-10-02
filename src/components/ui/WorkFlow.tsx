@@ -32,7 +32,7 @@ const workFlowSteps = [
 const WorkFlow = () => {
   return (
     <section className="relative w-full h-full flex justify-center items-center overflow-hidden">
-          <div className="flex flex-col md:flex-row w-full gap-4 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-4 md:gap-10">
             {workFlowSteps.map((step, index) => {
               const Icon = step.icon;
 

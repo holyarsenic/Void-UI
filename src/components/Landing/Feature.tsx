@@ -49,7 +49,7 @@ const Feature = () => {
 
           <div className="relative z-10 w-full lg:w-1/2">
             <h2 className="text-2xl font-theme font-bold text-foreground md:text-5xl lg:text-5xl">
-              Stop building the same UI twice.
+              Stop building the same UI twice
             </h2>
 
             <p className="mt-5 max-w-xl text-sm text-white/40 md:text-base sm:leading-7">
