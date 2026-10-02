@@ -1,4 +1,4 @@
-import UpgradeComp from "@/components/Dashboard/Upgrade/UpgradeComp";
+import UpgradeComp from "@/components/Dashboard/UpgradeComponents/UpgradeComp";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 import { redirect } from "next/navigation";

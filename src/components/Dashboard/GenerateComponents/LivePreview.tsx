@@ -39,9 +39,9 @@ function initEsbuild(): Promise<void> {
   return globalThis.__VOID_ESBUILD_INIT__;
 }
 
-export default function LivePreview({
+const LivePreview = ({
   code,
-}: LivePreviewProps) {
+}: LivePreviewProps) => {
   const [srcDoc, setSrcDoc] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setloading] = useState(true);
@@ -226,3 +226,5 @@ export default function LivePreview({
     />
   );
 }
+
+export default LivePreview;

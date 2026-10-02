@@ -18,9 +18,9 @@ interface RecentGenerationsProps {
   length: number;
 }
 
-export default function RecentGenerations({
+ const RecentGenerations = ({
   recentGenerations, length
-}: RecentGenerationsProps) {
+}: RecentGenerationsProps) => {
 
   return (
     <section>
@@ -93,3 +93,5 @@ export default function RecentGenerations({
     </section>
   );
 }
+
+export default RecentGenerations;
