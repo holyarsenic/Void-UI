@@ -7,6 +7,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { BookPlus, Bookmark } from 'lucide-react';
 import { motion } from "motion/react";
 import { toast } from "sonner";
+import ProjectLoader from "@/components/Loading/ProjectLoader";
 
 type ProjectType = { 
   id: number; 
@@ -19,10 +20,12 @@ type ProjectType = {
 export default function Project(){
 
   const [ projects, setProjects] = useState<ProjectType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const FetchProjects = async () => {
       try {
+        setIsLoading(true);
         const res = await fetch("/api/projects", {
           method: "GET"
         })
@@ -36,11 +39,18 @@ export default function Project(){
       } catch(error){
         console.error("Error fetching projects:", error);
         toast.error("Something went wrong");
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false)
       }
     }
 
     FetchProjects();
   },[])
+
+  if(isLoading){
+    return <ProjectLoader />
+  }
 
   const pinnedProjects = projects.filter((project) => project.isPinned).sort((a,b) => 
     new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());

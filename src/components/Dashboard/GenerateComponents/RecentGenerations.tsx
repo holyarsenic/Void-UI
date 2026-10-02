@@ -52,7 +52,7 @@ export default function RecentGenerations({
                 href={`/dashboard/projects/generate/${generation.projectId}`}
                 className="group block overflow-hidden rounded-xl border border-foreground/20 bg-background px-4 py-4 outline-none sm:px-5">
 
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex justify-between gap-4">
                   <div className=" flex-1">
                     <div className="flex items-center gap-3">
                       <motion.span
@@ -74,12 +74,12 @@ export default function RecentGenerations({
                       | {generation.provider}
                     </span>
 
-                    <p className="mt-2 line-clamp-2 max-w-50 sm:max-w-90 text-sm h-10 font-theme text-foreground/40">
+                    <p className="mt-2 line-clamp-2 max-w-full md:max-w-90 text-sm h-10 font-theme text-foreground/40">
                       {generation.prompt}
                     </p>
                   </div>
 
-                  <span className="shrink-0 whitespace-nowrap text-xs transition-colors text-foreground/80 group-hover:text-foreground">
+                  <span className="shrink-0 mt-2 whitespace-nowrap text-xs transition-colors text-foreground/80 group-hover:text-foreground">
                     {formatDistanceToNowStrict(generation.createdAt, {
                       addSuffix: true,
                     })}
