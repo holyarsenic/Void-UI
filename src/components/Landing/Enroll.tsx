@@ -1,5 +1,6 @@
 import { Button } from "../ui/button";
 import Logo from "@/assets/Logo/Logo";
+import Link from "next/link";
 
 const Enroll = () => {
   return (
@@ -15,9 +16,11 @@ const Enroll = () => {
             Start building with Void UI today to create modern, animated, and interactive websites that feel unique and stand out.
           </p>
 
-          <Button className="mt-7 px-6 py-5">
-            Explore Void UI
-          </Button>
+          <Link href="/dashboard">
+            <Button className="mt-7 px-6 py-5">
+              Explore Void UI
+            </Button>
+          </Link>
         </div>
 
         <div className="hidden lg:block mr-15">

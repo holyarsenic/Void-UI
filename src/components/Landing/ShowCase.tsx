@@ -1,6 +1,7 @@
 import Logo from "@/assets/Logo/Logo";
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
 import WorkFlow from "@/components/ui/WorkFlow";
+import Link from "next/link";
 
 const ShowCase = () => {
   return (
@@ -57,12 +58,12 @@ const ShowCase = () => {
               Start with a simple prompt and create beautiful, production-ready interfaces with AI. Void UI transforms your ideas into modern, animated UI components that are easy to customize and integrate, helping you build polished experiences faster without starting everything from scratch.
             </p>
 
-            <InteractiveHoverButton
-              className="mt-5 lg:mt-10 w-fit items-center justify-center"
-            >
-              Get Started
-            </InteractiveHoverButton>
-
+            <Link href="/dashboard">
+              <InteractiveHoverButton className="mt-5 lg:mt-10 w-fit items-center justify-center">
+               Get Started
+              </InteractiveHoverButton>
+            </Link>
+    
           </div>
         </div>
       </div>

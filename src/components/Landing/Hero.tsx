@@ -6,13 +6,16 @@ import Logo from "@/assets/Logo/Logo";
 import { ArrowUp } from "lucide-react";
 import { Button } from "../ui/button";
 import Navbar from "../ui/Navbar";
+import { useRouter } from "next/navigation"; 
 
 const Hero = () => {
   const [value, setValue] = useState("");
+  const router = useRouter();
 
   const handleSubmit = () => {
     if (!value.trim()) return;
     setValue("");
+    router.push("/dashboard")
   };
 
   return (
