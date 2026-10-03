@@ -17,7 +17,7 @@ const Pricing = () => {
   ];
 
   return (
-    <main className="relative min-h-[95vh] w-full overflow-hidden bg-[#050505] text-white md:min-h-screen px-6 py-8 lg:py-16 lg:px-20">
+    <section className="relative min-h-[95vh] w-full overflow-hidden bg-[#050505] text-white md:min-h-screen px-6 py-8 lg:py-16 lg:px-20" id="pricing">
 
       <div className="relative z-10 w-full lg:w-1/2 mb-15">
         <h2 className="text-2xl font-theme font-bold text-foreground md:text-5xl">
@@ -128,7 +128,7 @@ const Pricing = () => {
         </div>
       </div>
 
-    </main>
+    </section>
   );
 }
 

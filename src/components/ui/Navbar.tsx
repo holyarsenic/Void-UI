@@ -19,15 +19,16 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Showcase", href: "#showcase" },
-    { name: "Doc", href: "#doc" },
+    { name: "Doc", href: "/doc" },
     { name: "Features", href: "#features" },
+    { name: "Pricing", href: "#pricing"},
     { name: "Contact", href: "#contact" },
   ];
   return (
     <motion.div 
     animate={{width: scrolled ? "90%" : "100%"}}
     transition={{duration: 0.3, ease:"easeInOut"}}
-    className='fixed top-0 left-1/2 -translate-x-1/2 h-15 w-full flex items-center justify-between text-accent-foreground px-5 z-20'>
+    className={`fixed top-2 md:top-0 left-1/2 -translate-x-1/2 h-15 w-full flex items-center justify-between rounded-2xl text-accent-foreground ${scrolled? "bg-background/80 md:bg-transparent" : "bg-transparent"} px-5 z-20`}>
       <div className="flex gap-2 font-theme">
         <Image src="/Logo.svg" alt="Void UI Logo" width={22} height={22} className="text-white w-5 h-auto" />
         <h4>Void UI</h4>
