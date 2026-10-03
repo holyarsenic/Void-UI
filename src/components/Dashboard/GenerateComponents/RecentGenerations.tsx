@@ -41,7 +41,7 @@ interface RecentGenerationsProps {
           </p>
         </motion.div>
       ) : (
-        <div className="grid  grid-cols-1 md:grid-cols-1 xl:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-2 gap-4">
           {recentGenerations.slice(0, length).map((generation, index) => (
             <motion.div
               key={generation.projectId}
@@ -50,7 +50,7 @@ interface RecentGenerationsProps {
               transition={{duration: 0.45, delay: index * 0.07, ease: [0.22, 1, 0.36, 1]}}>
               <Link
                 href={`/dashboard/projects/generate/${generation.projectId}`}
-                className="group block overflow-hidden rounded-xl border border-foreground/20 bg-background px-4 py-4 outline-none sm:px-5">
+                className="group block overflow-hidden rounded-xl border border-foreground/20 bg-background px-4 py-4 outline-none sm:px-5 h-32 md:h-25">
                 <div>
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex min-w-0 items-center gap-3">

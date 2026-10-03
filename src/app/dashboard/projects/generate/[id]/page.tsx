@@ -77,7 +77,7 @@ export default function GeneratedProject({ params }: PageProps) {
   if (loading) {
     return (
       <div className="min-h-screen bg-background text-white flex items-center justify-center">
-        <RingLoader size={30} color="#ffffff" />
+        <RingLoader size={50} color="#ffffff" />
       </div>
     );
   }
@@ -142,11 +142,11 @@ export default function GeneratedProject({ params }: PageProps) {
       : null;
 
   return (
-    <div className="h-screen bg-background text-foreground px-3 py-10 md:px-10 lg:px-16 overflow-y-scroll">
+    <div className="h-screen bg-background text-foreground px-3 py-15 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="max-w-7xl">
 
         <div className="relative mb-8 -ml-10 pt-2">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 md:gap-3 ml-9 md:ml-0">
             <motion.button
               whileHover={{ x: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -155,7 +155,7 @@ export default function GeneratedProject({ params }: PageProps) {
               <ChevronLeft className="h-6 w-6" />
             </motion.button>
 
-            <h1 className="text-2xl md:text-3xl font-theme font-medium tracking-tight truncate max-w-[65vw] lg:max-w-[40vw]">
+            <h1 className="text-2xl md:text-3xl font-theme font-medium tracking-tight truncate max-w-[65vw] md:max-w-[40vw]">
               {project.name}
             </h1>
 
@@ -167,7 +167,7 @@ export default function GeneratedProject({ params }: PageProps) {
           </div>
 
           {project.description && (
-            <p className="mt-2 ml-12 max-w-[80vw] md:max-w-[55vw] text-sm leading-relaxed text-foreground/45 line-clamp-2">
+            <p className="mt-2 ml-12 max-w-[80vw] md:max-w-[55vw] text-sm text-foreground/45 line-clamp-3 md:line-clamp-2">
               {project.description}
             </p>
           )}
@@ -176,7 +176,7 @@ export default function GeneratedProject({ params }: PageProps) {
             whileTap={{ scale: deleting ? 1 : 0.95 }}
             whileHover={{ scale: deleting ? 1 : 1.02 }}
             type="button"
-            className="absolute -top-3 right-1 md:top-2 md:right-4 inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 border border-red-500/20 bg-red-950/20 text-red-400 hover:bg-red-500/20 hover:text-red-300 hover:border-red-500/40 backdrop-blur-sm"
+            className="absolute -top-9 right-1 md:top-2 md:right-4 inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 border border-red-500/20 bg-red-950/20 text-red-400 hover:bg-red-500/20 hover:text-red-300 hover:border-red-500/40 backdrop-blur-sm"
             onClick={handleDelete}
             disabled={deleting}
           >

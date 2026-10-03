@@ -2,6 +2,13 @@ import { db } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import RecentGenerations from "@/components/Dashboard/GenerateComponents/RecentGenerations";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Generation History",
+  description:
+    "View your history of AI-generated UI components with Void UI.",
+};
 
 export default async function Dashboard() {
   const session = await auth();

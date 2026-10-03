@@ -1,4 +1,11 @@
 import GenerateComp from "@/components/Dashboard/GenerateComponents/GenerateComp";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Generate Component",
+  description:
+    "Generate beautiful, animated UI components from simple prompts with Void UI.",
+};
 
 export default function Generate() {
   return (

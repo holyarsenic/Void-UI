@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button"
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import RecentGenerations from "@/components/Dashboard/GenerateComponents/RecentGenerations";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description:
+    "Your Void UI workspace. Create, manage, and explore your AI-generated animated UI components.",
+};
 
 export default async function Dashboard() {
   const session = await auth();

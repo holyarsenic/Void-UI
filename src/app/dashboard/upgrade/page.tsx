@@ -2,6 +2,13 @@ import UpgradeComp from "@/components/Dashboard/UpgradeComponents/UpgradeComp";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Upgrade Plan",
+  description:
+    "Upgrade your Void UI plan at any time to unlock more features and capabilities.",
+};
 
 export default async function Upgrade () {
   const session = await auth();
