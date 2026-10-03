@@ -29,7 +29,7 @@ const Pricing = () => {
       </div>
       
       <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-6 xl:flex-row">
-        <div className="hidden lg:flex w-[30%] h-120 flex-col justify-between rounded-2xl border-2 border-white/40 bg-white/2 p-10">
+        <div className="hidden lg:flex w-[30%] h-120 flex-col justify-between rounded-2xl border-4 border-white/40 bg-white/2 p-10">
           
           <div className="h-full w-full flex flex-col items-center justify-between pt-10">
             <HashLoader color="#ffffff" size={200}/>

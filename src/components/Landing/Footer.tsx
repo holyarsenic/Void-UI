@@ -9,13 +9,13 @@ const PRODUCT_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
-  { label: "Documentation", href: "#" },
+  { label: "Documentation", href: "/doc" },
   { label: "GitHub", href: "https://github.com/holyarsenic/void-ui" },
 ];
 
-const LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
+const Contact_LINKS = [
+  { label: "Linkeden", href: "https://www.linkedin.com/in/rohankt4" },
+  { label: "Twitter", href: "https://x.com/holyarsenic"}
 ];
 
 const FOOTER_LINK =
@@ -92,7 +92,7 @@ const Footer = () => {
               </h4>
 
               <ul className="space-y-3.5">
-                {LEGAL_LINKS.map((link) => (
+                {Contact_LINKS.map((link) => (
                   <li key={link.label}>
                     <a 
                       key={link.label}
