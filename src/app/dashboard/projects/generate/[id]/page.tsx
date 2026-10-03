@@ -142,7 +142,7 @@ export default function GeneratedProject({ params }: PageProps) {
       : null;
 
   return (
-    <div className="h-screen bg-background text-foreground px-3 py-15 md:px-10 lg:px-16 overflow-y-scroll">
+    <div className="h-screen bg-background text-foreground px-3 py-15 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="max-w-7xl">
 
         <div className="relative mb-8 -ml-10 pt-2">
