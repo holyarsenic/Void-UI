@@ -107,9 +107,6 @@ export async function POST(req: NextRequest) {
       !lastRequestDate ||
       now.getTime() - lastRequestDate.getTime() > TwentyFourHoursAgo;
 
-    const remainingHours = lastRequestDate ? Math.ceil(
-    (TwentyFourHoursAgo - (now.getTime() - lastRequestDate.getTime())) / (60 * 60 * 1000) ) : 0;
-
     if (isNewDay) {
       await db.user.update({
         where: {
@@ -129,7 +126,7 @@ export async function POST(req: NextRequest) {
         {
           success: false,
           error:
-            `Free plan limit reached. Try again in ${remainingHours} hours. Please upgrade to Pro.`,
+            "Free plan limit reached, Try again tomorrow. Please upgrade to Pro.",
         },
         { status: 403 }
       );
