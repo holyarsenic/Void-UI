@@ -123,7 +123,7 @@ const UpgradeComp = ({ Plan }: UpgradeCompProps) => {
               onClick={handleUpgrade}
               className="mt-10 w-full py-5"
             >
-              {Plan === "free" ? "Upgrade to Pro" : "Manage Plan"}
+              {Plan === "free" ? "Upgrade to Pro" : "Current Plan"}
             </Button>
 
             <p className="mt-4 text-center text-xs text-black/50">

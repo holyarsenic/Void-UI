@@ -44,6 +44,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (user.plan === "pro" && user.currentPeriodEnd && user.currentPeriodEnd <= new Date()) {
+      await db.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          plan: "free",
+          subscriptionStatus: "expired",
+        },
+      });
+
+      user.plan = "free";
+      user.subscriptionStatus = "expired";
+
+      console.log(`User ${user.id} Pro subscription expired. Downgraded to FREE.`);
+    }
+    
     const userId = user.id;
 
     const body: unknown = await req.json();
