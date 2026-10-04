@@ -60,7 +60,7 @@ export default async function Dashboard() {
     }
   });
 
-  const dailyLimit = user.plan === "pro" ? 300 : 10;
+  const dailyLimit = user.plan === "pro" ? 150 : 10;
   const remainingRequests = Math.max(
     dailyLimit - user.dailyRequests,
     0
@@ -140,14 +140,14 @@ export default async function Dashboard() {
             Recent Generations
           </h2>
 
-          <p className="mt-1 text-sm font-theme text-foreground/40">
+          <p className="mt-1 text-xs sm:text-sm font-theme text-foreground/40">
             Your latest generated components
           </p>
         </div>
 
         <Link
           href="/dashboard/projects"
-          className="mr-5 text-sm font-theme text-foreground/80 transition-colors hover:text-foreground">
+          className="mr-5 text-xs sm:text-sm font-theme text-foreground/80 transition-colors hover:text-foreground">
           View all
         </Link>
       </div>

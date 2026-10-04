@@ -40,7 +40,7 @@ const UpgradeComp = ({ Plan }: UpgradeCompProps) => {
   ];
 
   const proFeatures = [
-    "300 generations/day",
+    "150 generations/day",
     "Powered by Gemini",
     "Live Preview",
   ];

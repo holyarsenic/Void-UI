@@ -60,7 +60,7 @@ const Sidebar = () => {
           duration: 0.34,
           ease: "easeInOut",
         }}
-        className={`fixed md:relative flex h-screen flex-col overflow-hidden border-r border-white/10 bg-background z-20 
+        className={`fixed md:relative h-full md:h-screen flex flex-col overflow-hidden border-r border-white/10 bg-background z-20 
         ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
         <div className="relative flex h-20 items-center justify-between border-b border-white/10 px-5">
           <Link href="/dashboard" className="flex items-center gap-3">

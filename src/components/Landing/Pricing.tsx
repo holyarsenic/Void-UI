@@ -11,7 +11,7 @@ const Pricing = () => {
   ];
 
   const proFeatures = [
-    "300 generations per day",
+    "150 generations per day",
     "Powered by Gemini",
     "Live preview"
   ];

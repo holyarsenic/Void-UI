@@ -12,7 +12,7 @@ const gemini = new GoogleGenAI({
 });
 
 const FREE_LIMIT = 10;
-const PRO_LIMIT = 300;
+const PRO_LIMIT = 150;
 
 export async function POST(req: NextRequest) {
   try {
