@@ -7,7 +7,9 @@ import { Checkout, CheckoutSchema } from "@/schemas/CheckOut.schema";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 
-const dodo = new DodoPayments({bearerToken: process.env.DODO_API_KEY, environment: process.env.DODO_ENVIRONMENT as "live_mode" | "test_mode"})
+const dodo = new DodoPayments({
+  bearerToken: process.env.DODO_API_KEY, 
+  environment: process.env.DODO_ENVIRONMENT as "live_mode" | "test_mode"})
 
 export async function POST(req: NextRequest) {
   try {
@@ -69,6 +71,17 @@ export async function POST(req: NextRequest) {
     }
 
     if (plan === "pro") {
+
+      if (user.plan === "pro") {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "You are already a Pro user",
+          },
+          { status: 400 }
+        );
+      }
+      
       const productId = process.env.DODO_PRO_PRODUCT_ID;
 
       if(!productId) {

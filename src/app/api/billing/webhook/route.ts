@@ -30,8 +30,6 @@ export async function POST(req: NextRequest) {
     const payload = JSON.parse(body);
     const data = payload.data;
 
-    console.log("DODO WEBHOOK:", payload.type, data);
-
     // Subscription created
     if (payload.type === "subscription.created") {
       const customerId = data.customer_id;
