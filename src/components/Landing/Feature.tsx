@@ -61,7 +61,7 @@ const Feature = () => {
             </p>
           </div>
 
-          <div className="absolute right-0 -top-10 lg:-top-25 justify-center items-center lg:w-1/2 -z-50">
+          <div className="absolute right-0 -top-10 lg:-top-25 2xl:-top-70 justify-center items-center lg:w-1/2 -z-50">
             <BlackHole className="h-full w-full text-foreground/10 lg:text-foreground/80" />
           </div>
         </div>

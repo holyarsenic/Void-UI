@@ -29,7 +29,7 @@ const Pricing = () => {
       </div>
       
       <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-6 xl:flex-row">
-        <div className="hidden lg:flex w-[30%] h-120 flex-col justify-between rounded-2xl border-4 border-white/40 bg-white/2 p-10">
+        <div className="hidden lg:flex w-[30%] h-[65vh] flex-col justify-between rounded-2xl border-4 border-white/40 bg-white/2 p-10">
           
           <div className="h-full w-full flex flex-col items-center justify-between pt-10">
             <HashLoader color="#ffffff" size={200}/>
@@ -46,7 +46,7 @@ const Pricing = () => {
           </div>
         </div>
         <div className="w-full lg:w-[70%] h-full rounded-3xl flex flex-col lg:flex-row items-center justify-center gap-6">
-          <div className="w-full sm:w-[80vw] md:w-[70vw] lg:w-1/2 h-120 rounded-2xl border border-white/15 bg-white/5 p-8">
+          <div className="w-full sm:w-[80vw] md:w-[70vw] lg:w-1/2 h-120 md:h-[65vh] rounded-2xl border border-white/15 bg-white/5 p-8">
             <div>
               <h2 className="text-2xl font-semibold">Free</h2>
 
@@ -82,7 +82,7 @@ const Pricing = () => {
             </Link>
               
           </div>
-          <div className="w-full sm:w-[80vw] md:w-[70vw] lg:w-1/2 relative overflow-hidden h-120 rounded-2xl bg-foreground/60 p-8 text-black shadow-2xl shadow-yellow-600/10">
+          <div className="w-full sm:w-[80vw] md:w-[70vw] lg:w-1/2 relative overflow-hidden h-120 lg:h-[65vh] rounded-2xl bg-foreground/60 p-8 text-black shadow-2xl shadow-yellow-600/10">
             <div className="absolute right-5 top-5 rounded-full bg-black/10 px-3 py-1 text-xs font-semibold">
               RECOMMENDED
             </div>
