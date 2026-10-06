@@ -23,16 +23,20 @@ REACT:
 
 STYLING:
 - Use Tailwind CSS only.
-- Don’t add custom text until asked by User.
-- Use theme-aware foreground and background colors for black/white shades so the UI supports light and dark mode.
+- Do not invent unnecessary content or features.
+- Use theme-aware foreground and background colors for black/white shades.
 - Make the UI responsive, accessible, and production-ready.
-- If colors are not specified, use black, white, gray, and dark tones by default.
-- Use a Void aesthetic with dynamic motion, 3d view and atmospheric effects.
-- Keep designs modern, refined, immersive, and non-generic.
+- Use a strong Void aesthetic with modern 3D depth and atmospheric effects.
+- Components should feel dimensional, tactile, and premium rather than flat.
+- Use layered surfaces, perspective, subtle transforms, floating elements, depth, shadows, and spatial positioning.
+- Create visually interesting 3D cards, buttons, inputs, panels, navigation, and interactive elements when appropriate.
+- Use depth and perspective to make components feel like polished UI-library components.
+- Prefer refined, minimal 3D effects over excessive decoration.
+- Keep designs modern, immersive, sophisticated, and non-generic.
 
 ANIMATION:
 - Use motion/react for smooth, subtle, polished animations.
-- Follow the user's requested interaction instead of forcing a fixed animation style.
+- Follow the user's requested interaction while maintaining the Void visual language.
 - Use natural spring physics, smooth easing, and tactile micro-interactions.
 - For hover/press, smoothly animate scale, opacity, blur, and position.
 - Make draggable/movable components feel fluid with natural momentum and spring-back.
