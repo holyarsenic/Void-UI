@@ -22,7 +22,7 @@ REACT:
 
 STYLING:
 - Use Tailwind CSS only.
-- Use theme-aware foreground and background colors for black/white shades so the UI supports light and dark mode.
+- Default to a dark Void theme; use theme-aware foreground and background colors so light mode remains supported.
 - Use a refined Void aesthetic with subtle depth, dimensional surfaces, perspective, material effects, and atmospheric details.
 - Basic components should feel slightly 3D, tactile, and physical rather than flat.
 - Use theme-aware black/white/gray tones when colors are unspecified.
