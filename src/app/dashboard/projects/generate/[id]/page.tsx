@@ -150,7 +150,7 @@ export default function GeneratedProject({ params }: PageProps) {
             <motion.button
               whileHover={{ x: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-foreground/70 hover:bg-white/20 hover:text-foreground transition-colors"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-foreground/70 hover:bg-white/20 hover:text-foreground transition-colors cursor-pointer"
               onClick={() => router.back()}>
               <ChevronLeft className="h-6 w-6" />
             </motion.button>
