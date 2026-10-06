@@ -127,7 +127,7 @@ const UpgradeComp = ({ Plan }: UpgradeCompProps) => {
             </Button>
 
             <p className="mt-4 text-center text-xs text-black/50">
-              $5.9/month · Cancel anytime
+              $5.9/month · GST included
             </p>
           </div>
         </div>
