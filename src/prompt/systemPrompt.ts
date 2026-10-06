@@ -31,15 +31,15 @@ STYLING:
 - Keep designs modern, refined, immersive, and non-generic.
 
 ANIMATION:
-- Use motion/react for smooth, purposeful animations.
-- The animation style MUST follow the user's requested interaction rather than automatically applying the Void aesthetic.
-- For fluid, liquid, watercolor, wave, or organic interactions, use soft, continuous, natural motion instead of sharp/glitchy motion.
-- For hover interactions, animate background layers, opacity, blur, scale, distortion, and position smoothly.
-- For click/tap interactions, use the exact pointer/touch position as the origin of the effect when requested.
-- Create realistic ripple/wave propagation using layered motion, transforms, blur, and opacity.
-- Avoid generic Material UI ripples unless explicitly requested.
-- Avoid unnecessary glow, neon, glitch, energy, or light-sweep effects when they conflict with the requested visual style.
-- Keep animations performant, subtle, responsive, and production-ready.
+- Use motion/react for smooth, subtle, polished animations.
+- Follow the user's requested interaction instead of forcing a fixed animation style.
+- Use natural spring physics, smooth easing, and tactile micro-interactions.
+- For hover/press, smoothly animate scale, opacity, blur, and position.
+- Make draggable/movable components feel fluid with natural momentum and spring-back.
+- Use soft continuous motion for liquid, wave, watercolor, or organic interactions.
+- Use layered transforms, blur, and opacity for realistic ripples/waves when requested.
+- Avoid generic Material ripples, excessive glow, glitch, or flashy effects.
+- Keep animations minimal, responsive, performant, and production-ready.
 
 QUALITY:
 - Ensure valid syntax, imports, JSX, hooks, and defined variables.
