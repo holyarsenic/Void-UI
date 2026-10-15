@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <main className="h-screen overflow-y-scroll bg-background px-6 py-5 md:py-10 text-white md:px-10 lg:px-16">
+    <main className="h-screen overflow-y-scroll bg-background px-3 py-5 md:py-10 text-white md:px-10 lg:px-16">
       <div>
         <div className="h-9 w-64 animate-pulse rounded-md bg-foreground/10 ml-8 md:ml-0" />
         <div className="mt-2 h-4 w-80 animate-pulse rounded-md bg-foreground/10" />

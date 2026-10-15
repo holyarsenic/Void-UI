@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <main className="h-screen bg-background text-white px-6 py-5 md:py-10 md:px-10 lg:px-16">
+    <main className="h-screen bg-background text-white px-3 py-5 md:py-10 md:px-10 lg:px-16">
       
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
         <div>

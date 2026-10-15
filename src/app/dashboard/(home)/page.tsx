@@ -72,7 +72,7 @@ export default async function Dashboard() {
   );
 
   return (
-    <main className="h-screen bg-background text-white px-6 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
+    <main className="h-screen bg-background text-white px-3 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
 
         <div>
