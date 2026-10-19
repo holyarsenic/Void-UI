@@ -125,10 +125,10 @@ git clone https://github.com/holyarsenic/Void-UI.git
 cd Void-UI
 
 # 2. Install dependencies
-npm install
+pnpm install
 
 # 3. Start the dev server
-npm run dev
+pnpm dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000).
@@ -143,7 +143,7 @@ Before the app can generate, sign you in, or take payments, create a `.env` file
 
 <!-- Add the exact variable names from your code here, for example in a fenced env block. -->
 
-Next.js 16 works best on a current Node.js release, so Node.js 20 or newer is recommended. The repository also includes a `pnpm-workspace.yaml`, so `pnpm install` works too.
+Next.js 16 works best on a current Node.js release, so Node.js 20 or newer is recommended. The repository uses pnpm as its package manager.
 
 ## How it works
 
@@ -204,14 +204,14 @@ Prisma manages five models: `User`, `Account`, `Session`, `Project` and `Generat
 
 | Script                  | What it does                              |
 | ----------------------- | ----------------------------------------- |
-| `npm run dev`           | Starts the development server             |
-| `npm run build`         | Creates a production build                |
-| `npm run start`         | Runs the production build                 |
-| `npm run lint`          | Runs ESLint                               |
-| `npm run typecheck`     | Runs the TypeScript compiler without emit |
-| `npm run prepare`       | Sets up the Husky git hooks               |
-| `npm run postinstall`   | Runs automatically after install          |
-| `npm run contract:emit` | Emits the Prisma contract                 |
+| `pnpm dev`              | Starts the development server             |
+| `pnpm build`            | Creates a production build                |
+| `pnpm start`            | Runs the production build                 |
+| `pnpm lint`             | Runs ESLint                               |
+| `pnpm typecheck`        | Runs the TypeScript compiler without emit |
+| `pnpm prepare`          | Sets up the Husky git hooks               |
+| `pnpm postinstall`      | Runs automatically after install          |
+| `pnpm contract:emit`    | Emits the Prisma contract                 |
 
 </details>
 
@@ -292,8 +292,8 @@ Contributions are welcome. The standard flow:
 Please follow the existing code style. A pre-commit hook runs on staged files, and before you open a pull request, run:
 
 ```bash
-npm run lint
-npm run typecheck
+pnpm lint
+pnpm typecheck
 ```
 
 Ideas and bug reports are welcome in [issues](https://github.com/holyarsenic/Void-UI/issues).
