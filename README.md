@@ -1,8 +1,3 @@
-<!-- IMAGE SLOT 1 (banner): src/components/Documentation/images/banner.svg. To use your own, save it as src/components/Documentation/images/banner.png (about 1600x560) and change the src below. -->
-<p align="center">
-  <img src="src/components/Documentation/images/banner.svg" alt="Void UI banner: a black hole with gray rings beside the title and tagline" width="100%" />
-</p>
-
 <p align="center">
   <img src="public/Logo.svg" alt="Void UI logo" width="72" />
 </p>
