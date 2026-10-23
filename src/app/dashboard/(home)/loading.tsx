@@ -4,7 +4,7 @@ export default function Loading() {
       
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
         <div>
-          <div className="h-9 w-64 rounded-md bg-foreground/10 animate-pulse ml-8 md:ml-0" />
+          <div className="h-9 w-64 rounded-md bg-foreground/10 animate-pulse ml-10 md:ml-0" />
           <div className="mt-2 h-4 w-80 rounded-md bg-foreground/10 animate-pulse" />
         </div>
 

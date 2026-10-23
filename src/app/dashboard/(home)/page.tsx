@@ -76,7 +76,7 @@ export default async function Dashboard() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-theme ml-8 md:ml-0">
+          <h1 className="text-2xl md:text-3xl font-theme ml-10 md:ml-0">
             {user.name?.split(' ')[0] || "Creator"}&apos;s Workspace
           </h1>
           <p className="text-sm text-white/40 font-theme mt-1">Every great build starts in the dark.</p>

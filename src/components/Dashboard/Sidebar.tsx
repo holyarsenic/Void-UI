@@ -56,18 +56,14 @@ const Sidebar = () => {
       <motion.aside
         initial={{ width: 280 }}
         animate={{ width: mobileOpen ? 280 : collapsed ? 80 : 280 }}
-        transition={{
-          duration: 0.34,
-          ease: "easeInOut",
-        }}
+        transition={{ duration: 0.34, ease: "easeInOut" }}
         className={`fixed md:relative h-full md:h-screen flex flex-col overflow-hidden border-r border-white/10 bg-background z-20 
         ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
         <div className="relative flex h-20 items-center justify-between border-b border-white/10 px-5">
           <Link href="/dashboard" className="flex items-center gap-3">
             <motion.div
               whileHover={{ rotate: 8, scale: 1.08 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
+              transition={{ type: "spring", stiffness: 400 }}>
               <Logo className="h-6 w-6" />
             </motion.div>
 
@@ -137,22 +133,18 @@ const Sidebar = () => {
                   damping: 30,
                   delay: index * 0.05,
                   duration: 0.35,
-                }}
-              >
+                }}>
                 <Link
                   href={item.href}
+                  onClick={() => setMobileOpen(false)}
                   className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "text-white" : "text-white/50 hover:text-white"}`}>
                   <motion.div
-                    whileHover={{
-                      scale: 1.12,
-                      x: collapsed ? 0 : 2,
-                    }}
+                    whileHover={{ scale: 1.12, x: collapsed ? 0 : 2 }}
                     transition={{
                       type: "spring",
                       stiffness: 400,
                       damping: 15,
-                    }}
-                  >
+                    }}>
                     <Icon className="h-5 w-5" />
                   </motion.div>
 
@@ -163,8 +155,7 @@ const Sidebar = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -8 }}
                         transition={{ duration: 0.2 }}
-                        className="font-theme flex justify-between w-full"
-                      >
+                        className="font-theme flex justify-between w-full">
                         {item.name}
                         {isActive && (
                           <motion.div
@@ -183,15 +174,14 @@ const Sidebar = () => {
           })}
 
           <div>
-            <span
-                className="mb-2 px-2 text-sm font-theme text-white/30"
-              >
-                {collapsed ? "S" : "System" }
-              </span>
+            <span className="mb-2 px-2 text-sm font-theme text-white/30">
+              {collapsed ? "S" : "System" }
+            </span>
           </div>
 
           <Link
             href="/dashboard/settings"
+            onClick={() => setMobileOpen(false)}
             className={`group mb-2 relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
               isSettingsActive
                 ? "text-white"
@@ -202,8 +192,7 @@ const Sidebar = () => {
               transition={{
                 type: "spring",
                 stiffness: 300,
-              }}
-            >
+              }}>
               <Settings className="h-5 w-5" />
             </motion.div>
 
@@ -214,8 +203,7 @@ const Sidebar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -8 }}
                   transition={{ duration: 0.2 }}
-                  className="font-theme flex justify-between w-full"
-                >
+                  className="font-theme flex justify-between w-full">
                   Settings
                   {isSettingsActive && (
                     <motion.div
@@ -233,6 +221,7 @@ const Sidebar = () => {
           <Link href="/dashboard/upgrade">
             <motion.div 
             whileTap={{scale:0.98}}
+            onClick={() => setMobileOpen(false)}
             transition={{
               type: "spring",
               stiffness: 400,

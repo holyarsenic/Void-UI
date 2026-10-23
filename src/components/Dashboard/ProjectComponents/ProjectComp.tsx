@@ -63,7 +63,7 @@ const Project = () => {
           <div className="flex flex-col lg:flex-row lg:items-center gap-2 justify-between mb-5">
 
             <div>
-              <h1 className="font-theme  text-2xl md:text-3xl ml-8 md:ml-0">All Projects</h1>
+              <h1 className="font-theme  text-2xl md:text-3xl ml-10 md:ml-0">All Projects</h1>
 
               <p className="mt-1 font-theme text-sm text-white/40">
                 Manage and explore all your projects

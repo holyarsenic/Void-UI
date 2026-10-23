@@ -56,7 +56,7 @@ const SettingComp = () => {
     <div className="h-screen bg-background text-white px-3 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="max-w-5xl">
         <div className="mb-8">
-          <h1 className="font-theme text-2xl md:text-3xl ml-8 md:ml-0">
+          <h1 className="font-theme text-2xl md:text-3xl ml-10 md:ml-0">
             Settings
           </h1>
 
