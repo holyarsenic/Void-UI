@@ -4,6 +4,7 @@ import Feature from "@/components/Landing/Feature";
 import Footer from "@/components/Landing/Footer";
 import Enroll from "@/components/Landing/Enroll";
 import Pricing from "@/components/Landing/Pricing";
+import Questions from "@/components/Landing/Questions";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <ShowCase />
       <Feature />
+      <Questions />
       <Pricing />
       <Enroll />
       <Footer />
