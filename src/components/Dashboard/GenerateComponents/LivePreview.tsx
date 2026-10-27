@@ -57,7 +57,12 @@ const LivePreview = ({
 
         await initEsbuild();
 
-        const result = await esbuild.transform(code, {
+        const cleanCode = code
+          .replace(/^```(?:tsx|jsx|javascript|typescript|js|ts)?\r?\n?/i, "")
+          .replace(/\r?\n?```\s*$/i, "")
+          .trim();
+
+        const result = await esbuild.transform(cleanCode, {
           loader: "tsx",
           format: "esm",
           target: "es2020",
@@ -91,7 +96,9 @@ const LivePreview = ({
 
                           import React from "react";
                           import { motion } from "motion/react";
-                          import { circle } from "lucide-react";
+                          import { Circle } from "lucide-react";
+                          import * as THREE from "three";
+                          import { OrbitControls } from "three/addons/controls/OrbitControls.js";
                       -->
                       <script type="importmap">
                       {
@@ -99,7 +106,10 @@ const LivePreview = ({
                           "react": "https://esm.sh/react@18.3.1",
                           "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
                           "motion/react": "https://esm.sh/motion@13.1.1/react?deps=react@18.3.1",
-                          "lucide-react": "https://esm.sh/lucide-react?deps=react@18.3.1"
+                          "lucide-react": "https://esm.sh/lucide-react?deps=react@18.3.1",
+                          "three": "https://esm.sh/three@0.174.0",
+                          "three/addons/": "https://esm.sh/three@0.174.0/examples/jsm/",
+                          "three/examples/jsm/": "https://esm.sh/three@0.174.0/examples/jsm/"
                         }
                       }
                       </script>
@@ -129,6 +139,10 @@ const LivePreview = ({
                         body {
                           background: transparent;
                         }
+
+                        canvas {
+                          display: block;
+                        }
                       </style>
                     </head>
 
@@ -138,25 +152,10 @@ const LivePreview = ({
 
                       <script type="module">
 
-                        /*
-                        * ReactDOM is provided by the import map.
-                        */
                         import ReactDOM from "react-dom/client";
 
-                        /*
-                        * Compiled AI-generated TSX.
-                        *
-                        * This still contains imports such as:
-                        *
-                        *   import React from "react";
-                        *   import { motion } from "motion/react";
-                        *   import { circle } from "lucide-react";
-                        */
                         ${compiledCode}
 
-                        /*
-                        * Render the generated App component.
-                        */
                         const root = ReactDOM.createRoot(
                           document.getElementById("root")
                         );
@@ -172,10 +171,10 @@ const LivePreview = ({
                     `;
 
         setSrcDoc(html);
-        setloading(false)
+        setloading(false);
       } catch (err) {
-        console.error("Preview compilation error:",err);
-        setloading(false)
+        console.error("Preview compilation error:", err);
+        setloading(false);
         if (!cancelled) {
           setError(
             err instanceof Error
@@ -193,13 +192,12 @@ const LivePreview = ({
     };
   }, [code]);
 
-
-  if(loading) {
+  if (loading) {
     return (
-    <div className="flex h-full w-full items-center justify-center rounded-lg border border-white/10 bg-background">
-      <BarLoader color="var(--foreground)" />
-    </div>
-  );
+      <div className="flex h-full w-full items-center justify-center rounded-lg border border-white/10 bg-background">
+        <BarLoader color="var(--foreground)" />
+      </div>
+    );
   }
 
   if (error) {
@@ -225,6 +223,6 @@ const LivePreview = ({
       className="h-full w-full rounded-lg border-0 bg-transparent"
     />
   );
-}
+};
 
 export default LivePreview;
