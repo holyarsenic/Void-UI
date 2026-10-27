@@ -12,8 +12,8 @@ export default function Home() {
       <Hero />
       <ShowCase />
       <Feature />
-      <Questions />
       <Pricing />
+      <Questions />
       <Enroll />
       <Footer />
     </div>
