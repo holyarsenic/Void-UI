@@ -137,7 +137,7 @@ const Sidebar = () => {
                 <Link
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "text-white" : "text-white/50 hover:text-white"}`}>
+                  className={`group relative flex items-center font-semibold gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "text-white" : "text-white md:text-white/50  hover:text-white"}`}>
                   <motion.div
                     whileHover={{ scale: 1.12, x: collapsed ? 0 : 2 }}
                     transition={{
@@ -145,7 +145,7 @@ const Sidebar = () => {
                       stiffness: 400,
                       damping: 15,
                     }}>
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-5 w-5 font-semibold" />
                   </motion.div>
 
                   <AnimatePresence>
@@ -182,10 +182,10 @@ const Sidebar = () => {
           <Link
             href="/dashboard/settings"
             onClick={() => setMobileOpen(false)}
-            className={`group mb-2 relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
+            className={`group mb-2 font-semibold relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors ${
               isSettingsActive
                 ? "text-white"
-                : "text-white/50 hover:text-white"
+                : "text-white md:text-white/50 hover:text-white"
             }`}>
             <motion.div
               whileHover={{ rotate: 45, scale: 1.1 }}
