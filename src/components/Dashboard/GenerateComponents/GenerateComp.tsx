@@ -84,7 +84,7 @@ const GenerateComp = () => {
   };
 
   return (
-    <section className="relative h-full w-full flex flex-col gap-5 items-center mt-20 overflow-hidden bg-background text-white">
+    <section className="relative h-full w-full flex flex-col gap-5 items-center overflow-hidden bg-background text-white">
 
         <h2 className="font-theme text-base md:text-2xl text-foreground/60 text-center">
           {user?.name?.split(" ")[0] || "Creator"}&apos;s — What&apos;s the next move?
