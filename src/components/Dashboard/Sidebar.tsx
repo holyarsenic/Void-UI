@@ -55,7 +55,7 @@ const Sidebar = () => {
       </motion.button>
       <motion.aside
         initial={{ width: 280 }}
-        animate={{ width: mobileOpen ? 280 : collapsed ? 80 : 280 }}
+        animate={{ width: mobileOpen ? "80vw" : collapsed ? 80 : 280 }}
         transition={{ duration: 0.34, ease: "easeInOut" }}
         className={`fixed md:relative h-full md:h-screen flex flex-col overflow-hidden border-r border-white/10 bg-background z-20 
         ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
@@ -137,7 +137,7 @@ const Sidebar = () => {
                 <Link
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "text-white" : "text-white md:text-white/50  hover:text-white"}`}>
+                  className={`group relative flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition-colors hover:text-white ${ isActive ? "text-white" : "text-white/80 md:text-white/50  hover:text-white"}`}>
                   <motion.div
                     whileHover={{ scale: 1.12, x: collapsed ? 0 : 2 }}
                     transition={{
