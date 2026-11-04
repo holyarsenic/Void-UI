@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Generate() {
   return (
-    <main className="h-screen bg-background text-white flex flex-col justify-between md:justify-start gap-20 px-3 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
+    <main className="h-dvh bg-background text-white flex flex-col justify-between md:justify-start gap-20 px-3 py-5 md:py-10 md:px-10 lg:px-16 overflow-y-scroll">
       <div className="mb-10">
         <h1 className="text-2xl md:text-3xl font-theme ml-10 md:ml-0">
           Generate Component
