@@ -42,7 +42,7 @@ const features: Feature[] = [
 
 const Feature = () => {
   return (
-    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-background px-6 py-8 lg:py-16 lg:px-20" id="features">
+    <section className="relative flex min-h-dvh w-full items-center overflow-hidden bg-background px-6 py-8 lg:py-16 lg:px-20" id="features">
       <div className="relative z-10 mx-auto w-full">
 
         <div className="relative mb-12 flex w-full flex-col gap-6 lg:mb-25 lg:flex-row lg:justify-between">

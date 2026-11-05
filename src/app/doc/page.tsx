@@ -193,7 +193,7 @@ import { motion } from "motion/react";`}
 
 export default function Doc() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto flex max-w-7xl justify-between gap-12 px-3 py-15">
         <DocsSidebar />
 

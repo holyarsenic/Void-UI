@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const ShowCase = () => {
   return (
-    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-background px-6 py-8 lg:py-16 lg:px-20" id="showcase">
+    <section className="relative flex min-h-dvh w-full items-center overflow-hidden bg-background px-6 py-8 lg:py-16 lg:px-20" id="showcase">
 
       <div className="absolute inset-0">
         <Logo className="absolute inset-0 h-full w-full rotate-180 text-foreground/5" />

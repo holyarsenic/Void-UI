@@ -64,7 +64,7 @@ const Questions = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#050505] text-white">
+    <section className="relative min-h-dvh w-full overflow-hidden bg-[#050505] text-white">
       <div className="relative z-10 mx-auto flex min-h-screen w-full flex-col px-6 py-16 md:px-10 lg:px-20 lg:py-24">
 
         <div className="relative z-10 w-full lg:w-1/2">

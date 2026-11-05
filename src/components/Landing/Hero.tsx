@@ -19,7 +19,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden bg-[#050505] text-white">
+    <section className="relative min-h-[95vh] md:min-h-dvh w-full overflow-hidden bg-[#050505] text-white">
       <Navbar />
       <div className="absolute inset-0">
         <LightLines />
