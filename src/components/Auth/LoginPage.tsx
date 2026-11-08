@@ -31,7 +31,7 @@ const LoginPage = () => {
   const isLoggedIn = status === "authenticated";
 
   return (
-    <div className="flex w-full max-w-md flex-col items-center justify-center rounded-xl p-5 md:p-8">
+    <div className="flex w-full md:max-w-md flex-col items-center justify-center rounded-xl p-5 md:p-8">
       <h1 className="text-center font-theme text-2xl font-bold md:text-3xl">
         Welcome to Void UI
       </h1>
@@ -45,7 +45,7 @@ const LoginPage = () => {
           type="button"
           variant="default"
           onClick={handleGoogleLogin}
-          className={`flex h-12 w-65 items-center  gap-3 rounded-4xl p-3 ${loading ? "bg-primary/80 justify-center" : "justify-start"}`}>
+          className={`flex h-12 md:w-65 items-center  gap-3 rounded-4xl p-3 ${loading ? "bg-primary/80 justify-center" : "justify-start"}`}>
           {loading ? (
             <AuthLoading />
           ) : (

@@ -41,7 +41,7 @@ const LoginBanner = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-[50%] xl:w-[40%] h-screen p-5 lg:p-15 z-20">
+      <div className="flex flex-col gap-45 items-center bg-black/85 w-full lg:w-[50%] xl:w-[40%] h-dvh p-5 lg:p-15 z-20">
         <div className="flex w-full items-center justify-between gap-5">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5" />
