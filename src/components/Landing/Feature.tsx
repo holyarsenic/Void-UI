@@ -71,11 +71,10 @@ const Feature = () => {
         </p>
 
         <div className="grid overflow-hidden border md:border-4 border-foreground/50 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
+          {features.map((feature, ind) => (
             <div
               key={feature.count}
-              className="group border-2 border-foreground/50 p-4 transition-colors duration-300 hover:bg-foreground/10 md:p-6 lg:p-7"
-            >
+              className={`group border-2 border-foreground/50 p-4 transition-colors ${ind % 2 === 0 ? "bg-background" : "bg-foreground/20"} duration-300 md:p-6 lg:p-7`}>
               <div className="flex items-center justify-between">
                 <feature.icon className="size-5 text-foreground/50" />
 

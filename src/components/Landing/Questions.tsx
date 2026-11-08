@@ -7,53 +7,33 @@ const questions = [
   {
     question: "What is Void UI?",
     answer:
-      "Void UI is an AI-powered interface generation platform that turns plain-language prompts into polished, working UI components. Prompt what you want, and Void UI generates the interface for you with a live preview.",
+      "Void UI is an AI-powered component generation platform that turns simple prompts into stunning, animated UI components. Describe what you imagine, and watch it come to life.",
   },
   {
-    question: "How does Void UI generate components?",
+    question: "Do I need frontend development experience?",
     answer:
-      "You describe the interface you want in the Generate page. Void UI validates your request and sends it to Google Gemini with a purpose-built system prompt. The generated component is then rendered in the live preview.",
+      "Not at all. Just describe what you want in plain language. Void UI handles the heavy lifting and gives you working code that you can customize for your project.",
   },
   {
-    question: "Do I need to be an expert in frontend development?",
+    question: "What makes Void UI animations special?",
     answer:
-      "No. Void UI is designed around natural-language prompts, so you can describe the interface you have in mind without building every part from scratch. You can then use the generated code as a starting point for your project.",
+      "Void UI uses Framer Motion and Three.js to bring components to life with smooth transitions, interactive effects, and immersive 3D experiences. Every detail is designed to make your interface stand out.",
   },
   {
     question: "Can I preview my generated components?",
     answer:
-      "Yes. Every generated component is displayed in a live preview so you can see the interface as it is generated. This makes it easier to experiment with different prompts and ideas.",
+      "Absolutely. Every component comes with a live preview. See your ideas take shape, experiment with different prompts, and fine-tune the result until it feels right.",
   },
   {
-    question: "Can I save my generated components?",
+    question: "Can I save and organize my creations?",
     answer:
-      "Yes. Void UI saves your generations so you can revisit them later. You can also organize generations into projects and pin projects that you want to keep easily accessible.",
+      "Yes. Your generations are saved so you can revisit them anytime. Organize them into projects, pin your favorites, and keep everything within reach.",
   },
   {
-    question: "What technologies does Void UI use?",
+    question: "Can I use Void UI in my own projects?",
     answer:
-      "Void UI is built with Next.js, TypeScript, and Tailwind CSS. It uses Google Gemini for AI generation, PostgreSQL with Prisma for data, NextAuth for authentication, Zod for validation, and Dodo Payments for billing.",
+      "Of course. Get the generated code and make it yours. Customize the styles, animations, and interactions, then bring your components into your own projects. Void UI is open source under the MIT License.",
   },
-  {
-    question: "What kind of interfaces can I generate?",
-    answer:
-      "You can describe a wide range of interfaces in natural language, including dashboards, cards, forms, navigation elements, landing page sections, authentication screens, and custom UI components.",
-  },
-  {
-    question: "Can I use Void UI components in my own projects?",
-    answer:
-      "Yes. Void UI is designed to help you generate usable interface code that you can adapt to your own projects. You can customize the generated component to match your application's design and requirements.",
-  },
-  {
-    question: "Does Void UI keep my generation history?",
-    answer:
-      "Yes. Generations are stored with your account, allowing you to return to previous results, compare ideas, and manage your generated components through your history and projects.",
-  },
-  {
-    question: "Is Void UI open source?",
-    answer:
-      "Yes. Void UI is publicly available on GitHub and is licensed under the MIT License. You can explore the source code, contribute improvements, and build on the project.",
-  }
 ];
 
 const Questions = () => {
