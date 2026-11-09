@@ -46,6 +46,19 @@ const Sidebar = () => {
 
   return (
     <>
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setMobileOpen(false)}
+            className="fixed inset-0 z-10 bg-black/60 backdrop-blur-xs md:hidden"
+          />
+        )}
+      </AnimatePresence>
+
       <motion.button
         onClick={() => setMobileOpen(true)}
         whileHover={{ scale: 1.08 }}
@@ -57,7 +70,7 @@ const Sidebar = () => {
         initial={{ width: 280 }}
         animate={{ width: mobileOpen ? "80vw" : collapsed ? 80 : 280 }}
         transition={{ duration: 0.34, ease: "easeInOut" }}
-        className={`fixed md:relative h-full md:h-screen flex flex-col overflow-hidden border-r border-white/10 bg-background z-20 
+        className={`fixed md:relative h-full md:h-screen flex flex-col overflow-hidden border-r border-white/10 bg-background z-20 transition-transform duration-300 ease-in-out 
         ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
         <div className="relative flex h-20 items-center justify-between border-b border-white/10 px-5">
           <Link href="/dashboard" className="flex items-center gap-3">
