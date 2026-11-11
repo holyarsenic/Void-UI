@@ -60,7 +60,7 @@ const SettingComp = () => {
             Settings
           </h1>
 
-          <p className="mt-2 max-w-2xl text-sm text-foreground/45">
+          <p className="mt-2 max-w-3xl text-sm font-theme text-background px-2 py-1 bg-yellow-600 rounded-md w-fit">
             Learn how to get the most out of Void UI and create better
             components from natural language prompts.
           </p>
@@ -71,7 +71,7 @@ const SettingComp = () => {
             onClick={() => setActiveTab("docs")}
             className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition ${
               activeTab === "docs"
-                ? "bg-white/10 text-foreground"
+                ? "text-foreground"
                 : "text-foreground/45 hover:text-foreground/80"
             }`}>
             <BookOpen className="h-4 w-4" />
@@ -82,7 +82,7 @@ const SettingComp = () => {
             onClick={() => setActiveTab("contact")}
             className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition ${
               activeTab === "contact"
-                ? "bg-white/10 text-foreground"
+                ? "text-foreground"
                 : "text-foreground/45 hover:text-foreground/80"
             }`}
           >

@@ -68,7 +68,7 @@ const Sidebar = () => {
       </motion.button>
       <motion.aside
         initial={{ width: 280 }}
-        animate={{ width: mobileOpen ? "80vw" : collapsed ? 80 : 280 }}
+        animate={{ width: collapsed ? 80 : 280 }}
         transition={{ duration: 0.34, ease: "easeInOut" }}
         className={`fixed md:relative h-full md:h-screen flex flex-col overflow-hidden border-r border-white/10 bg-background z-20 transition-transform duration-300 ease-in-out 
         ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>

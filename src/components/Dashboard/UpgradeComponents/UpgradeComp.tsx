@@ -53,7 +53,7 @@ const UpgradeComp = ({ Plan }: UpgradeCompProps) => {
             <div>
               <h2 className="text-2xl font-semibold">Free</h2>
 
-              <p className="mt-2 text-sm text-white/50">
+              <p className="mt-1 font-theme text-sm text-background px-2 py-1 bg-yellow-600 rounded-md w-fit">
                 Everything you need to get started.
               </p>
             </div>

@@ -11,7 +11,7 @@ const ProjectLoader = () => {
       <div className="mb-4 mt-8 h-6 w-40 rounded-md bg-foreground/10 animate-pulse" />
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {[1, 2, 3, 4].map((item) => (
+        {[1, 2, 3, 4, 5, 6].map((item) => (
           <div
             key={item}
             className="h-30 rounded-xl border border-foreground/20 px-4 py-4 sm:px-5"

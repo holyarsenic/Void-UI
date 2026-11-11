@@ -65,7 +65,7 @@ const Project = () => {
             <div>
               <h1 className="font-theme  text-2xl md:text-3xl ml-10 md:ml-0">All Projects</h1>
 
-              <p className="mt-1 font-theme text-sm text-white/40">
+              <p className="mt-1 font-theme text-sm text-background px-2 py-1 bg-yellow-600 rounded-md w-fit">
                 Manage and explore all your projects
               </p>
             </div>

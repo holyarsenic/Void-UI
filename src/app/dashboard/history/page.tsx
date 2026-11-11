@@ -65,7 +65,7 @@ export default async function Dashboard() {
         <div>
           <h1 className="font-theme text-2xl md:text-3xl ml-10 md:ml-0">A Record of Creation</h1>
 
-          <p className="mt-1 font-theme text-sm text-white/40">
+          <p className="mt-1 font-theme text-sm text-background px-2 py-1 bg-yellow-600 rounded-md w-fit">
             Everything created, preserved within the Void.
           </p>
         </div>
