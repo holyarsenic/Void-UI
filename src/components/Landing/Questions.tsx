@@ -37,7 +37,7 @@ const questions = [
 ];
 
 const Questions = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -58,7 +58,7 @@ const Questions = () => {
 
           <p className="mt-5 max-w-xl text-sm text-white/40 md:text-base sm:leading-7">
             Everything you need to know about Void UI, AI-generated
-            components, and turning your ideas into interfaces.
+            components.
           </p>
         </div>
         
