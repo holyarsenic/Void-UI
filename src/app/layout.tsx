@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Generate beautiful, production-ready UI components from simple prompts.",
     type: "website",
-    images: ["/Logo.svg"],
+    images: ["/Void.jpg"],
   },
 
   twitter: {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "Void UI — Generate Animated UI from Prompts",
     description:
       "Generate beautiful, production-ready UI components from simple prompts.",
-    images: ["/Logo.svg"],
+    images: ["/Void.jpg"],
   },
 };
 
