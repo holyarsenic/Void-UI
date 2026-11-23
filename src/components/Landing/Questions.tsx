@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 const questions = [
   {
@@ -44,8 +45,8 @@ const Questions = () => {
   };
 
   return (
-    <section className="relative min-h-dvh w-full overflow-hidden bg-[#050505] text-white">
-      <div className="relative z-10 mx-auto flex min-h-screen w-full flex-col px-6 py-16 md:px-10 lg:px-20 lg:py-24">
+    <section className="relative h-auto w-full overflow-hidden bg-[#050505] text-white">
+      <div className="relative z-10 mx-auto flex h-full w-full flex-col px-6 py-16 md:px-10 lg:px-20 lg:py-24">
 
         <div className="relative z-10 w-full lg:w-1/2">
           <p className="mb-4 font-theme text-xs uppercase tracking-[0.3em] text-white/40">
@@ -62,7 +63,16 @@ const Questions = () => {
           </p>
         </div>
         
-        <div className="m-auto mt-16 w-full max-w-4xl lg:mt-20">
+        <div className="mt-16 w-full flex gap-10 items-center justify-between lg:mt-20">
+
+          <Image
+            src="/ReachLight.png"
+            alt="Void UI"
+            width={300}
+            height={200}
+            className="hidden lg:block h-full w-100 border-4 rounded-2xl border-white/60"
+          />
+
           <div className="border-t border-b border-white">
             {questions.map((item, index) => {
               const isOpen = openIndex === index;
