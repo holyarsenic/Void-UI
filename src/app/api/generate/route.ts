@@ -144,17 +144,17 @@ export async function POST(req: NextRequest) {
     }
     
     const response = await gemini.models.generateContent({
-      model: "gemini-3.1-flash-lite",
+      model: process.env.GEMINI_MODEL || "gemini-3.1-flash-lite",
       contents: prompt,
       config: {
         systemInstruction: VOID_UI_SYSTEM_PROMPT,
-        maxOutputTokens: 8192,
+        maxOutputTokens: 16384,
       },
     });
 
-    const responseText = response.text;
+    const rawText = response.text;
 
-    if (!responseText) {
+    if (!rawText) {
       return NextResponse.json(
         {
           success: false,
@@ -164,7 +164,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!responseText.includes("export default App")) {
+    const responseText = rawText
+      .replace(/^```(?:tsx|jsx|javascript|typescript|js|ts)?\r?\n?/i, "")
+      .replace(/\r?\n?```\s*$/i, "")
+      .trim();
+
+    if (!/export\s+default\s+(?:function\s+)?App\b/.test(responseText)) {
       return NextResponse.json(
         {
           success: false,
@@ -209,10 +214,15 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Generate API error:", error);
 
+    const errorMessage =
+      process.env.NODE_ENV !== "production" && error instanceof Error
+        ? error.message
+        : "Failed to generate response";
+
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to generate response",
+        error: errorMessage,
       },
       { status: 500 }
     );
